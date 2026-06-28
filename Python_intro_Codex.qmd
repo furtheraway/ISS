@@ -1,7 +1,7 @@
 ---
-title: "Python Programming and Data Analysis in the Age of AI"
-subtitle: "A beginner-friendly introduction for undergraduate students"
-author: "Summer Semester Teaching Materials"
+title: Python Programming and Data Analysis in the Age of AI
+subtitle: A beginner-friendly introduction for undergraduate students
+author: Summer Semester Teaching Materials
 format:
   html:
     toc: true
@@ -215,6 +215,8 @@ print(message2)
 ```
 
 Use f-strings to insert values into text.
+
+`f-string` stands for "formatted string literal". It is a Python string prefixed with `f` that allows expressions inside `{}` to be evaluated and inserted into the string.
 
 ```{python}
 name = "Maya"
@@ -603,6 +605,12 @@ The keyword `def` starts a function definition.
 ## Parameters
 
 Parameters are inputs to a function.
+
+A parameter is a variable name used in a function definition. It tells the function what kind of input it expects.
+
+An argument is the actual value you pass to the function when you call it.
+
+Example:
 
 ```{python}
 def greet(name):
