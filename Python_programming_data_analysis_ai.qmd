@@ -1,0 +1,3520 @@
+---
+title: "Python Programming and Data Analysis in the Age of AI"
+subtitle: "A beginner-friendly teaching document for undergraduate students"
+author: "Prepared for summer undergraduate instruction"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    theme: cosmo
+  pdf:
+    toc: true
+    number-sections: true
+execute:
+  eval: false
+  echo: true
+jupyter: python3
+---
+
+# How to use this document
+
+This document is designed for students who are new to programming. It uses Python as the main language for learning programming and then applies Python to data analysis and plotting.
+
+The document can support a summer semester course, a short bootcamp, or a self-study module. It starts with the question "What is programming?" and gradually builds toward practical analysis with data tables, files, and visualizations.
+
+::: {.callout-tip}
+## Teaching suggestion
+For a summer semester, this material can be taught in 8 to 12 weeks. Each major part can be a week or a two-class unit, depending on the pace of the course and how much practice time students need.
+:::
+
+## Learning goals
+
+By the end of this document, students should be able to:
+
+1. Explain what a program is and how Python runs code.
+2. Use variables, expressions, functions, conditionals, loops, and collections.
+3. Read error messages and debug small programs.
+4. Work with files and structured data.
+5. Use Python libraries such as `math`, `random`, `pathlib`, `csv`, `json`, `numpy`, `pandas`, and `matplotlib`.
+6. Clean, summarize, filter, group, and visualize data.
+7. Compare basic Python ideas with JavaScript and C#.
+8. Use AI tools responsibly as programming assistants, not as replacements for understanding.
+
+## Suggested course structure
+
+| Unit | Topic | Main skills |
+|---|---|---|
+| 1 | What programming is | Algorithms, syntax, variables, expressions |
+| 2 | Basic Python | Types, strings, input/output, operators |
+| 3 | Control flow | `if`, `elif`, `else`, Boolean logic |
+| 4 | Loops | `for`, `while`, `range`, `break`, `continue` |
+| 5 | Collections | Lists, tuples, dictionaries, sets |
+| 6 | Functions | Parameters, return values, scope, type hints |
+| 7 | Debugging and files | Errors, exceptions, text files, CSV, JSON |
+| 8 | Data analysis | NumPy, pandas, tabular thinking |
+| 9 | Plotting | Matplotlib, chart types, visual clarity |
+| 10 | Mini-projects | End-to-end analysis and presentation |
+| 11 | Python vs. JS/C# | Similar concepts, different syntax and habits |
+| 12 | AI-assisted programming | Prompting, verification, testing, ethics |
+
+# Part I: Programming fundamentals
+
+# What is programming?
+
+Programming is the practice of writing instructions that a computer can follow.
+
+A program is not magic. It is a precise set of steps written in a programming language. The computer follows those steps exactly, even when the steps are wrong.
+
+For example, a human instruction might be:
+
+> Calculate the average score for the class.
+
+A computer needs something more precise:
+
+```{python}
+scores = [82, 91, 77, 88, 95]
+average = sum(scores) / len(scores)
+print(average)
+```
+
+This program says:
+
+1. Store five scores in a list.
+2. Add the scores.
+3. Count how many scores there are.
+4. Divide the total by the count.
+5. Print the result.
+
+## Programs, data, and algorithms
+
+Three important ideas appear throughout the course.
+
+| Concept | Meaning | Example |
+|---|---|---|
+| Data | Information a program uses | Numbers, names, dates, tables |
+| Algorithm | A step-by-step method | Sort values from smallest to largest |
+| Program | An algorithm written in code | A Python file that reads data and makes a chart |
+
+An algorithm can exist before code. For example, the algorithm for finding the largest value in a list is:
+
+1. Start with the first value as the largest value seen so far.
+2. Look at each remaining value.
+3. If the current value is larger than the largest value seen so far, replace it.
+4. After checking all values, report the largest value.
+
+In Python:
+
+```{python}
+numbers = [12, 5, 19, 3, 14]
+
+largest = numbers[0]
+
+for number in numbers:
+    if number > largest:
+        largest = number
+
+print(largest)
+```
+
+## Syntax and semantics
+
+Programming languages have syntax and semantics.
+
+Syntax means the grammar of code. It answers: Is the code written in a form Python understands?
+
+Semantics means the meaning of the code. It answers: Does the code do what we intended?
+
+This code has a syntax error because the closing parenthesis is missing:
+
+```{python}
+print("Hello"
+```
+
+This code has valid syntax but wrong semantics if the goal is to calculate an average:
+
+```{python}
+scores = [80, 90, 100]
+wrong_average = sum(scores)   # forgot to divide by the number of scores
+print(wrong_average)
+```
+
+A major part of learning programming is learning to diagnose both kinds of problems.
+
+## Why Python?
+
+Python is commonly used for teaching because it has readable syntax and supports many styles of programming. It is also widely used in data analysis, automation, web development, scientific computing, machine learning, and artificial intelligence workflows.
+
+Python is an interpreted language. In beginner terms, that means you can run Python code directly and see results quickly. Python also has a large ecosystem of packages, which are reusable tools written by other programmers.
+
+## A first Python program
+
+```{python}
+print("Hello, Python!")
+```
+
+The word `print` is the name of a built-in function. A function is a reusable action. Here, the action displays text.
+
+The text `"Hello, Python!"` is a string, which means a piece of text.
+
+## Comments
+
+Comments are notes for humans. Python ignores comments when running the program.
+
+```{python}
+# This is a comment.
+# It explains what the code is doing.
+
+name = "Maya"
+print("Hello,", name)
+```
+
+Good comments explain why something is being done, not only what the code already says.
+
+```{python}
+# Good: the curve is nonlinear, so a log scale makes the trend easier to see.
+
+# Less useful: print the variable x.
+print(x)
+```
+
+# Running Python code
+
+Students commonly run Python in three ways.
+
+| Method | Description | Good for |
+|---|---|---|
+| Interactive shell / REPL | Type one line at a time and immediately see results | Quick experiments |
+| Script file | Save code in a `.py` file and run it | Reusable programs |
+| Notebook / Quarto document | Mix code, text, output, and plots | Data analysis and teaching |
+
+This document is written in Quarto Markdown (`.qmd`). A Quarto document can contain formatted text and executable code cells. For example:
+
+````markdown
+```{python}
+print("This code cell can run in Quarto.")
+```
+````
+
+In this teaching document, the global setting `execute: eval: false` means code cells are displayed but not automatically executed when rendered. In class, an instructor can change that setting or run code interactively.
+
+## Installing packages
+
+Python includes many built-in tools, but data analysis usually needs external packages.
+
+Common beginner packages:
+
+| Package | Purpose |
+|---|---|
+| `numpy` | Fast numerical arrays and mathematical operations |
+| `pandas` | Tables and data analysis |
+| `matplotlib` | Plotting and visualization |
+| `jupyter` | Interactive notebooks |
+
+A common command-line installation pattern is:
+
+```bash
+python -m pip install numpy pandas matplotlib jupyter
+```
+
+For a class, it is often easier to provide one controlled environment instead of asking every student to configure their computer from scratch. Options include a university JupyterHub, cloud notebooks, a prebuilt conda environment, or a shared `requirements.txt` file.
+
+# Variables and expressions
+
+A variable is a name that refers to a value.
+
+```{python}
+age = 20
+name = "Alex"
+gpa = 3.72
+is_enrolled = True
+
+print(name)
+print(age)
+```
+
+A useful beginner mental model is:
+
+> A variable is a label attached to a value.
+
+The assignment operator `=` stores a value under a name.
+
+```{python}
+x = 10
+x = x + 5
+print(x)
+```
+
+The line `x = x + 5` means:
+
+1. Look up the current value of `x`.
+2. Add `5`.
+3. Store the new result back into `x`.
+
+It does not mean mathematical equality. In mathematics, `x = x + 5` is impossible. In Python, it is an instruction.
+
+## Expressions
+
+An expression is a piece of code that produces a value.
+
+```{python}
+2 + 3
+10 * 4
+"data" + " analysis"
+len("Python")
+```
+
+A statement is a complete instruction.
+
+```{python}
+message = "Welcome to Python"
+print(message)
+```
+
+## Naming variables
+
+Good variable names make code easier to understand.
+
+```{python}
+# Clear
+student_count = 42
+average_score = 88.5
+
+# Unclear
+sc = 42
+x = 88.5
+```
+
+Python naming habits:
+
+- Use lowercase words separated by underscores: `average_score`.
+- Start with a letter or underscore, not a number.
+- Avoid names that are already built in, such as `list`, `dict`, `sum`, or `type`.
+- Choose names that describe the data, not just the data type.
+
+# Basic data types
+
+A data type describes what kind of value something is and what operations make sense for it.
+
+| Type | Meaning | Example |
+|---|---|---|
+| `int` | Integer | `42` |
+| `float` | Decimal number | `3.14` |
+| `str` | Text string | `"hello"` |
+| `bool` | Boolean truth value | `True`, `False` |
+| `NoneType` | Absence of a value | `None` |
+
+Use `type()` to inspect a value's type.
+
+```{python}
+print(type(42))
+print(type(3.14))
+print(type("hello"))
+print(type(True))
+print(type(None))
+```
+
+## Numbers
+
+```{python}
+a = 10
+b = 3
+
+print(a + b)   # addition
+print(a - b)   # subtraction
+print(a * b)   # multiplication
+print(a / b)   # division, always produces a float
+print(a // b)  # integer division
+print(a % b)   # remainder
+print(a ** b)  # exponentiation
+```
+
+The `%` operator is useful for checking divisibility.
+
+```{python}
+number = 17
+
+if number % 2 == 0:
+    print("even")
+else:
+    print("odd")
+```
+
+## Floating-point numbers
+
+Computers approximate many decimal values. This can surprise beginners.
+
+```{python}
+print(0.1 + 0.2)
+```
+
+The result may not display exactly as `0.3`. For most data analysis this is normal, but students should avoid testing floating-point values for exact equality when small rounding differences are possible.
+
+```{python}
+value = 0.1 + 0.2
+print(abs(value - 0.3) < 0.000001)
+```
+
+## Strings
+
+Strings are text values.
+
+```{python}
+first_name = "Ada"
+last_name = "Lovelace"
+full_name = first_name + " " + last_name
+print(full_name)
+```
+
+Strings can use single or double quotes.
+
+```{python}
+course = 'Python Programming'
+semester = "Summer"
+```
+
+Use whichever makes the string easier to read.
+
+```{python}
+message = "It's a good day to learn Python."
+```
+
+## String methods
+
+A method is a function attached to an object. Strings have many useful methods.
+
+```{python}
+text = "  Data Analysis with Python  "
+
+print(text.lower())
+print(text.upper())
+print(text.strip())
+print(text.replace("Python", "pandas"))
+print(text.startswith("  Data"))
+```
+
+Strings are sequences, so you can index and slice them.
+
+```{python}
+word = "Python"
+
+print(word[0])    # first character
+print(word[-1])   # last character
+print(word[0:3])  # characters at index 0, 1, 2
+print(word[3:])   # from index 3 to the end
+```
+
+Python uses zero-based indexing: the first position is index `0`.
+
+## Formatted strings
+
+Formatted strings, often called f-strings, make it easy to insert values into text.
+
+```{python}
+name = "Sam"
+score = 91.236
+
+print(f"{name} scored {score} points.")
+print(f"{name} scored {score:.1f} points.")
+```
+
+The format `:.1f` means display one digit after the decimal point.
+
+## Booleans
+
+Booleans represent truth values.
+
+```{python}
+is_raining = False
+has_umbrella = True
+
+print(is_raining)
+print(has_umbrella)
+```
+
+Booleans are central to decision-making.
+
+```{python}
+temperature = 32
+is_freezing = temperature <= 32
+print(is_freezing)
+```
+
+## `None`
+
+`None` represents the absence of a value.
+
+```{python}
+middle_name = None
+print(middle_name)
+```
+
+`None` is useful when a value is unknown, missing, not yet computed, or intentionally empty.
+
+```{python}
+best_score = None
+
+scores = [82, 91, 77]
+for score in scores:
+    if best_score is None or score > best_score:
+        best_score = score
+
+print(best_score)
+```
+
+# Input and output
+
+Output means information the program shows to the user. The most basic output tool is `print()`.
+
+```{python}
+print("Welcome")
+print(2 + 3)
+```
+
+Input means information the user gives to the program. The basic input tool is `input()`.
+
+```{python}
+name = input("What is your name? ")
+print(f"Hello, {name}!")
+```
+
+`input()` always returns a string. Convert it when you need a number.
+
+```{python}
+age_text = input("How old are you? ")
+age = int(age_text)
+print(f"Next year you will be {age + 1}.")
+```
+
+A shorter version:
+
+```{python}
+age = int(input("How old are you? "))
+print(f"Next year you will be {age + 1}.")
+```
+
+Common conversion functions:
+
+| Function | Converts to |
+|---|---|
+| `int()` | Integer |
+| `float()` | Decimal number |
+| `str()` | String |
+| `bool()` | Boolean |
+
+::: {.callout-warning}
+## Beginner warning
+`bool("False")` is `True` because non-empty strings are treated as true. Do not use `bool()` to parse user text like `"yes"` or `"no"` without writing your own logic.
+:::
+
+# Practice: basic expressions
+
+1. Create variables for your name, major, year in school, and favorite number. Print one sentence using all four variables.
+2. Ask a user for a temperature in Celsius and convert it to Fahrenheit using `F = C * 9/5 + 32`.
+3. Ask a user for three exam scores and print the average.
+4. Write a program that asks for a number of minutes and converts it to hours and minutes.
+
+Example solution for exercise 4:
+
+```{python}
+total_minutes = int(input("Enter minutes: "))
+hours = total_minutes // 60
+minutes = total_minutes % 60
+print(f"{total_minutes} minutes is {hours} hours and {minutes} minutes.")
+```
+
+# Part II: Control flow
+
+# Making decisions with `if`
+
+Programs often need to choose between different actions.
+
+```{python}
+score = 87
+
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+elif score >= 70:
+    print("C")
+else:
+    print("Needs improvement")
+```
+
+The keywords mean:
+
+| Keyword | Meaning |
+|---|---|
+| `if` | Check the first condition |
+| `elif` | Check another condition if previous conditions were false |
+| `else` | Run this block if no previous condition was true |
+
+## Indentation
+
+Python uses indentation to show which lines belong together.
+
+```{python}
+age = 19
+
+if age >= 18:
+    print("You are an adult.")
+    print("This line is also inside the if block.")
+
+print("This line always runs.")
+```
+
+Indentation is not just style in Python. It changes the meaning of the program.
+
+## Comparison operators
+
+| Operator | Meaning | Example |
+|---|---|---|
+| `==` | equal to | `x == 5` |
+| `!=` | not equal to | `x != 5` |
+| `<` | less than | `x < 5` |
+| `<=` | less than or equal to | `x <= 5` |
+| `>` | greater than | `x > 5` |
+| `>=` | greater than or equal to | `x >= 5` |
+
+A common beginner mistake is confusing `=` and `==`.
+
+```{python}
+x = 5      # assignment: store 5 in x
+x == 5     # comparison: ask whether x equals 5
+```
+
+## Boolean operators
+
+Use `and`, `or`, and `not` to combine conditions.
+
+```{python}
+age = 20
+has_id = True
+
+if age >= 18 and has_id:
+    print("Entry allowed")
+else:
+    print("Entry denied")
+```
+
+```{python}
+is_weekend = True
+is_holiday = False
+
+if is_weekend or is_holiday:
+    print("No class today")
+```
+
+```{python}
+is_logged_in = False
+
+if not is_logged_in:
+    print("Please log in")
+```
+
+## Truthiness
+
+Python can treat values as true or false in conditions.
+
+Usually false:
+
+- `False`
+- `None`
+- `0`
+- `0.0`
+- `""` empty string
+- `[]` empty list
+- `{}` empty dictionary
+
+Usually true:
+
+- Nonzero numbers
+- Non-empty strings
+- Non-empty lists
+- Non-empty dictionaries
+
+```{python}
+name = ""
+
+if name:
+    print(f"Hello, {name}")
+else:
+    print("Name is missing")
+```
+
+Use truthiness carefully. It is convenient, but explicit comparisons are sometimes clearer for beginners.
+
+# Loops
+
+A loop repeats code.
+
+Python has two main kinds of loops:
+
+| Loop | Best when |
+|---|---|
+| `for` loop | You know what collection or range you want to iterate over |
+| `while` loop | You want to repeat until a condition changes |
+
+## `for` loops
+
+A `for` loop repeats once for each item in a sequence.
+
+```{python}
+names = ["Ava", "Ben", "Chen"]
+
+for name in names:
+    print(f"Hello, {name}")
+```
+
+The variable `name` takes one value at a time from the list.
+
+## `range()`
+
+`range()` creates a sequence of integers.
+
+```{python}
+for i in range(5):
+    print(i)
+```
+
+This prints `0`, `1`, `2`, `3`, and `4`.
+
+Useful patterns:
+
+```{python}
+for i in range(1, 6):
+    print(i)        # 1 through 5
+
+for i in range(2, 11, 2):
+    print(i)        # 2, 4, 6, 8, 10
+```
+
+## Accumulating values
+
+Loops often accumulate a result.
+
+```{python}
+scores = [82, 91, 77, 88]
+
+total = 0
+for score in scores:
+    total = total + score
+
+average = total / len(scores)
+print(average)
+```
+
+Python also has built-in functions for common operations.
+
+```{python}
+scores = [82, 91, 77, 88]
+print(sum(scores) / len(scores))
+```
+
+Students should learn both versions. The manual loop teaches the algorithm. The built-in version is usually the better practical code.
+
+## Counting with a loop
+
+```{python}
+scores = [82, 91, 77, 88, 95, 69]
+
+passing_count = 0
+for score in scores:
+    if score >= 70:
+        passing_count = passing_count + 1
+
+print(passing_count)
+```
+
+Shorter version:
+
+```{python}
+scores = [82, 91, 77, 88, 95, 69]
+passing_count = sum(1 for score in scores if score >= 70)
+print(passing_count)
+```
+
+The shorter version is idiomatic, but the longer version is easier for beginners to understand first.
+
+## `while` loops
+
+A `while` loop repeats as long as a condition is true.
+
+```{python}
+count = 1
+
+while count <= 5:
+    print(count)
+    count = count + 1
+```
+
+`while` loops are useful for repeated input, simulations, and situations where the number of repetitions is not known in advance.
+
+```{python}
+password = ""
+
+while password != "python123":
+    password = input("Enter password: ")
+
+print("Access granted")
+```
+
+::: {.callout-warning}
+## Infinite loops
+A `while` loop can run forever if the condition never becomes false. Make sure something inside the loop changes the condition.
+:::
+
+## `break` and `continue`
+
+`break` exits a loop early.
+
+```{python}
+numbers = [3, 7, 11, 18, 21]
+
+for number in numbers:
+    if number % 2 == 0:
+        print(f"First even number: {number}")
+        break
+```
+
+`continue` skips to the next iteration.
+
+```{python}
+numbers = [3, -2, 7, -5, 10]
+
+for number in numbers:
+    if number < 0:
+        continue
+    print(number)
+```
+
+Use `break` and `continue` when they make code clearer. Avoid using them so heavily that the loop becomes hard to follow.
+
+## `enumerate()`
+
+Use `enumerate()` when you need both an index and a value.
+
+```{python}
+names = ["Ava", "Ben", "Chen"]
+
+for index, name in enumerate(names):
+    print(index, name)
+```
+
+Use `start=1` when displaying human-friendly numbering.
+
+```{python}
+for rank, name in enumerate(names, start=1):
+    print(f"{rank}. {name}")
+```
+
+## `zip()`
+
+Use `zip()` to loop over two or more sequences at the same time.
+
+```{python}
+names = ["Ava", "Ben", "Chen"]
+scores = [91, 85, 93]
+
+for name, score in zip(names, scores):
+    print(f"{name}: {score}")
+```
+
+# Practice: conditionals and loops
+
+1. Write a program that asks for a score and prints the letter grade.
+2. Write a program that prints every number from 1 to 100 divisible by 7.
+3. Given a list of temperatures, count how many are above 90.
+4. Ask the user to enter numbers until they type `done`, then print the average.
+5. Write a guessing game where the computer has a secret number and the user guesses until correct.
+
+Example solution for exercise 4:
+
+```{python}
+total = 0
+count = 0
+
+while True:
+    text = input("Enter a number or 'done': ")
+
+    if text == "done":
+        break
+
+    number = float(text)
+    total = total + number
+    count = count + 1
+
+if count > 0:
+    print(f"Average: {total / count}")
+else:
+    print("No numbers were entered.")
+```
+
+# Collections
+
+Collections store multiple values.
+
+| Collection | Ordered? | Mutable? | Typical use |
+|---|---:|---:|---|
+| `list` | Yes | Yes | A sequence of values that may change |
+| `tuple` | Yes | No | A fixed group of related values |
+| `dict` | In insertion order | Yes | Key-value lookup |
+| `set` | No | Yes | Unique values and membership tests |
+
+# Lists
+
+A list stores an ordered sequence of values.
+
+```{python}
+scores = [82, 91, 77, 88]
+print(scores)
+```
+
+Lists can contain values of different types, but in data analysis lists usually contain values of the same kind.
+
+```{python}
+items = ["notebook", 3, True]
+```
+
+## Indexing and slicing lists
+
+```{python}
+scores = [82, 91, 77, 88]
+
+print(scores[0])     # first item
+print(scores[-1])    # last item
+print(scores[1:3])   # items at index 1 and 2
+```
+
+## Changing lists
+
+Lists are mutable, meaning they can be changed.
+
+```{python}
+scores = [82, 91, 77]
+
+scores.append(88)
+print(scores)
+
+scores[0] = 85
+print(scores)
+
+scores.remove(77)
+print(scores)
+```
+
+Common list methods:
+
+| Method | Description |
+|---|---|
+| `.append(x)` | Add `x` to the end |
+| `.extend(other_list)` | Add all items from another list |
+| `.insert(i, x)` | Insert `x` at position `i` |
+| `.remove(x)` | Remove the first matching value |
+| `.pop()` | Remove and return the last item |
+| `.sort()` | Sort the list in place |
+| `.copy()` | Make a shallow copy |
+
+## Sorting lists
+
+```{python}
+scores = [82, 91, 77, 88]
+
+print(sorted(scores))     # returns a new sorted list
+print(scores)             # original list is unchanged
+
+scores.sort()             # changes the original list
+print(scores)
+```
+
+Use `sorted()` when you want a new list. Use `.sort()` when you want to modify the existing list.
+
+## List comprehensions
+
+A list comprehension creates a list from another sequence in a compact way.
+
+```{python}
+numbers = [1, 2, 3, 4, 5]
+squares = [number ** 2 for number in numbers]
+print(squares)
+```
+
+With a condition:
+
+```{python}
+numbers = [1, 2, 3, 4, 5, 6]
+even_numbers = [number for number in numbers if number % 2 == 0]
+print(even_numbers)
+```
+
+Equivalent loop:
+
+```{python}
+even_numbers = []
+for number in numbers:
+    if number % 2 == 0:
+        even_numbers.append(number)
+```
+
+Comprehensions are useful, but clarity is more important than cleverness.
+
+# Tuples
+
+A tuple is an ordered collection that cannot be changed after creation.
+
+```{python}
+point = (3, 4)
+print(point[0])
+print(point[1])
+```
+
+Tuples are often used for fixed groups of related values.
+
+```{python}
+student_record = ("Ava", 91)
+name, score = student_record
+print(name)
+print(score)
+```
+
+The assignment `name, score = student_record` is called unpacking.
+
+```{python}
+x, y = (10, 20)
+print(x)
+print(y)
+```
+
+# Dictionaries
+
+A dictionary stores key-value pairs.
+
+```{python}
+student = {
+    "name": "Ava",
+    "major": "Biology",
+    "score": 91
+}
+
+print(student["name"])
+print(student["score"])
+```
+
+A key is used to look up a value. Dictionaries are useful when each item has named attributes.
+
+## Adding and changing dictionary values
+
+```{python}
+student = {
+    "name": "Ava",
+    "major": "Biology",
+    "score": 91
+}
+
+student["year"] = "junior"
+student["score"] = 93
+
+print(student)
+```
+
+## Safe lookup with `.get()`
+
+```{python}
+student = {"name": "Ava", "score": 91}
+
+print(student.get("score"))
+print(student.get("email"))
+print(student.get("email", "not provided"))
+```
+
+Using `student["email"]` would cause an error if the key does not exist. `.get()` returns `None` or a default value instead.
+
+## Looping through dictionaries
+
+```{python}
+student = {
+    "name": "Ava",
+    "major": "Biology",
+    "score": 91
+}
+
+for key in student:
+    print(key, student[key])
+
+for key, value in student.items():
+    print(key, value)
+```
+
+## Counting with dictionaries
+
+Dictionaries are useful for frequency counts.
+
+```{python}
+majors = ["Biology", "Math", "Biology", "History", "Math", "Biology"]
+
+counts = {}
+for major in majors:
+    if major not in counts:
+        counts[major] = 0
+    counts[major] = counts[major] + 1
+
+print(counts)
+```
+
+The standard library also provides `Counter` for this common pattern.
+
+```{python}
+from collections import Counter
+
+majors = ["Biology", "Math", "Biology", "History", "Math", "Biology"]
+counts = Counter(majors)
+print(counts)
+```
+
+# Sets
+
+A set stores unique values.
+
+```{python}
+majors = {"Biology", "Math", "History", "Biology"}
+print(majors)
+```
+
+The duplicate value appears only once.
+
+Sets are useful for membership checks.
+
+```{python}
+allowed_majors = {"Biology", "Math", "History"}
+major = "Math"
+
+if major in allowed_majors:
+    print("Allowed")
+```
+
+They are also useful for comparing groups.
+
+```{python}
+python_students = {"Ava", "Ben", "Chen", "Dana"}
+stats_students = {"Chen", "Dana", "Eli"}
+
+print(python_students & stats_students)  # intersection
+print(python_students | stats_students)  # union
+print(python_students - stats_students)  # difference
+```
+
+# Practice: collections
+
+1. Create a list of five cities. Print the first and last city.
+2. Given a list of numbers, create a new list containing only values greater than 10.
+3. Create a dictionary for a book with title, author, year, and number of pages.
+4. Given a list of words, count how many times each word appears.
+5. Given two sets of students, find who is enrolled in both courses.
+
+Example solution for exercise 4:
+
+```{python}
+words = ["data", "python", "data", "ai", "python", "data"]
+
+counts = {}
+for word in words:
+    counts[word] = counts.get(word, 0) + 1
+
+print(counts)
+```
+
+# Part III: Functions, errors, and files
+
+# Functions
+
+A function is a reusable block of code that performs a task.
+
+Functions help programmers:
+
+- Avoid repeating code.
+- Give names to important actions.
+- Break large problems into smaller problems.
+- Test pieces of a program separately.
+
+## Defining a function
+
+```{python}
+def greet():
+    print("Hello!")
+
+
+greet()
+greet()
+```
+
+The keyword `def` begins a function definition. The function body is indented.
+
+## Parameters and arguments
+
+A parameter is a variable listed in a function definition.
+
+An argument is a value passed into the function when it is called.
+
+```{python}
+def greet(name):
+    print(f"Hello, {name}!")
+
+
+greet("Ava")
+greet("Ben")
+```
+
+Here, `name` is the parameter. `"Ava"` and `"Ben"` are arguments.
+
+## Return values
+
+Some functions print a result. Other functions return a result.
+
+```{python}
+def square(number):
+    return number ** 2
+
+
+result = square(5)
+print(result)
+```
+
+`return` sends a value back to the code that called the function.
+
+A beginner mistake is confusing `print()` and `return`.
+
+```{python}
+def square_print(number):
+    print(number ** 2)
+
+
+def square_return(number):
+    return number ** 2
+
+
+value1 = square_print(5)
+value2 = square_return(5)
+
+print("value1:", value1)
+print("value2:", value2)
+```
+
+The first function displays a result but returns `None`. The second function returns a value that can be stored and reused.
+
+## Multiple parameters
+
+```{python}
+def calculate_average(score1, score2, score3):
+    return (score1 + score2 + score3) / 3
+
+
+average = calculate_average(80, 90, 100)
+print(average)
+```
+
+## Default parameter values
+
+```{python}
+def greet(name, greeting="Hello"):
+    return f"{greeting}, {name}!"
+
+
+print(greet("Ava"))
+print(greet("Ava", "Good morning"))
+```
+
+## Keyword arguments
+
+```{python}
+def describe_student(name, major, year):
+    return f"{name} is a {year} majoring in {major}."
+
+
+print(describe_student(name="Ava", major="Biology", year="junior"))
+```
+
+Keyword arguments make function calls easier to read, especially when there are several arguments.
+
+## Scope
+
+Scope describes where a variable can be used.
+
+```{python}
+def calculate_tax(price):
+    tax_rate = 0.08
+    return price * tax_rate
+
+
+print(calculate_tax(100))
+# print(tax_rate)  # This would cause an error because tax_rate is local to the function.
+```
+
+A variable created inside a function is usually local to that function.
+
+## Type hints
+
+Type hints describe the expected types of parameters and return values.
+
+```{python}
+def calculate_average(scores: list[float]) -> float:
+    return sum(scores) / len(scores)
+
+
+print(calculate_average([80.0, 90.0, 100.0]))
+```
+
+Type hints do not usually change how Python runs the code. They help humans, editors, and checking tools understand the programmer's intention.
+
+## Docstrings
+
+A docstring explains what a function does.
+
+```{python}
+def celsius_to_fahrenheit(celsius: float) -> float:
+    """Convert a temperature from Celsius to Fahrenheit."""
+    return celsius * 9 / 5 + 32
+
+
+print(celsius_to_fahrenheit(20))
+```
+
+Docstrings are useful for students because they force a clear statement of purpose.
+
+## Designing functions
+
+A good beginner function usually has these qualities:
+
+- It has one clear purpose.
+- Its name starts with a verb when it performs an action: `calculate_average`, `load_data`, `plot_scores`.
+- It uses parameters instead of relying on hidden global variables.
+- It returns a value when the result should be reused.
+- It is short enough to understand at a glance.
+
+## Example: from repeated code to a function
+
+Repeated code:
+
+```{python}
+score1 = 82
+score2 = 91
+score3 = 77
+average1 = (score1 + score2 + score3) / 3
+print(average1)
+
+score4 = 88
+score5 = 95
+score6 = 84
+average2 = (score4 + score5 + score6) / 3
+print(average2)
+```
+
+Function version:
+
+```{python}
+def average_three(a, b, c):
+    return (a + b + c) / 3
+
+
+print(average_three(82, 91, 77))
+print(average_three(88, 95, 84))
+```
+
+More flexible version:
+
+```{python}
+def average(scores):
+    return sum(scores) / len(scores)
+
+
+print(average([82, 91, 77]))
+print(average([88, 95, 84, 90, 92]))
+```
+
+# Errors and debugging
+
+Debugging is the process of finding and fixing problems in code.
+
+Students should learn that errors are normal. Experienced programmers read error messages constantly.
+
+## Common error types
+
+| Error | Typical cause |
+|---|---|
+| `SyntaxError` | Python cannot parse the code |
+| `NameError` | A variable or function name does not exist |
+| `TypeError` | Operation used with an inappropriate type |
+| `ValueError` | Type is correct, but value is invalid |
+| `IndexError` | List index is out of range |
+| `KeyError` | Dictionary key does not exist |
+| `FileNotFoundError` | File path is wrong or file does not exist |
+| `ZeroDivisionError` | Division by zero |
+
+## Reading a traceback
+
+A traceback shows where Python encountered an error.
+
+Example:
+
+```{python}
+scores = [82, 91, 77]
+print(scores[5])
+```
+
+This produces an `IndexError` because index `5` does not exist.
+
+When reading a traceback:
+
+1. Start at the bottom to identify the error type and message.
+2. Look for the line number in your own code.
+3. Read the line carefully.
+4. Check the values of variables used on that line.
+
+## Debugging with `print()`
+
+```{python}
+def average(scores):
+    print("scores:", scores)
+    print("count:", len(scores))
+    return sum(scores) / len(scores)
+
+
+print(average([82, 91, 77]))
+```
+
+Print debugging is simple and effective. It helps students see what the program is actually doing.
+
+## Debugging with small tests
+
+```{python}
+def celsius_to_fahrenheit(celsius):
+    return celsius * 9 / 5 + 32
+
+
+assert celsius_to_fahrenheit(0) == 32
+assert celsius_to_fahrenheit(100) == 212
+```
+
+`assert` checks that a condition is true. If not, Python raises an error.
+
+Small tests are especially useful when using AI-generated code. The AI may produce code that looks plausible but has subtle mistakes.
+
+## Handling exceptions
+
+Sometimes you expect an operation might fail, and you want the program to respond gracefully.
+
+```{python}
+text = input("Enter a number: ")
+
+try:
+    number = float(text)
+    print(f"Double: {number * 2}")
+except ValueError:
+    print("That was not a valid number.")
+```
+
+Do not use `try`/`except` to hide errors you do not understand. Use it when you know what might go wrong and how the program should respond.
+
+# Files and paths
+
+Data analysis usually begins with data stored in files.
+
+Python can read and write many kinds of files. Common beginner formats include:
+
+| Format | Description | Common extension |
+|---|---|---|
+| Plain text | Unstructured text | `.txt` |
+| CSV | Comma-separated table | `.csv` |
+| JSON | Nested key-value data | `.json` |
+
+## Paths with `pathlib`
+
+A path describes where a file is located.
+
+```{python}
+from pathlib import Path
+
+project_folder = Path(".")
+data_folder = project_folder / "data"
+file_path = data_folder / "students.csv"
+
+print(file_path)
+```
+
+Using `Path` is often clearer than manually joining strings.
+
+## Writing a text file
+
+```{python}
+from pathlib import Path
+
+path = Path("message.txt")
+path.write_text("Hello from Python!\n")
+```
+
+## Reading a text file
+
+```{python}
+from pathlib import Path
+
+path = Path("message.txt")
+text = path.read_text()
+print(text)
+```
+
+## Reading line by line
+
+```{python}
+from pathlib import Path
+
+path = Path("message.txt")
+
+for line in path.read_text().splitlines():
+    print(line)
+```
+
+For small files, `read_text()` is convenient. For very large files, reading line by line with `open()` can be more memory-efficient.
+
+```{python}
+with open("message.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(line.strip())
+```
+
+The `with` statement closes the file automatically when the block finishes.
+
+## CSV files
+
+CSV means comma-separated values. It is a common format for tabular data.
+
+Example CSV content:
+
+```text
+name,major,score
+Ava,Biology,91
+Ben,Math,85
+Chen,History,93
+```
+
+Python's standard library includes a `csv` module.
+
+```{python}
+import csv
+
+with open("students.csv", "r", encoding="utf-8", newline="") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(row["name"], row["score"])
+```
+
+For larger data analysis tasks, `pandas` is usually more convenient.
+
+```{python}
+import pandas as pd
+
+students = pd.read_csv("students.csv")
+print(students)
+```
+
+## JSON files
+
+JSON is useful for nested data.
+
+```{python}
+import json
+
+student = {
+    "name": "Ava",
+    "major": "Biology",
+    "scores": [91, 88, 95]
+}
+
+with open("student.json", "w", encoding="utf-8") as file:
+    json.dump(student, file, indent=2)
+```
+
+Reading JSON:
+
+```{python}
+import json
+
+with open("student.json", "r", encoding="utf-8") as file:
+    student = json.load(file)
+
+print(student["name"])
+print(student["scores"])
+```
+
+# Modules, packages, and imports
+
+A module is a Python file that contains reusable code. A package is a collection of modules.
+
+Use `import` to bring outside code into your program.
+
+```{python}
+import math
+
+print(math.sqrt(25))
+print(math.pi)
+```
+
+Import a specific function:
+
+```{python}
+from math import sqrt
+
+print(sqrt(25))
+```
+
+Use an alias:
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+Aliases like `pd`, `np`, and `plt` are common in data analysis.
+
+## Useful standard library modules
+
+| Module | Purpose |
+|---|---|
+| `math` | Mathematical functions |
+| `random` | Random numbers and random choices |
+| `statistics` | Basic statistics |
+| `pathlib` | File paths |
+| `csv` | CSV files |
+| `json` | JSON files |
+| `datetime` | Dates and times |
+| `collections` | Specialized containers such as `Counter` |
+| `itertools` | Efficient iteration tools |
+
+## Random numbers
+
+```{python}
+import random
+
+print(random.randint(1, 6))
+print(random.choice(["heads", "tails"]))
+```
+
+Set a seed when you want reproducible random results.
+
+```{python}
+import random
+
+random.seed(42)
+print(random.randint(1, 6))
+```
+
+Reproducibility is important in data analysis because another person should be able to rerun your analysis and get the same result when the process is deterministic.
+
+# Object-oriented programming: a gentle introduction
+
+Python supports object-oriented programming. Beginners do not need to master it immediately, but they should understand what objects, attributes, and methods are.
+
+An object is a value that can contain data and behavior.
+
+```{python}
+text = "python"
+print(text.upper())
+```
+
+Here, `text` is a string object, and `.upper()` is a method.
+
+## Classes
+
+A class defines a new kind of object.
+
+```{python}
+class Student:
+    def __init__(self, name, major, score):
+        self.name = name
+        self.major = major
+        self.score = score
+
+    def passed(self):
+        return self.score >= 70
+
+
+student = Student("Ava", "Biology", 91)
+print(student.name)
+print(student.passed())
+```
+
+Key ideas:
+
+| Term | Meaning |
+|---|---|
+| Class | Blueprint for a kind of object |
+| Object / instance | A specific value created from a class |
+| Attribute | Data stored on an object |
+| Method | Function attached to an object |
+| `self` | The current object inside a class method |
+
+For data analysis, students will use objects constantly, even if they rarely write their own classes. A pandas `DataFrame`, a matplotlib `Figure`, and a string are all objects.
+
+# Practice: functions, errors, and files
+
+1. Write a function `is_even(number)` that returns `True` if a number is even.
+2. Write a function `letter_grade(score)` that returns a letter grade.
+3. Write a function `average(scores)` that handles an empty list by returning `None`.
+4. Write a program that reads a text file and counts how many lines it contains.
+5. Write a program that reads a CSV file of students and prints only students with scores above 90.
+
+Example solution for exercise 3:
+
+```{python}
+def average(scores):
+    if len(scores) == 0:
+        return None
+    return sum(scores) / len(scores)
+
+
+print(average([80, 90, 100]))
+print(average([]))
+```
+
+# Part IV: Data analysis with Python
+
+# Thinking like a data analyst
+
+Data analysis is the process of using data to answer questions.
+
+A typical workflow is:
+
+1. Ask a question.
+2. Collect or load data.
+3. Inspect the data.
+4. Clean the data.
+5. Transform the data.
+6. Summarize patterns.
+7. Visualize results.
+8. Communicate conclusions and limitations.
+
+Programming matters because real datasets are often too large, messy, or repetitive to handle manually.
+
+## A small teaching dataset
+
+The examples below use a small student dataset.
+
+```{python}
+import pandas as pd
+
+students = pd.DataFrame({
+    "student_id": [1, 2, 3, 4, 5, 6, 7, 8],
+    "name": ["Ava", "Ben", "Chen", "Dana", "Eli", "Fatima", "Gio", "Hana"],
+    "major": ["Biology", "Math", "History", "Math", "Biology", "Computer Science", "History", "Computer Science"],
+    "year": ["first", "second", "third", "second", "fourth", "third", "first", "fourth"],
+    "hours_studied": [5.5, 3.0, 4.5, 6.0, 2.5, 7.0, 3.5, 6.5],
+    "exam_score": [88, 76, 91, 85, 69, 95, 73, 90],
+    "submitted_project": [True, True, True, False, False, True, True, True]
+})
+
+print(students)
+```
+
+# NumPy basics
+
+NumPy is a library for numerical computing. Its main data structure is the array.
+
+A Python list is flexible. A NumPy array is designed for fast numerical operations.
+
+```{python}
+import numpy as np
+
+scores = np.array([88, 76, 91, 85, 69, 95, 73, 90])
+
+print(scores)
+print(scores.mean())
+print(scores.max())
+print(scores.min())
+```
+
+## Vectorized operations
+
+With a Python list, multiplying by `2` repeats the list.
+
+```{python}
+values = [1, 2, 3]
+print(values * 2)
+```
+
+With a NumPy array, multiplying by `2` multiplies each value.
+
+```{python}
+import numpy as np
+
+values = np.array([1, 2, 3])
+print(values * 2)
+```
+
+This is called vectorization. It means applying an operation to many values at once without writing a manual loop.
+
+## Boolean filtering with NumPy
+
+```{python}
+import numpy as np
+
+scores = np.array([88, 76, 91, 85, 69, 95, 73, 90])
+high_scores = scores[scores >= 90]
+
+print(high_scores)
+```
+
+The expression `scores >= 90` produces a Boolean array.
+
+```{python}
+print(scores >= 90)
+```
+
+NumPy is important because pandas uses similar ideas for columns and filters.
+
+# pandas basics
+
+pandas is a library for working with tabular data.
+
+The two most important pandas objects are:
+
+| Object | Meaning |
+|---|---|
+| `Series` | One column of data |
+| `DataFrame` | A table with rows and columns |
+
+## Creating a DataFrame
+
+```{python}
+import pandas as pd
+
+students = pd.DataFrame({
+    "name": ["Ava", "Ben", "Chen"],
+    "major": ["Biology", "Math", "History"],
+    "score": [88, 76, 91]
+})
+
+print(students)
+```
+
+## Loading a CSV file
+
+```{python}
+import pandas as pd
+
+students = pd.read_csv("students.csv")
+```
+
+In a real project, data is often loaded from a CSV, Excel file, database, web API, or research data repository.
+
+## Inspecting a DataFrame
+
+```{python}
+print(students.head())
+print(students.tail())
+print(students.shape)
+print(students.columns)
+print(students.info())
+print(students.describe())
+```
+
+Common inspection methods:
+
+| Method | Purpose |
+|---|---|
+| `.head()` | Show the first rows |
+| `.tail()` | Show the last rows |
+| `.shape` | Number of rows and columns |
+| `.columns` | Column names |
+| `.info()` | Column types and missing values |
+| `.describe()` | Summary statistics for numeric columns |
+
+## Selecting columns
+
+```{python}
+print(students["exam_score"])
+print(students[["name", "exam_score"]])
+```
+
+One pair of brackets returns a `Series`.
+
+Two pairs of brackets return a `DataFrame`.
+
+```{python}
+score_series = students["exam_score"]
+score_table = students[["exam_score"]]
+
+print(type(score_series))
+print(type(score_table))
+```
+
+## Filtering rows
+
+```{python}
+high_scores = students[students["exam_score"] >= 90]
+print(high_scores)
+```
+
+Read this as:
+
+> Select rows from `students` where the `exam_score` column is at least 90.
+
+Multiple conditions use `&` for and, `|` for or, and parentheses around each condition.
+
+```{python}
+math_high_scores = students[
+    (students["major"] == "Math") &
+    (students["exam_score"] >= 80)
+]
+
+print(math_high_scores)
+```
+
+## Sorting rows
+
+```{python}
+print(students.sort_values("exam_score"))
+print(students.sort_values("exam_score", ascending=False))
+```
+
+Sort by multiple columns:
+
+```{python}
+print(students.sort_values(["major", "exam_score"], ascending=[True, False]))
+```
+
+## Creating new columns
+
+```{python}
+students["passed"] = students["exam_score"] >= 70
+students["study_hours_per_point"] = students["hours_studied"] / students["exam_score"]
+
+print(students)
+```
+
+A new column can be based on existing columns.
+
+```{python}
+students["score_category"] = "standard"
+students.loc[students["exam_score"] >= 90, "score_category"] = "high"
+students.loc[students["exam_score"] < 70, "score_category"] = "low"
+
+print(students[["name", "exam_score", "score_category"]])
+```
+
+## Grouping and summarizing
+
+Grouping answers questions such as:
+
+- What is the average exam score by major?
+- How many students are in each year?
+- What percentage submitted the project?
+
+```{python}
+mean_score_by_major = students.groupby("major")["exam_score"].mean()
+print(mean_score_by_major)
+```
+
+Count rows by group:
+
+```{python}
+student_count_by_major = students.groupby("major").size()
+print(student_count_by_major)
+```
+
+Multiple summaries:
+
+```{python}
+summary = students.groupby("major").agg(
+    average_score=("exam_score", "mean"),
+    max_score=("exam_score", "max"),
+    student_count=("student_id", "count"),
+    average_hours=("hours_studied", "mean")
+)
+
+print(summary)
+```
+
+## Missing data
+
+Real data often has missing values.
+
+```{python}
+import pandas as pd
+
+survey = pd.DataFrame({
+    "name": ["Ava", "Ben", "Chen", "Dana"],
+    "age": [19, None, 21, 20],
+    "hours_studied": [5.5, 3.0, None, 6.0]
+})
+
+print(survey)
+print(survey.isna())
+print(survey.isna().sum())
+```
+
+Common strategies:
+
+| Strategy | Example | When it may make sense |
+|---|---|---|
+| Leave missing values | Keep `NaN` | Analysis method can handle missing values |
+| Drop rows | `.dropna()` | Missing rows are few and not systematic |
+| Fill with a value | `.fillna(0)` | Missing means zero in context |
+| Fill with summary | Fill with mean or median | Reasonable approximation for numeric data |
+| Flag missingness | Add a Boolean column | Missingness itself may be informative |
+
+Examples:
+
+```{python}
+print(survey.dropna())
+
+survey["hours_missing"] = survey["hours_studied"].isna()
+survey["hours_studied_filled"] = survey["hours_studied"].fillna(survey["hours_studied"].mean())
+
+print(survey)
+```
+
+::: {.callout-warning}
+## Data ethics note
+Filling missing values can change conclusions. Always explain how missing values were handled.
+:::
+
+## Renaming columns
+
+```{python}
+students = students.rename(columns={
+    "exam_score": "score",
+    "hours_studied": "study_hours"
+})
+
+print(students.columns)
+```
+
+## Working with dates
+
+```{python}
+import pandas as pd
+
+attendance = pd.DataFrame({
+    "student": ["Ava", "Ava", "Ben", "Ben"],
+    "date": ["2026-06-01", "2026-06-03", "2026-06-01", "2026-06-03"],
+    "present": [True, True, True, False]
+})
+
+attendance["date"] = pd.to_datetime(attendance["date"])
+attendance["weekday"] = attendance["date"].dt.day_name()
+
+print(attendance)
+```
+
+Date columns must often be converted before date operations work correctly.
+
+## Combining datasets
+
+Data is often spread across multiple tables.
+
+```{python}
+import pandas as pd
+
+students = pd.DataFrame({
+    "student_id": [1, 2, 3],
+    "name": ["Ava", "Ben", "Chen"],
+    "major": ["Biology", "Math", "History"]
+})
+
+scores = pd.DataFrame({
+    "student_id": [1, 2, 3],
+    "exam_score": [88, 76, 91]
+})
+
+combined = students.merge(scores, on="student_id", how="left")
+print(combined)
+```
+
+Common join types:
+
+| Join type | Meaning |
+|---|---|
+| `left` | Keep all rows from the left table |
+| `right` | Keep all rows from the right table |
+| `inner` | Keep only matching rows |
+| `outer` | Keep all rows from both tables |
+
+## Saving results
+
+```{python}
+summary.to_csv("summary_by_major.csv")
+```
+
+You can also save a DataFrame without the index column.
+
+```{python}
+summary.to_csv("summary_by_major.csv", index=False)
+```
+
+# Example analysis: study time and exam scores
+
+Question:
+
+> Do students who studied more hours tend to have higher exam scores?
+
+First, create or load the data.
+
+```{python}
+import pandas as pd
+
+students = pd.DataFrame({
+    "student_id": [1, 2, 3, 4, 5, 6, 7, 8],
+    "name": ["Ava", "Ben", "Chen", "Dana", "Eli", "Fatima", "Gio", "Hana"],
+    "major": ["Biology", "Math", "History", "Math", "Biology", "Computer Science", "History", "Computer Science"],
+    "year": ["first", "second", "third", "second", "fourth", "third", "first", "fourth"],
+    "hours_studied": [5.5, 3.0, 4.5, 6.0, 2.5, 7.0, 3.5, 6.5],
+    "exam_score": [88, 76, 91, 85, 69, 95, 73, 90],
+    "submitted_project": [True, True, True, False, False, True, True, True]
+})
+```
+
+Inspect:
+
+```{python}
+print(students.head())
+print(students.describe())
+```
+
+Calculate correlation:
+
+```{python}
+correlation = students["hours_studied"].corr(students["exam_score"])
+print(f"Correlation: {correlation:.2f}")
+```
+
+Summarize by project submission:
+
+```{python}
+summary = students.groupby("submitted_project").agg(
+    average_score=("exam_score", "mean"),
+    average_hours=("hours_studied", "mean"),
+    count=("student_id", "count")
+)
+
+print(summary)
+```
+
+Interpretation:
+
+- A positive correlation suggests that higher study time is associated with higher exam scores in this small dataset.
+- This does not prove that studying caused higher scores.
+- The dataset is tiny, so conclusions should be cautious.
+- Other variables, such as prior preparation, course difficulty, work hours, and attendance, may matter.
+
+# Practice: pandas
+
+Use the student dataset above.
+
+1. Print only the `name` and `exam_score` columns.
+2. Filter to students who studied at least 5 hours.
+3. Find the average exam score by year.
+4. Create a new column called `passed` where a score of 70 or higher is passing.
+5. Count how many students passed and failed.
+6. Sort students from highest to lowest score.
+7. Save the filtered high-scoring students to a CSV file.
+
+Example solution for exercises 2 through 5:
+
+```{python}
+studied_5_hours = students[students["hours_studied"] >= 5]
+print(studied_5_hours)
+
+average_by_year = students.groupby("year")["exam_score"].mean()
+print(average_by_year)
+
+students["passed"] = students["exam_score"] >= 70
+pass_counts = students["passed"].value_counts()
+print(pass_counts)
+```
+
+# Part V: Plotting and visualization
+
+# Why visualize data?
+
+Tables are precise, but plots make patterns easier to see. A good plot helps answer a question.
+
+Common reasons to make a plot:
+
+- Compare groups.
+- Show a trend over time.
+- Show the distribution of a variable.
+- Show the relationship between two variables.
+- Detect unusual values.
+
+Common chart choices:
+
+| Question | Useful chart |
+|---|---|
+| How does one numeric variable vary? | Histogram |
+| How do groups compare? | Bar chart or box plot |
+| How does a value change over time? | Line chart |
+| How are two numeric variables related? | Scatter plot |
+| What are the parts of a whole? | Bar chart; sometimes pie chart for simple cases |
+
+# Matplotlib basics
+
+Matplotlib is a widely used Python plotting library.
+
+A common import is:
+
+```{python}
+import matplotlib.pyplot as plt
+```
+
+## Line plot
+
+A line plot is useful for ordered data, especially time.
+
+```{python}
+import matplotlib.pyplot as plt
+
+weeks = [1, 2, 3, 4, 5]
+average_scores = [78, 81, 83, 86, 88]
+
+plt.plot(weeks, average_scores, marker="o")
+plt.xlabel("Week")
+plt.ylabel("Average score")
+plt.title("Average score over time")
+plt.show()
+```
+
+## Scatter plot
+
+A scatter plot shows the relationship between two numeric variables.
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+students = pd.DataFrame({
+    "hours_studied": [5.5, 3.0, 4.5, 6.0, 2.5, 7.0, 3.5, 6.5],
+    "exam_score": [88, 76, 91, 85, 69, 95, 73, 90]
+})
+
+plt.scatter(students["hours_studied"], students["exam_score"])
+plt.xlabel("Hours studied")
+plt.ylabel("Exam score")
+plt.title("Study time and exam score")
+plt.show()
+```
+
+## Bar chart
+
+A bar chart compares categories.
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+students = pd.DataFrame({
+    "major": ["Biology", "Math", "History", "Math", "Biology", "Computer Science", "History", "Computer Science"],
+    "exam_score": [88, 76, 91, 85, 69, 95, 73, 90]
+})
+
+average_by_major = students.groupby("major")["exam_score"].mean().sort_values()
+
+plt.bar(average_by_major.index, average_by_major.values)
+plt.xlabel("Major")
+plt.ylabel("Average exam score")
+plt.title("Average exam score by major")
+plt.xticks(rotation=30, ha="right")
+plt.tight_layout()
+plt.show()
+```
+
+## Histogram
+
+A histogram shows the distribution of a numeric variable.
+
+```{python}
+import matplotlib.pyplot as plt
+
+scores = [88, 76, 91, 85, 69, 95, 73, 90, 82, 78, 87, 94]
+
+plt.hist(scores, bins=5)
+plt.xlabel("Exam score")
+plt.ylabel("Number of students")
+plt.title("Distribution of exam scores")
+plt.show()
+```
+
+## Box plot
+
+A box plot summarizes a distribution and can show potential outliers.
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+students = pd.DataFrame({
+    "major": ["Biology", "Math", "History", "Math", "Biology", "Computer Science", "History", "Computer Science"],
+    "exam_score": [88, 76, 91, 85, 69, 95, 73, 90]
+})
+
+students.boxplot(column="exam_score", by="major")
+plt.suptitle("")
+plt.title("Exam score by major")
+plt.xlabel("Major")
+plt.ylabel("Exam score")
+plt.xticks(rotation=30, ha="right")
+plt.tight_layout()
+plt.show()
+```
+
+## Plotting directly from pandas
+
+pandas has convenient plotting methods built on matplotlib.
+
+```{python}
+average_by_major.plot(kind="bar")
+plt.xlabel("Major")
+plt.ylabel("Average exam score")
+plt.title("Average exam score by major")
+plt.xticks(rotation=30, ha="right")
+plt.tight_layout()
+plt.show()
+```
+
+This is often faster for exploratory work. Matplotlib gives more control when polishing a figure.
+
+# Visual communication principles
+
+A good plot should be understandable without a long explanation.
+
+## Use clear titles and labels
+
+```{python}
+plt.xlabel("Hours studied")
+plt.ylabel("Exam score")
+plt.title("Students who studied more tended to score higher")
+```
+
+The title should describe the message, not just the chart type.
+
+Weak title:
+
+> Scatter plot
+
+Better title:
+
+> Study time and exam score show a positive association
+
+## Choose the right scale
+
+Changing an axis scale can change how readers perceive a pattern. Avoid misleading axis choices.
+
+For bar charts, starting the y-axis at zero is usually clearer because bar length visually represents quantity.
+
+## Avoid chart clutter
+
+Too many labels, colors, legends, or grid lines can make a chart hard to read. A simple chart is often better than a decorative chart.
+
+## Separate exploration from presentation
+
+Exploratory plots help you understand the data. Presentation plots help communicate a conclusion.
+
+Exploratory plot:
+
+```{python}
+students.plot()
+plt.show()
+```
+
+Presentation plot:
+
+```{python}
+average_by_major = students.groupby("major")["exam_score"].mean().sort_values()
+
+plt.bar(average_by_major.index, average_by_major.values)
+plt.xlabel("Major")
+plt.ylabel("Average exam score")
+plt.title("Average exam score differs by major in the sample")
+plt.xticks(rotation=30, ha="right")
+plt.tight_layout()
+plt.show()
+```
+
+# Example visualization project
+
+Question:
+
+> How do study hours, project submission, and exam scores relate in a small course dataset?
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+students = pd.DataFrame({
+    "student_id": [1, 2, 3, 4, 5, 6, 7, 8],
+    "name": ["Ava", "Ben", "Chen", "Dana", "Eli", "Fatima", "Gio", "Hana"],
+    "major": ["Biology", "Math", "History", "Math", "Biology", "Computer Science", "History", "Computer Science"],
+    "year": ["first", "second", "third", "second", "fourth", "third", "first", "fourth"],
+    "hours_studied": [5.5, 3.0, 4.5, 6.0, 2.5, 7.0, 3.5, 6.5],
+    "exam_score": [88, 76, 91, 85, 69, 95, 73, 90],
+    "submitted_project": [True, True, True, False, False, True, True, True]
+})
+
+plt.scatter(students["hours_studied"], students["exam_score"])
+plt.xlabel("Hours studied")
+plt.ylabel("Exam score")
+plt.title("Study time and exam score")
+plt.show()
+```
+
+Add group summaries:
+
+```{python}
+summary = students.groupby("submitted_project")["exam_score"].mean()
+
+plt.bar(["No project", "Submitted project"], summary.values)
+plt.ylabel("Average exam score")
+plt.title("Project submission and average exam score")
+plt.show()
+```
+
+Write a short interpretation:
+
+> In this sample, students who submitted the project had a higher average exam score. Students who studied more hours also tended to have higher scores. Because the dataset is small and observational, this does not prove causation.
+
+# Practice: plotting
+
+1. Make a histogram of exam scores.
+2. Make a bar chart of the number of students in each major.
+3. Make a scatter plot of hours studied and exam score.
+4. Add a title, x-axis label, and y-axis label to each plot.
+5. Write two sentences interpreting one plot.
+
+Example solution for exercise 2:
+
+```{python}
+major_counts = students["major"].value_counts()
+
+plt.bar(major_counts.index, major_counts.values)
+plt.xlabel("Major")
+plt.ylabel("Number of students")
+plt.title("Number of students by major")
+plt.xticks(rotation=30, ha="right")
+plt.tight_layout()
+plt.show()
+```
+
+# Part VI: Mini-projects
+
+# Mini-project 1: Gradebook analysis
+
+## Goal
+
+Analyze a small class gradebook and answer:
+
+1. What is the average final grade?
+2. Which students are at risk?
+3. Which assessment had the lowest average?
+4. How should the instructor summarize performance visually?
+
+## Starter data
+
+```{python}
+import pandas as pd
+
+grades = pd.DataFrame({
+    "student": ["Ava", "Ben", "Chen", "Dana", "Eli", "Fatima", "Gio", "Hana"],
+    "homework": [92, 81, 88, 75, 70, 95, 78, 90],
+    "midterm": [85, 76, 91, 72, 68, 94, 73, 89],
+    "project": [93, 84, 90, 78, 65, 98, 80, 91],
+    "final_exam": [88, 74, 92, 80, 67, 96, 76, 90]
+})
+```
+
+## Analysis tasks
+
+```{python}
+grades["final_grade"] = (
+    grades["homework"] * 0.25 +
+    grades["midterm"] * 0.25 +
+    grades["project"] * 0.25 +
+    grades["final_exam"] * 0.25
+)
+
+print(grades)
+print(grades["final_grade"].mean())
+```
+
+Find at-risk students:
+
+```{python}
+at_risk = grades[grades["final_grade"] < 75]
+print(at_risk[["student", "final_grade"]])
+```
+
+Find average score by assessment:
+
+```{python}
+assessment_means = grades[["homework", "midterm", "project", "final_exam"]].mean()
+print(assessment_means)
+```
+
+Plot:
+
+```{python}
+assessment_means.plot(kind="bar")
+plt.ylabel("Average score")
+plt.title("Average score by assessment")
+plt.xticks(rotation=30, ha="right")
+plt.tight_layout()
+plt.show()
+```
+
+## Written interpretation template
+
+> The class average final grade was `___`. The lowest average assessment was `___`, suggesting that students may need additional support in `___`. The at-risk students were `___`. This analysis is limited because it only includes scores and does not include attendance, prior preparation, or other context.
+
+# Mini-project 2: Simple survey analysis
+
+## Goal
+
+Analyze survey responses about study habits and technology use.
+
+## Starter data
+
+```{python}
+import pandas as pd
+
+survey = pd.DataFrame({
+    "student_id": range(1, 11),
+    "study_hours_per_week": [4, 6, 3, 8, 5, 10, 2, 7, 6, 9],
+    "uses_ai_tool": [True, True, False, True, False, True, False, True, False, True],
+    "confidence": [3, 4, 2, 5, 3, 5, 2, 4, 3, 5],
+    "preferred_language": ["Python", "Python", "JavaScript", "Python", "C#", "Python", "JavaScript", "Python", "C#", "Python"]
+})
+```
+
+## Questions
+
+1. What is the average confidence score?
+2. Do students who use AI tools report different confidence levels?
+3. What programming language is most preferred?
+4. Is study time associated with confidence?
+
+## Example code
+
+```{python}
+print(survey["confidence"].mean())
+print(survey.groupby("uses_ai_tool")["confidence"].mean())
+print(survey["preferred_language"].value_counts())
+print(survey["study_hours_per_week"].corr(survey["confidence"]))
+```
+
+Plot:
+
+```{python}
+language_counts = survey["preferred_language"].value_counts()
+
+plt.bar(language_counts.index, language_counts.values)
+plt.xlabel("Preferred language")
+plt.ylabel("Number of students")
+plt.title("Preferred programming language in the sample")
+plt.show()
+```
+
+# Mini-project 3: Personal data log
+
+Students can collect a small dataset about themselves for one week. Example variables:
+
+- Date
+- Hours slept
+- Study hours
+- Exercise minutes
+- Screen time
+- Mood rating from 1 to 5
+
+Example structure:
+
+```{python}
+import pandas as pd
+
+log = pd.DataFrame({
+    "date": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05"],
+    "sleep_hours": [7.5, 6.0, 8.0, 7.0, 6.5],
+    "study_hours": [2.0, 3.5, 1.5, 4.0, 3.0],
+    "exercise_minutes": [30, 0, 45, 20, 10],
+    "mood": [4, 3, 5, 4, 3]
+})
+
+log["date"] = pd.to_datetime(log["date"])
+print(log)
+```
+
+Possible analysis:
+
+```{python}
+print(log.describe())
+print(log[["sleep_hours", "study_hours", "exercise_minutes", "mood"]].corr())
+```
+
+Possible plot:
+
+```{python}
+plt.plot(log["date"], log["sleep_hours"], marker="o")
+plt.xlabel("Date")
+plt.ylabel("Sleep hours")
+plt.title("Sleep hours over time")
+plt.xticks(rotation=30, ha="right")
+plt.tight_layout()
+plt.show()
+```
+
+::: {.callout-note}
+## Privacy note
+Personal data projects should be optional or designed with synthetic data. Students should not be required to reveal sensitive personal information.
+:::
+
+# Mini-project 4: Reproducible analysis report
+
+Students create a short Quarto report that includes:
+
+1. A research question.
+2. A short description of the dataset.
+3. Data loading code.
+4. At least three summary statistics.
+5. At least two visualizations.
+6. A short interpretation.
+7. A limitations section.
+
+Suggested report outline:
+
+```markdown
+# Title
+
+## Question
+
+What question does this analysis answer?
+
+## Data
+
+Where did the data come from? What does each row represent?
+
+## Methods
+
+What cleaning and summary steps were used?
+
+## Results
+
+Include tables and plots.
+
+## Interpretation
+
+What did you find? What do the results not prove?
+
+## Limitations
+
+What are the weaknesses of the data or method?
+```
+
+# Part VII: Comparing Python, JavaScript, and C#
+
+Python, JavaScript, and C# can all teach the same programming concepts: variables, functions, conditionals, loops, collections, and objects. The differences are mostly syntax, runtime environment, typing style, and common use cases.
+
+## Common uses
+
+| Language | Common beginner context | Common professional uses |
+|---|---|---|
+| Python | Data analysis, scripting, automation, scientific computing | Data science, AI, automation, backend services |
+| JavaScript | Web pages and interactive browser code | Frontend web, backend with Node.js, full-stack apps |
+| C# | Structured programming and software engineering | Windows apps, enterprise systems, games with Unity, backend services |
+
+## Variables
+
+Python:
+
+```{python}
+age = 20
+name = "Ava"
+```
+
+JavaScript:
+
+```javascript
+let age = 20;
+const name = "Ava";
+```
+
+C#:
+
+```csharp
+int age = 20;
+string name = "Ava";
+```
+
+Key comparison:
+
+| Feature | Python | JavaScript | C# |
+|---|---|---|---|
+| Semicolons | Not normally used | Usually optional but common | Required |
+| Type declarations | Usually not required | Usually not required | Usually required, though `var` can infer type |
+| Variable declaration keyword | None for basic assignment | `let`, `const`, `var` | Type name or `var` |
+
+## Printing output
+
+Python:
+
+```{python}
+print("Hello")
+```
+
+JavaScript:
+
+```javascript
+console.log("Hello");
+```
+
+C#:
+
+```csharp
+Console.WriteLine("Hello");
+```
+
+## Conditionals
+
+Python:
+
+```{python}
+score = 87
+
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+else:
+    print("Other")
+```
+
+JavaScript:
+
+```javascript
+let score = 87;
+
+if (score >= 90) {
+    console.log("A");
+} else if (score >= 80) {
+    console.log("B");
+} else {
+    console.log("Other");
+}
+```
+
+C#:
+
+```csharp
+int score = 87;
+
+if (score >= 90)
+{
+    Console.WriteLine("A");
+}
+else if (score >= 80)
+{
+    Console.WriteLine("B");
+}
+else
+{
+    Console.WriteLine("Other");
+}
+```
+
+Key comparison:
+
+| Feature | Python | JavaScript | C# |
+|---|---|---|---|
+| Blocks | Indentation | Curly braces | Curly braces |
+| Else-if keyword | `elif` | `else if` | `else if` |
+| Parentheses around condition | Not required | Required | Required |
+
+## Loops
+
+Python `for` loop:
+
+```{python}
+for number in [1, 2, 3]:
+    print(number)
+```
+
+JavaScript `for...of` loop:
+
+```javascript
+for (const number of [1, 2, 3]) {
+    console.log(number);
+}
+```
+
+C# `foreach` loop:
+
+```csharp
+foreach (int number in new int[] {1, 2, 3})
+{
+    Console.WriteLine(number);
+}
+```
+
+Python `while` loop:
+
+```{python}
+count = 1
+
+while count <= 3:
+    print(count)
+    count += 1
+```
+
+JavaScript `while` loop:
+
+```javascript
+let count = 1;
+
+while (count <= 3) {
+    console.log(count);
+    count += 1;
+}
+```
+
+C# `while` loop:
+
+```csharp
+int count = 1;
+
+while (count <= 3)
+{
+    Console.WriteLine(count);
+    count += 1;
+}
+```
+
+## Functions
+
+Python:
+
+```{python}
+def add(a, b):
+    return a + b
+```
+
+JavaScript:
+
+```javascript
+function add(a, b) {
+    return a + b;
+}
+```
+
+C#:
+
+```csharp
+int Add(int a, int b)
+{
+    return a + b;
+}
+```
+
+Key comparison:
+
+| Feature | Python | JavaScript | C# |
+|---|---|---|---|
+| Function keyword | `def` | `function` or arrow syntax | Return type plus method name |
+| Return type declared? | Optional type hints | No, unless using TypeScript | Yes |
+| Braces? | No | Yes | Yes |
+
+## Lists and arrays
+
+Python list:
+
+```{python}
+scores = [88, 76, 91]
+scores.append(85)
+print(scores[0])
+```
+
+JavaScript array:
+
+```javascript
+let scores = [88, 76, 91];
+scores.push(85);
+console.log(scores[0]);
+```
+
+C# array and list:
+
+```csharp
+int[] scoresArray = new int[] {88, 76, 91};
+Console.WriteLine(scoresArray[0]);
+
+List<int> scoresList = new List<int> {88, 76, 91};
+scoresList.Add(85);
+Console.WriteLine(scoresList[0]);
+```
+
+## Dictionaries, objects, and maps
+
+Python dictionary:
+
+```{python}
+student = {"name": "Ava", "score": 91}
+print(student["name"])
+```
+
+JavaScript object:
+
+```javascript
+const student = {name: "Ava", score: 91};
+console.log(student.name);
+```
+
+C# dictionary:
+
+```csharp
+Dictionary<string, object> student = new Dictionary<string, object>();
+student["name"] = "Ava";
+student["score"] = 91;
+Console.WriteLine(student["name"]);
+```
+
+In C#, a class is often preferred for structured records:
+
+```csharp
+public class Student
+{
+    public string Name { get; set; }
+    public int Score { get; set; }
+}
+```
+
+## Typing style
+
+Python is dynamically typed. A variable can refer to values of different types at different times, although changing types carelessly makes code confusing.
+
+```{python}
+x = 10
+x = "ten"
+```
+
+C# is statically typed. The type of a variable is usually known at compile time.
+
+```csharp
+int x = 10;
+// x = "ten"; // This is not allowed.
+```
+
+JavaScript is dynamically typed.
+
+```javascript
+let x = 10;
+x = "ten";
+```
+
+Static typing can catch some mistakes earlier. Dynamic typing can make quick exploration flexible. For data analysis, Python's flexibility is convenient, but students should still write clear, predictable code.
+
+## Indentation and braces
+
+Python uses indentation to define blocks.
+
+```{python}
+if True:
+    print("inside block")
+print("outside block")
+```
+
+JavaScript and C# use braces.
+
+```javascript
+if (true) {
+    console.log("inside block");
+}
+console.log("outside block");
+```
+
+The Python style encourages visually clean code, but it also means indentation errors matter.
+
+## What transfers across languages?
+
+The most important programming ideas transfer well:
+
+- Breaking a problem into steps.
+- Naming variables clearly.
+- Using conditionals for decisions.
+- Using loops for repetition.
+- Using functions for reusable logic.
+- Using data structures to organize information.
+- Reading documentation.
+- Debugging systematically.
+- Testing assumptions.
+
+Syntax changes from language to language. Problem-solving habits transfer.
+
+# Part VIII: Programming in the age of AI
+
+AI tools can help students learn programming, but they can also hide misunderstandings. The course should teach students how to use AI as a tutor, reviewer, and assistant while still requiring them to reason about code.
+
+# What AI can help with
+
+AI tools are useful for:
+
+- Explaining unfamiliar code.
+- Generating small examples.
+- Suggesting debugging strategies.
+- Translating code from one language to another.
+- Creating practice problems.
+- Drafting comments or documentation.
+- Suggesting test cases.
+- Refactoring code for readability.
+
+Example prompt:
+
+> I am new to Python. Explain this code line by line and ask me two questions to check my understanding.
+
+Example prompt:
+
+> Here is my function. It gives the wrong answer for an empty list. Help me find the bug, but do not give me the final answer immediately.
+
+Example prompt:
+
+> Create five beginner practice problems about `for` loops using lists of numbers. Include expected outputs but not solutions.
+
+# What AI cannot replace
+
+Students still need to understand:
+
+- What the code is supposed to do.
+- Whether the output makes sense.
+- Whether the code is appropriate for the data.
+- Whether assumptions are valid.
+- Whether the result is ethical and reproducible.
+- Whether a chart or statistic supports the claim being made.
+
+AI-generated code can be wrong, outdated, inefficient, insecure, or mismatched to the assignment. A student who cannot read the code cannot responsibly use it.
+
+# A responsible AI workflow for beginners
+
+Use this workflow when AI helps with programming:
+
+1. State the goal in your own words.
+2. Write or sketch a first attempt.
+3. Ask AI for targeted help, not a complete replacement.
+4. Run the code.
+5. Read every line.
+6. Test with small examples where you know the answer.
+7. Explain the final code in your own words.
+8. Cite or disclose AI assistance if required by the course policy.
+
+## Example: asking AI for debugging help
+
+Weak prompt:
+
+> Fix my code.
+
+Better prompt:
+
+> I am trying to calculate the average of a list of scores in Python. My code returns a `ZeroDivisionError` when the list is empty. Explain why this happens and give me two possible beginner-friendly ways to handle it.
+
+## Example: asking AI for concept explanation
+
+Weak prompt:
+
+> Explain Python.
+
+Better prompt:
+
+> Explain the difference between a Python list and dictionary for a student who has only learned variables and loops. Include one example of when each is useful.
+
+## Example: asking AI for verification
+
+Prompt:
+
+> Review the following code for possible logic errors. Do not rewrite it unless necessary. First explain what the code currently does, then list possible problems, then suggest small tests.
+
+This encourages the AI to act as a reviewer instead of silently replacing the student's work.
+
+# Testing AI-generated code
+
+Suppose AI gives this function:
+
+```{python}
+def average(scores):
+    return sum(scores) / len(scores)
+```
+
+A student should test normal and edge cases.
+
+```{python}
+assert average([80, 90, 100]) == 90
+assert average([10]) == 10
+```
+
+The empty-list case needs a design decision.
+
+```{python}
+# This will cause ZeroDivisionError.
+# average([])
+```
+
+Possible revised function:
+
+```{python}
+def average(scores):
+    if len(scores) == 0:
+        return None
+    return sum(scores) / len(scores)
+```
+
+Test again:
+
+```{python}
+assert average([80, 90, 100]) == 90
+assert average([10]) == 10
+assert average([]) is None
+```
+
+# Academic integrity and AI
+
+A course should give students a clear AI policy. A useful policy distinguishes between support and substitution.
+
+Possible allowed uses:
+
+- Asking for explanations of concepts.
+- Asking for help interpreting error messages.
+- Asking for additional practice problems.
+- Asking for feedback on code the student wrote.
+- Asking for help writing comments after understanding the code.
+
+Possible restricted uses:
+
+- Submitting code the student cannot explain.
+- Generating an entire assignment without disclosure.
+- Using AI to bypass required practice.
+- Fabricating data, sources, or results.
+
+Example disclosure statement:
+
+> I used an AI assistant to help understand a `KeyError` and to suggest test cases. I wrote the final code and verified the output.
+
+# Part IX: Good programming habits
+
+# Write readable code
+
+Readable code is easier to debug, share, and grade.
+
+Less readable:
+
+```{python}
+x=[82,91,77,88]
+y=0
+for z in x:y+=z
+print(y/len(x))
+```
+
+More readable:
+
+```{python}
+scores = [82, 91, 77, 88]
+
+total = 0
+for score in scores:
+    total += score
+
+average_score = total / len(scores)
+print(average_score)
+```
+
+# Prefer clarity over cleverness
+
+A clever one-line solution can be impressive, but it may not be the best teaching code.
+
+Compact:
+
+```{python}
+print(sum(x for x in scores if x >= 70) / len([x for x in scores if x >= 70]))
+```
+
+Clearer:
+
+```{python}
+passing_scores = [score for score in scores if score >= 70]
+average_passing_score = sum(passing_scores) / len(passing_scores)
+print(average_passing_score)
+```
+
+# Use small steps
+
+When solving a problem, do not write 50 lines before running anything. Build and test small pieces.
+
+Example workflow:
+
+1. Load the data.
+2. Print the first few rows.
+3. Select one column.
+4. Create one filter.
+5. Calculate one summary.
+6. Make one plot.
+7. Combine into a final report.
+
+# Make code reproducible
+
+A reproducible analysis can be rerun by another person.
+
+Good habits:
+
+- Keep raw data separate from cleaned data.
+- Use relative paths such as `data/students.csv` rather than computer-specific paths.
+- Put imports at the top.
+- Set random seeds when using randomness.
+- Record package requirements for larger projects.
+- Explain data cleaning decisions.
+- Avoid manual spreadsheet edits that are not documented.
+
+# Use meaningful file organization
+
+Example project folder:
+
+```text
+python-course-project/
+├── data/
+│   ├── raw/
+│   └── cleaned/
+├── notebooks/
+├── scripts/
+├── figures/
+├── reports/
+└── README.md
+```
+
+A small class project does not need every folder, but students should learn that organization matters.
+
+# Part X: Assessment ideas
+
+# Low-stakes checks
+
+Use frequent small activities:
+
+- Predict the output of a short code snippet.
+- Fix one error in a program.
+- Fill in missing code.
+- Explain a line of code in plain English.
+- Write one test case.
+- Modify a working example.
+
+# Concept questions
+
+1. What is the difference between `=` and `==`?
+2. What is the difference between `print()` and `return`?
+3. Why does Python use indentation?
+4. When would you use a `for` loop instead of a `while` loop?
+5. What is the difference between a list and a dictionary?
+6. What does a function parameter do?
+7. Why should we inspect data before analyzing it?
+8. Why does correlation not prove causation?
+9. What should you check before trusting AI-generated code?
+10. What makes a plot misleading?
+
+# Code tracing exercise
+
+Ask students to predict the output before running the code.
+
+```{python}
+numbers = [2, 5, 8, 11]
+result = []
+
+for number in numbers:
+    if number % 2 == 0:
+        result.append(number * 10)
+    else:
+        result.append(number + 1)
+
+print(result)
+```
+
+Expected output:
+
+```text
+[20, 6, 80, 12]
+```
+
+# Debugging exercise
+
+Find and fix the errors.
+
+```{python}
+scores = [82, 91, 77, 88]
+
+def average(scores)
+    total = 0
+    for score in score:
+        total = total + scores
+    return total / len(score)
+
+print(average(scores))
+```
+
+Possible corrected version:
+
+```{python}
+scores = [82, 91, 77, 88]
+
+def average(scores):
+    total = 0
+    for score in scores:
+        total = total + score
+    return total / len(scores)
+
+print(average(scores))
+```
+
+# Short programming assignments
+
+## Assignment 1: Calculator basics
+
+Write a program that asks the user for two numbers and prints:
+
+- Sum
+- Difference
+- Product
+- Quotient
+- Remainder
+
+Include clear labels in the output.
+
+## Assignment 2: Grade classifier
+
+Write a program that asks for a score from 0 to 100 and prints a letter grade.
+
+Add error handling for invalid input.
+
+## Assignment 3: List summary
+
+Given a list of numbers, write functions that return:
+
+- Minimum
+- Maximum
+- Average
+- Count above a threshold
+
+Do not use built-in `min`, `max`, or `sum` for the first version. Then write a second version using built-ins.
+
+## Assignment 4: Word counter
+
+Ask the user for a sentence. Count how many times each word appears.
+
+Optional extension: ignore capitalization and punctuation.
+
+## Assignment 5: CSV analysis
+
+Given a CSV file of students, write a program that:
+
+- Loads the data.
+- Prints the number of rows.
+- Prints the average score.
+- Filters students above a threshold.
+- Saves the filtered data.
+
+## Assignment 6: Data visualization report
+
+Use a small dataset to create a report with:
+
+- One table of summary statistics.
+- One histogram.
+- One scatter plot or bar chart.
+- A short explanation of each figure.
+
+# Final project option
+
+Students complete an end-to-end analysis project.
+
+Required sections:
+
+1. Research question
+2. Data description
+3. Data cleaning
+4. Summary statistics
+5. Visualizations
+6. Interpretation
+7. Limitations
+8. Reproducibility notes
+9. AI assistance disclosure, if applicable
+
+Possible project topics:
+
+- Course survey data
+- Public transportation ridership
+- Weather records
+- Campus event attendance
+- Sports statistics
+- Movie or music dataset
+- Simulated business sales data
+- Personal learning log using synthetic or anonymized data
+
+# Part XI: Reference sheets
+
+# Python syntax quick reference
+
+| Task | Syntax example |
+|---|---|
+| Assign variable | `x = 10` |
+| Print | `print(x)` |
+| Comment | `# comment` |
+| If statement | `if x > 0:` |
+| Else-if | `elif x == 0:` |
+| Else | `else:` |
+| For loop | `for item in items:` |
+| While loop | `while condition:` |
+| Function | `def name(parameter):` |
+| Return | `return value` |
+| List | `[1, 2, 3]` |
+| Dictionary | `{"name": "Ava"}` |
+| Set | `{1, 2, 3}` |
+| Tuple | `(1, 2)` |
+| Import | `import math` |
+| Read CSV | `pd.read_csv("file.csv")` |
+| Plot | `plt.plot(x, y)` |
+
+# Common beginner mistakes
+
+| Mistake | Example | Fix |
+|---|---|---|
+| Assignment instead of comparison | `if x = 5:` | `if x == 5:` |
+| Missing colon | `if x > 0` | `if x > 0:` |
+| Wrong indentation | Inconsistent spaces | Use four spaces per level |
+| String instead of number | `"5" + 1` | `int("5") + 1` |
+| Index out of range | `items[10]` | Check `len(items)` |
+| Dictionary key missing | `student["email"]` | Use `.get()` or check key |
+| Empty list average | `sum(scores) / len(scores)` | Handle empty list first |
+| Confusing print and return | Function prints but returns `None` | Use `return` for reusable result |
+| Forgetting parentheses in pandas filters | `df[df["x"] > 1 & df["y"] < 5]` | `df[(df["x"] > 1) & (df["y"] < 5)]` |
+| Trusting AI output without tests | Copy and submit | Run, inspect, test, explain |
+
+# pandas quick reference
+
+| Task | Code |
+|---|---|
+| Import pandas | `import pandas as pd` |
+| Read CSV | `df = pd.read_csv("file.csv")` |
+| First rows | `df.head()` |
+| Dimensions | `df.shape` |
+| Column names | `df.columns` |
+| Summary stats | `df.describe()` |
+| Select column | `df["column"]` |
+| Select columns | `df[["col1", "col2"]]` |
+| Filter rows | `df[df["score"] >= 90]` |
+| Sort | `df.sort_values("score")` |
+| New column | `df["passed"] = df["score"] >= 70` |
+| Group average | `df.groupby("major")["score"].mean()` |
+| Missing counts | `df.isna().sum()` |
+| Drop missing | `df.dropna()` |
+| Fill missing | `df.fillna(0)` |
+| Save CSV | `df.to_csv("out.csv", index=False)` |
+
+# matplotlib quick reference
+
+| Task | Code |
+|---|---|
+| Import | `import matplotlib.pyplot as plt` |
+| Line plot | `plt.plot(x, y)` |
+| Scatter plot | `plt.scatter(x, y)` |
+| Bar chart | `plt.bar(categories, values)` |
+| Histogram | `plt.hist(values)` |
+| X label | `plt.xlabel("Label")` |
+| Y label | `plt.ylabel("Label")` |
+| Title | `plt.title("Title")` |
+| Rotate x labels | `plt.xticks(rotation=30, ha="right")` |
+| Improve spacing | `plt.tight_layout()` |
+| Show plot | `plt.show()` |
+
+# Instructor notes
+
+# Pacing suggestions
+
+A fast 8-week version:
+
+| Week | Focus |
+|---|---|
+| 1 | Programming concepts, variables, types |
+| 2 | Conditionals and loops |
+| 3 | Collections and functions |
+| 4 | Errors, debugging, files |
+| 5 | pandas basics |
+| 6 | Grouping, cleaning, merging |
+| 7 | Plotting and interpretation |
+| 8 | Final project and AI-assisted review |
+
+A fuller 12-week version:
+
+| Week | Focus |
+|---|---|
+| 1 | What programming is; running Python |
+| 2 | Variables, types, strings |
+| 3 | Conditionals |
+| 4 | Loops |
+| 5 | Collections |
+| 6 | Functions |
+| 7 | Debugging, testing, files |
+| 8 | NumPy and pandas introduction |
+| 9 | pandas cleaning and grouping |
+| 10 | Plotting |
+| 11 | Mini-project workshops and language comparison |
+| 12 | Final presentations and AI reflection |
+
+# Suggested classroom pattern
+
+For each new concept:
+
+1. Explain the concept in plain language.
+2. Show a tiny code example.
+3. Ask students to predict the output.
+4. Run the code.
+5. Modify one piece and rerun.
+6. Give a short practice task.
+7. Discuss one common error.
+8. Connect the concept to data analysis.
+
+# Suggested grading categories
+
+| Category | Possible weight |
+|---|---:|
+| Weekly coding practice | 25% |
+| Concept quizzes | 15% |
+| Data analysis mini-projects | 25% |
+| Final project | 25% |
+| Participation and code review | 10% |
+
+# Code review checklist for students
+
+Before submitting code, students should answer:
+
+1. Does the program run from top to bottom?
+2. Are variable names clear?
+3. Are functions used for repeated logic?
+4. Are edge cases handled?
+5. Are plots labeled clearly?
+6. Are data cleaning steps explained?
+7. Can I explain every line of code?
+8. Did I test AI-generated or AI-edited code?
+9. Did I disclose AI assistance if required?
+
+# Further learning resources
+
+Useful official or commonly used resources for students:
+
+- Python documentation: <https://docs.python.org/3/>
+- Python tutorial: <https://docs.python.org/3/tutorial/>
+- pandas documentation: <https://pandas.pydata.org/docs/>
+- NumPy documentation: <https://numpy.org/doc/>
+- Matplotlib documentation: <https://matplotlib.org/stable/users/index.html>
+- Quarto documentation: <https://quarto.org/docs/>
+
+# Closing message for students
+
+Programming is a practical skill. It is learned by writing code, making mistakes, reading errors, testing ideas, and revising solutions.
+
+Python is not only a language for professional programmers. It is also a tool for thinking clearly about data. In the age of AI, the most valuable skill is not memorizing every syntax detail. The valuable skill is knowing how to ask precise questions, evaluate answers, test code, interpret results, and communicate honestly.
