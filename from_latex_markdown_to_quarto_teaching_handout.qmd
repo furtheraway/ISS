@@ -29,10 +29,10 @@ By the end of this handout, students should be able to explain:
 2. How LaTeX, Markdown, notebooks, R Markdown, and Quarto are related.
 3. Why Quarto is useful for scientific papers, class reports, office documents, and content creation.
 4. How a `.qmd` file differs from a simple `.md` file.
-5. How VS Code, Git, and Quarto work together in a modern writing workflow.
+5. How VS Code, **Git**, and Quarto work together in a modern writing workflow.
 
 ::: {.callout-note}
-This handout is intentionally friendly. Many tool names in technical writing sound intimidating: LaTeX, Markdown, Pandoc, Jupyter, RStudio, Quarto, Git, YAML. Most of them are just answers to one repeated question: **How can we write once, revise safely, and publish in many formats?**
+This handout is intentionally friendly. Many tool names in technical writing sound intimidating: LaTeX, Markdown, Pandoc, Jupyter, RStudio, Quarto, **Git**, YAML. Most of them are just answers to one repeated question: **How can we write once, revise safely, and publish in many formats?**
 :::
 
 ## The big idea: source files and rendered files
@@ -48,7 +48,7 @@ figures/                                             ---> Word DOCX
 scripts/                                             ---> slides
 ```
 
-The source files are plain text. They are easy to read, easy to compare, and easy to track with Git.
+The source files are plain text. They are easy to read, easy to compare, and easy to track with **Git**.
 
 The output files are what people read or submit: PDF, Word, HTML, slides, books, reports, or websites.
 
@@ -123,7 +123,7 @@ That is why Markdown became popular in README files, websites, blogs, GitHub iss
 
 ### Notebooks: computation plus explanation
 
-Jupyter notebooks combine live runnable code, narrative text, equations, images, visualizations, and rich output. JupyterLab's documentation describes notebooks this way: <https://jupyterlab.readthedocs.io/en/latest/user/notebook.html>. Project Jupyter says it was born out of IPython in 2014 as the project evolved to support interactive data science and scientific computing across programming languages: <https://jupyter.org/about>.
+**Jupyter notebooks** combine live runnable code, narrative text, equations, images, **visualizations**, and rich output. JupyterLab's documentation describes notebooks this way: <https://jupyterlab.readthedocs.io/en/latest/user/notebook.html>. Project Jupyter says it was born out of IPython in 2014 as the project evolved to support interactive data science and scientific computing across **programming languages**: <https://jupyter.org/about>.
 
 A notebook is excellent for exploration:
 
@@ -138,7 +138,7 @@ write interpretation
 
 The key idea: **notebooks are good for interactive thinking and computational teaching.**
 
-However, notebooks are not always ideal for long manuscripts because notebook files are usually JSON, which can be harder to review with Git than plain text. Quarto can use notebooks, but it also lets us write notebook-like documents as plain-text `.qmd` files.
+However, notebooks are not always ideal for long manuscripts because notebook files are usually JSON, which can be harder to review with **Git** than plain text. Quarto can use notebooks, but it also lets us write notebook-like documents as plain-text `.qmd` files.
 
 ### R Markdown: reproducible reports
 
@@ -148,32 +148,30 @@ The book *R Markdown: The Definitive Guide* notes that R Markdown was first intr
 
 A simplified R Markdown example:
 
-````markdown
----
+<pre><code>&#45;&#45;&#45;
 title: "My Report"
 output: html_document
----
+&#45;&#45;&#45;
 
 ## Results
 
-```{r}
+&#96;&#96;&#96;{r}
 plot(cars)
-```
-````
+&#96;&#96;&#96;</code></pre>
 
 The key idea: **the text, the code, and the output can live together.**
 
-This reduces copy-and-paste errors. If the data change, we can re-render the report and update the numbers, tables, and figures.
+This reduces copy-and-paste **errors**. If the data change, we can re-render the report and update the numbers, tables, and figures.
 
 ### RStudio and Posit
 
-RStudio became a very popular environment for R programming, data analysis, and R Markdown authoring. The company later changed its name to Posit, reflecting a broader focus beyond only R. Posit announced the name change during `rstudio::conf(2022)` and described the change on its website: <https://posit.co/blog/rstudio-is-now-posit/>.
+RStudio became a very popular environment for R programming, data analysis, and R Markdown authoring. The company later changed its name to **Posit**, reflecting a broader focus beyond only R. **Posit** announced the name change during `rstudio::conf(2022)` and described the change on its website: <https://posit.co/blog/rstudio-is-now-posit/>.
 
 This matters historically because Quarto came from the same ecosystem that made R Markdown popular, but Quarto was designed to be broader: Python, R, Julia, Observable, VS Code, Jupyter, RStudio, and more.
 
 ### Quarto: the general-purpose publishing layer
 
-Posit announced Quarto in 2022 as a new open-source scientific and technical publishing system and described it as the next generation of R Markdown, rebuilt to support more languages and environments. See <https://posit.co/blog/announcing-quarto-a-new-scientific-and-technical-publishing-system>.
+**Posit** announced Quarto in 2022 as a new open-source scientific and technical publishing system and described it as the next generation of R Markdown, rebuilt to support more languages and environments. See <https://posit.co/blog/announcing-quarto-a-new-scientific-and-technical-publishing-system>.
 
 The Quarto website describes Quarto as an open-source scientific and technical publishing system for articles, websites, blogs, books, slides, dashboards, and more, with support for Python, R, Julia, and Observable. See <https://quarto.org/>.
 
@@ -332,7 +330,7 @@ See @eq-model.
 
 ### Figures and cross-references
 
-Quarto supports cross-references for figures, tables, equations, sections, code listings, theorems, and more. See <https://quarto.org/docs/authoring/cross-references.html>.
+Quarto supports **cross-references** for figures, tables, equations, sections, code listings, theorems, and more. See <https://quarto.org/docs/authoring/cross-references.html>.
 
 ```markdown
 ![Relationship between input and output.](figures/result.png){#fig-result}
@@ -423,14 +421,14 @@ and easy to publish in more than one format.
 
 ## Why plain text is powerful
 
-Plain text is not old-fashioned. It is powerful because computers, humans, and AI tools can all work with it.
+Plain text is not old-fashioned. It is powerful because computers, humans, and **AI** tools can all work with it.
 
 Plain text is:
 
 - easy to search;
 - easy to copy;
-- easy to compare with Git;
-- easy for AI tools to edit;
+- easy to compare with **Git**;
+- easy for **AI** tools to edit;
 - independent of one company's file format;
 - small and portable;
 - readable even when the original software is not available.
@@ -443,7 +441,7 @@ A recommended workflow is: **write and version-control the source, then render t
 
 ## Where Git fits
 
-Git tracks changes over time. It answers questions such as:
+**Git** tracks changes over time. It answers questions such as:
 
 - What changed?
 - Who changed it?
@@ -451,7 +449,7 @@ Git tracks changes over time. It answers questions such as:
 - Can we go back to an earlier version?
 - Can we review a proposed change before accepting it?
 
-A Quarto project works well with Git because `.qmd`, `.yml`, `.bib`, `.py`, `.R`, and `.txt` files are plain text.
+A Quarto project works well with **Git** because `.qmd`, `.yml`, `.bib`, `.py`, `.R`, and `.txt` files are plain text.
 
 A simple workflow:
 
@@ -634,7 +632,7 @@ A notebook is like cooking while recording notes, measurements, photos, and expe
 
 A Quarto file is like a recipe that can become a web page, printable PDF, Word handout, slide deck, or reproducible lab report.
 
-Git is the notebook that remembers every draft.
+**Git** is the notebook that remembers every draft.
 
 VS Code is the desk where all these files are edited.
 
@@ -649,9 +647,9 @@ Students practice:
 - using citations and references;
 - using figures, tables, and equations;
 - rendering the same source to different formats;
-- tracking revisions with Git;
+- tracking revisions with **Git**;
 - making reproducible reports;
-- working with AI tools more safely because changes can be reviewed.
+- working with **AI** tools more safely because changes can be reviewed.
 
 ::: {.callout-tip}
 A useful message for students: **You do not need to memorize every tool name. Learn the workflow: write source, render output, track changes.**
@@ -716,7 +714,7 @@ Change the introduction, then run:
 git diff
 ```
 
-Students should see that Git can show the exact sentence-level changes because the source is plain text.
+Students should see that **Git** can show the exact sentence-level changes because the source is plain text.
 
 ## Suggested classroom exercise
 
@@ -728,7 +726,7 @@ Ask students to create a short report with:
 4. one image;
 5. one table;
 6. one cross-reference;
-7. one Git commit before revision and one Git commit after revision;
+7. one **Git** commit before revision and one Git commit after revision;
 8. HTML and Word output.
 
 Optional extension:
@@ -736,28 +734,28 @@ Optional extension:
 - Add a bibliography file.
 - Add one citation.
 - Add a Python or R code chunk that creates a figure.
-- Submit the `.qmd` source and the rendered HTML or DOCX.
+- Submit the `.qmd` source and the rendered HTML or **DOCX**.
 
 ## Key takeaways
 
 1. LaTeX made high-quality scientific typesetting widely available.
 2. Markdown made formatted writing readable as plain text.
-3. Jupyter notebooks made computation and explanation interactive.
+3. **Jupyter notebooks** made computation and explanation interactive.
 4. R Markdown made reproducible data reports practical.
 5. Quarto combines many of these ideas into one modern publishing system.
 6. VS Code gives a practical editing environment.
-7. Git gives document history and review.
-8. Plain text makes writing more transparent, portable, and AI-friendly.
+7. **Git** gives document history and review.
+8. Plain text makes writing more transparent, portable, and **AI**-friendly.
 
 ## Sources and further reading
 
 - Quarto home page: <https://quarto.org/>
 - Quarto Markdown basics: <https://quarto.org/docs/authoring/markdown-basics.html>
-- Quarto cross-references: <https://quarto.org/docs/authoring/cross-references.html>
+- Quarto **cross-references**: <https://quarto.org/docs/authoring/cross-references.html>
 - Quarto citations: <https://quarto.org/docs/authoring/citations.html>
 - Quarto manuscripts: <https://quarto.org/docs/manuscripts/>
 - Quarto with VS Code: <https://quarto.org/docs/tools/vscode/>
-- Posit announcement of Quarto: <https://posit.co/blog/announcing-quarto-a-new-scientific-and-technical-publishing-system>
+- **Posit** announcement of Quarto: <https://posit.co/blog/announcing-quarto-a-new-scientific-and-technical-publishing-system>
 - R Markdown: <https://rmarkdown.rstudio.com/>
 - *R Markdown: The Definitive Guide*: <https://pkg.yihui.org/rmarkdown-book/>
 - Project Jupyter: <https://jupyter.org/>
@@ -768,14 +766,14 @@ Optional extension:
 - LyX: <https://www.lyx.org/>
 - TeX Users Group: <https://tug.org/>
 - LaTeX Project history notes: <https://www.latex-project.org/news/2019/04/23/history-papers/>
-- Posit name change from RStudio: <https://posit.co/blog/rstudio-is-now-posit/>
+- **Posit** name change from RStudio: <https://posit.co/blog/rstudio-is-now-posit/>
 
 ## Instructor note
 
 This handout can be used in two ways:
 
 1. As a reading assignment before a hands-on Quarto lab.
-2. As a live demonstration file: open it in VS Code, preview it, edit it, render it, and commit changes with Git.
+2. As a live demonstration file: open it in VS Code, preview it, edit it, render it, and commit changes with **Git**.
 
 The most important concept to reinforce is not the name of any single tool. The most important concept is the workflow:
 

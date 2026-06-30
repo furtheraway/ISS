@@ -31,18 +31,18 @@ Welcome to data analysis and programming. This course uses **Python** as the mai
 5. Communicate results honestly and clearly.
 6. Make the work reproducible so that you, your classmates, or future collaborators can understand what happened.
 
-Students in this class may come from journalism, social science, humanities, business, natural science, engineering, public health, or other fields. Programming is useful across all of these areas because it helps us handle repetitive tasks, large datasets, transparent analysis, and reproducible writing.
+Students in this class may come from journalism, social science, humanities, business, natural science, engineering, public health, or other fields. Programming is useful across all of these areas because it helps us handle repetitive tasks, large **datasets**, transparent analysis, and reproducible writing.
 
 ## Learning objectives
 
 By the end of this first class, students should be able to explain:
 
 - What programming is and why Python is useful for data analysis.
-- What an **integrated development environment** (IDE) is.
+- What an **integrated development environment** (**IDE**) is.
 - What **Visual Studio Code** is and how it helps with coding and writing.
 - The difference between **Python**, **VS Code**, and the **Python extension for VS Code**.
 - What **Git** and **GitHub** are.
-- Why plain-text documents such as **Markdown** and **Quarto `.qmd` files** are useful for data analysis, writing, and version control.
+- Why plain-text documents such as **Markdown** and **Quarto `.qmd` files** are useful for data analysis, writing, and **version control**.
 - How Markdown/Quarto differs from traditional word processors such as Microsoft Word.
 
 # The big picture: tools and concepts
@@ -62,14 +62,14 @@ A beginning data analysis workflow often includes several tools:
 ::: {.callout-note}
 ## Important distinction
 
-**VS Code is not Python.** VS Code is the place where you write and manage code. Python is the language and interpreter that runs the code. The Python extension helps VS Code work well with Python, but it does not replace the need for a Python installation.
+**VS Code is not Python.** VS Code is the place where you write and manage code. Python is the language and **interpreter** that runs the code. The Python extension helps VS Code work well with Python, but it does not replace the need for a Python installation.
 :::
 
 # What is programming?
 
 Programming means writing instructions that a computer can run. A program may be very short or very complex. In data analysis, programs often help us:
 
-- Import a dataset.
+- Import a **dataset**.
 - Clean messy columns.
 - Combine multiple files.
 - Count, group, filter, or summarize records.
@@ -86,7 +86,7 @@ name = "data analysis"
 print(f"Welcome to {name}!")
 ```
 
-Programming is not only about writing code from memory. It is also about reading documentation, asking good questions, testing small pieces, debugging errors, and explaining your reasoning.
+Programming is not only about writing code from memory. It is also about reading documentation, asking good questions, testing small pieces, debugging **errors**, and explaining your reasoning.
 
 # What are programming languages?
 
@@ -110,8 +110,8 @@ Python is a good language for an undergraduate data analysis course because it i
 - Text data.
 - Web data.
 - Survey data.
-- Public datasets.
-- Visualizations.
+- Public **datasets**.
+- **Visualizations**.
 - Reproducible reports.
 
 Common Python packages for data analysis include:
@@ -143,7 +143,7 @@ students
 
 An **integrated development environment** or **IDE** is software that helps people write, run, test, and manage code.
 
-An IDE or code editor may include:
+An **IDE** or code editor may include:
 
 - A file browser.
 - Syntax highlighting.
@@ -151,7 +151,7 @@ An IDE or code editor may include:
 - Error messages.
 - A terminal.
 - Debugging tools.
-- Git integration.
+- **Git** integration.
 - Extensions for different languages and file formats.
 
 Examples include VS Code, PyCharm, RStudio/Positron, JupyterLab, and Spyder.
@@ -159,7 +159,7 @@ Examples include VS Code, PyCharm, RStudio/Positron, JupyterLab, and Spyder.
 ::: {.callout-tip}
 ## Analogy
 
-A programming language is like a language you write in. An IDE is like the desk, notebook, dictionary, spell checker, filing cabinet, and workspace that help you write more effectively.
+A programming language is like a language you write in. An **IDE** is like the desk, notebook, dictionary, spell checker, filing cabinet, and workspace that help you write more effectively.
 :::
 
 # What is Visual Studio Code?
@@ -173,7 +173,7 @@ In this course, VS Code can be used to:
 - Write Markdown documents: `.md` files.
 - Open a project folder.
 - Use the built-in terminal.
-- Work with Git and GitHub.
+- Work with **Git** and GitHub.
 - Preview Quarto documents.
 
 ## Recommended VS Code extensions
@@ -191,10 +191,10 @@ Install these extensions from the VS Code Extensions panel:
 
 Yes. In most teaching setups, students should install **both**:
 
-1. **Python**, the interpreter that actually runs Python code.
+1. **Python**, the **interpreter** that actually runs Python code.
 2. **VS Code + Python extension**, the editor environment that helps write and manage Python code.
 
-The VS Code Python extension is not a complete replacement for Python itself. It helps VS Code find and use an installed Python interpreter. After installing Python, VS Code can select that interpreter for the project.
+The VS Code Python extension is not a complete replacement for Python itself. It helps VS Code find and use an installed Python **interpreter**. After installing Python, VS Code can select that **interpreter** for the project.
 :::
 
 # What is the terminal?
@@ -206,7 +206,7 @@ In data analysis courses, students may use the terminal to:
 - Check whether software is installed.
 - Run Python scripts.
 - Install Python packages.
-- Use Git commands.
+- Use **Git** commands.
 - Render Quarto documents.
 
 Common commands:
@@ -232,9 +232,9 @@ python -m venv .venv
 
 # What is Git?
 
-**Git** is a version control system. It records changes to files over time.
+**Git** is a **version control** system. It records changes to files over time.
 
-Git helps answer questions such as:
+**Git** helps answer questions such as:
 
 - What changed since yesterday?
 - Who changed this file?
@@ -265,11 +265,11 @@ git commit -m "Add first analysis draft"
 git push
 ```
 
-In VS Code, many Git actions can also be done through the Source Control panel without typing every command manually.
+In VS Code, many **Git** actions can also be done through the Source Control panel without typing every command manually.
 
 # What is GitHub?
 
-**GitHub** is a web platform for hosting Git repositories. Git is the version control tool; GitHub is a website that makes Git-based collaboration easier.
+**GitHub** is a web platform for hosting **Git** repositories. Git is the **version control** tool; GitHub is a website that makes Git-based collaboration easier.
 
 GitHub can be used to:
 
@@ -284,10 +284,10 @@ GitHub can be used to:
 ::: {.callout-note}
 ## Git vs GitHub
 
-Git and GitHub are related, but they are not the same thing.
+**Git** and GitHub are related, but they are not the same thing.
 
 - **Git** is software installed on your computer.
-- **GitHub** is an online service that hosts Git repositories.
+- **GitHub** is an online service that hosts **Git** repositories.
 :::
 
 # Why writing matters in a data analysis course
@@ -328,7 +328,7 @@ This is a paragraph with **bold text** and *italic text*.
 | Value 1 | Value 2 |
 ```
 
-Markdown is especially useful because it stores writing as plain text. Plain text works well with Git, because Git can clearly show exactly which lines changed.
+Markdown is especially useful because it stores writing as plain text. Plain text works well with **Git**, because Git can clearly show exactly which lines changed.
 
 # What is Quarto?
 
@@ -397,7 +397,7 @@ Later, the sentence becomes:
 The city budget increased by 6% in 2024 after revised revenue estimates.
 ```
 
-Git can show the exact line that changed. In a Word document, version history exists, but the internal file format is not as simple for Git to compare, merge, and review.
+**Git** can show the exact line that changed. In a Word document, version history exists, but the internal file format is not as simple for Git to compare, merge, and review.
 
 ## When should students use Word?
 
@@ -405,7 +405,7 @@ Word is still useful when:
 
 - The instructor, editor, or organization requires `.docx`.
 - A document needs detailed visual layout.
-- A collaborator is not comfortable with Markdown, Quarto, or Git.
+- A collaborator is not comfortable with Markdown, Quarto, or **Git**.
 - The task is mainly final formatting rather than reproducible analysis.
 
 ## When should students use Quarto?
@@ -414,7 +414,7 @@ Quarto is especially useful when:
 
 - A document includes code and results.
 - The analysis may need to be repeated.
-- The project benefits from Git version history.
+- The project benefits from **Git** version history.
 - The writer wants to produce HTML, PDF, Word, or slides from one source file.
 - The document should clearly connect evidence, method, and conclusion.
 
@@ -450,7 +450,7 @@ Optional but useful:
 
 # Recommended first-week setup test
 
-After installing Python, VS Code, Git, and Quarto, students can open the terminal in VS Code and run:
+After installing Python, VS Code, **Git**, and Quarto, students can open the terminal in VS Code and run:
 
 ```bash
 python --version
@@ -514,7 +514,7 @@ No. **Visual Studio Code** is a lightweight editor used for many languages and w
 
 ## Is GitHub the same as Google Drive or Dropbox?
 
-No. GitHub stores project history using Git. It is not just file storage. It tracks changes, supports collaboration, and lets people review project history.
+No. GitHub stores project history using **Git**. It is not just file storage. It tracks changes, supports collaboration, and lets people review project history.
 
 ## Can I use Word and Quarto together?
 
@@ -526,7 +526,7 @@ No. Students should learn a small set of common commands, but the main goal is u
 
 ## Why not use only Jupyter notebooks?
 
-Jupyter notebooks are useful for exploration and interactive coding. Quarto is useful for turning analysis into polished documents, reports, websites, or slides. In this course, we may use both, but `.qmd` files are especially helpful for combining writing, code, and version control.
+**Jupyter notebooks** are useful for exploration and interactive coding. Quarto is useful for turning analysis into polished documents, reports, websites, or slides. In this course, we may use both, but `.qmd` files are especially helpful for combining writing, code, and **version control**.
 
 # One-sentence summaries
 
@@ -534,7 +534,7 @@ Jupyter notebooks are useful for exploration and interactive coding. Quarto is u
 - **VS Code** is the editor where we write code and documents.
 - **The Python extension** helps VS Code work well with Python, but it does not replace Python itself.
 - **Git** tracks changes to project files.
-- **GitHub** hosts Git projects online and supports collaboration.
+- **GitHub** hosts **Git** projects online and supports collaboration.
 - **Markdown** is a plain-text writing format.
 - **Quarto** turns Markdown plus code into reproducible documents.
 - **Word** is useful for traditional document editing, while **Quarto** is useful for reproducible, version-controlled analytical writing.
@@ -555,7 +555,7 @@ Possible teaching sequence for a 75-minute first class:
 
 Possible first assignment:
 
-1. Install Python, VS Code, Git, and Quarto.
+1. Install Python, VS Code, **Git**, and Quarto.
 2. Create a GitHub account.
 3. Make a folder for the course.
 4. Create a `hello.qmd` file.

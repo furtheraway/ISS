@@ -23,7 +23,7 @@ jupyter: python3
 
 This document is designed for students who are new to programming. It uses Python as the main language for learning programming and then applies Python to data analysis and plotting.
 
-The document can support a summer semester course, a short bootcamp, or a self-study module. It starts with the question "What is programming?" and gradually builds toward practical analysis with data tables, files, and visualizations.
+The document can support a summer semester course, a short bootcamp, or a self-study module. It starts with the question "What is programming?" and gradually builds toward practical analysis with data tables, files, and **visualizations**.
 
 ::: {.callout-tip}
 ## Teaching suggestion
@@ -35,13 +35,13 @@ For a summer semester, this material can be taught in 8 to 12 weeks. Each major 
 By the end of this document, students should be able to:
 
 1. Explain what a program is and how Python runs code.
-2. Use variables, expressions, functions, conditionals, loops, and collections.
+2. Use **variables**, expressions, functions, **conditionals**, loops, and collections.
 3. Read error messages and debug small programs.
 4. Work with files and structured data.
 5. Use Python libraries such as `math`, `random`, `pathlib`, `csv`, `json`, `numpy`, `pandas`, and `matplotlib`.
 6. Clean, summarize, filter, group, and visualize data.
 7. Compare basic Python ideas with JavaScript and C#.
-8. Use AI tools responsibly as programming assistants, not as replacements for understanding.
+8. Use **AI** tools responsibly as programming assistants, not as replacements for understanding.
 
 ## Suggested course structure
 
@@ -82,7 +82,7 @@ print(average)
 
 This program says:
 
-1. Store five scores in a list.
+1. Store five scores in a **list**.
 2. Add the scores.
 3. Count how many scores there are.
 4. Divide the total by the count.
@@ -98,7 +98,7 @@ Three important ideas appear throughout the course.
 | Algorithm | A step-by-step method | Sort values from smallest to largest |
 | Program | An algorithm written in code | A Python file that reads data and makes a chart |
 
-An algorithm can exist before code. For example, the algorithm for finding the largest value in a list is:
+An algorithm can exist before code. For example, the algorithm for finding the largest value in a **list** is:
 
 1. Start with the first value as the largest value seen so far.
 2. Look at each remaining value.
@@ -121,7 +121,7 @@ print(largest)
 
 ## Syntax and semantics
 
-Programming languages have syntax and semantics.
+**Programming languages** have syntax and semantics.
 
 Syntax means the grammar of code. It answers: Is the code written in a form Python understands?
 
@@ -511,7 +511,7 @@ Common conversion functions:
 
 # Practice: basic expressions
 
-1. Create variables for your name, major, year in school, and favorite number. Print one sentence using all four variables.
+1. Create **variables** for your name, major, year in school, and favorite number. Print one sentence using all four variables.
 2. Ask a user for a temperature in Celsius and convert it to Fahrenheit using `F = C * 9/5 + 32`.
 3. Ask a user for three exam scores and print the average.
 4. Write a program that asks for a number of minutes and converts it to hours and minutes.
@@ -626,7 +626,7 @@ Usually false:
 - `0`
 - `0.0`
 - `""` empty string
-- `[]` empty list
+- `[]` empty **list**
 - `{}` empty dictionary
 
 Usually true:
@@ -634,7 +634,7 @@ Usually true:
 - Nonzero numbers
 - Non-empty strings
 - Non-empty lists
-- Non-empty dictionaries
+- Non-empty **dictionaries**
 
 ```{python}
 name = ""
@@ -669,7 +669,7 @@ for name in names:
     print(f"Hello, {name}")
 ```
 
-The variable `name` takes one value at a time from the list.
+The variable `name` takes one value at a time from the **list**.
 
 ## `range()`
 
@@ -827,7 +827,7 @@ for name, score in zip(names, scores):
 
 1. Write a program that asks for a score and prints the letter grade.
 2. Write a program that prints every number from 1 to 100 divisible by 7.
-3. Given a list of temperatures, count how many are above 90.
+3. Given a **list** of temperatures, count how many are above 90.
 4. Ask the user to enter numbers until they type `done`, then print the average.
 5. Write a guessing game where the computer has a secret number and the user guesses until correct.
 
@@ -866,7 +866,7 @@ Collections store multiple values.
 
 # Lists
 
-A list stores an ordered sequence of values.
+A **list** stores an ordered sequence of values.
 
 ```{python}
 scores = [82, 91, 77, 88]
@@ -906,7 +906,7 @@ scores.remove(77)
 print(scores)
 ```
 
-Common list methods:
+Common **list** methods:
 
 | Method | Description |
 |---|---|
@@ -930,11 +930,11 @@ scores.sort()             # changes the original list
 print(scores)
 ```
 
-Use `sorted()` when you want a new list. Use `.sort()` when you want to modify the existing list.
+Use `sorted()` when you want a new **list**. Use `.sort()` when you want to modify the existing list.
 
 ## List comprehensions
 
-A list comprehension creates a list from another sequence in a compact way.
+A **list** comprehension creates a list from another sequence in a compact way.
 
 ```{python}
 numbers = [1, 2, 3, 4, 5]
@@ -1003,7 +1003,7 @@ print(student["name"])
 print(student["score"])
 ```
 
-A key is used to look up a value. Dictionaries are useful when each item has named attributes.
+A key is used to look up a value. **Dictionaries** are useful when each item has named attributes.
 
 ## Adding and changing dictionary values
 
@@ -1050,7 +1050,7 @@ for key, value in student.items():
 
 ## Counting with dictionaries
 
-Dictionaries are useful for frequency counts.
+**Dictionaries** are useful for frequency counts.
 
 ```{python}
 majors = ["Biology", "Math", "Biology", "History", "Math", "Biology"]
@@ -1108,10 +1108,10 @@ print(python_students - stats_students)  # difference
 
 # Practice: collections
 
-1. Create a list of five cities. Print the first and last city.
-2. Given a list of numbers, create a new list containing only values greater than 10.
+1. Create a **list** of five cities. Print the first and last city.
+2. Given a **list** of numbers, create a new list containing only values greater than 10.
 3. Create a dictionary for a book with title, author, year, and number of pages.
-4. Given a list of words, count how many times each word appears.
+4. Given a **list** of words, count how many times each word appears.
 5. Given two sets of students, find who is enrolled in both courses.
 
 Example solution for exercise 4:
@@ -1289,7 +1289,7 @@ A good beginner function usually has these qualities:
 
 - It has one clear purpose.
 - Its name starts with a verb when it performs an action: `calculate_average`, `load_data`, `plot_scores`.
-- It uses parameters instead of relying on hidden global variables.
+- It uses parameters instead of relying on hidden global **variables**.
 - It returns a value when the result should be reused.
 - It is short enough to understand at a glance.
 
@@ -1337,7 +1337,7 @@ print(average([88, 95, 84, 90, 92]))
 
 Debugging is the process of finding and fixing problems in code.
 
-Students should learn that errors are normal. Experienced programmers read error messages constantly.
+Students should learn that **errors** are normal. Experienced programmers read error messages constantly.
 
 ## Common error types
 
@@ -1370,7 +1370,7 @@ When reading a traceback:
 1. Start at the bottom to identify the error type and message.
 2. Look for the line number in your own code.
 3. Read the line carefully.
-4. Check the values of variables used on that line.
+4. Check the values of **variables** used on that line.
 
 ## Debugging with `print()`
 
@@ -1399,7 +1399,7 @@ assert celsius_to_fahrenheit(100) == 212
 
 `assert` checks that a condition is true. If not, Python raises an error.
 
-Small tests are especially useful when using AI-generated code. The AI may produce code that looks plausible but has subtle mistakes.
+Small tests are especially useful when using **AI**-generated code. The **AI** may produce code that looks plausible but has subtle mistakes.
 
 ## Handling exceptions
 
@@ -1415,7 +1415,7 @@ except ValueError:
     print("That was not a valid number.")
 ```
 
-Do not use `try`/`except` to hide errors you do not understand. Use it when you know what might go wrong and how the program should respond.
+Do not use `try`/`except` to hide **errors** you do not understand. Use it when you know what might go wrong and how the program should respond.
 
 # Files and paths
 
@@ -1614,7 +1614,7 @@ Reproducibility is important in data analysis because another person should be a
 
 # Object-oriented programming: a gentle introduction
 
-Python supports object-oriented programming. Beginners do not need to master it immediately, but they should understand what objects, attributes, and methods are.
+Python supports **object-oriented programming**. Beginners do not need to master it immediately, but they should understand what objects, attributes, and methods are.
 
 An object is a value that can contain data and behavior.
 
@@ -1655,13 +1655,13 @@ Key ideas:
 | Method | Function attached to an object |
 | `self` | The current object inside a class method |
 
-For data analysis, students will use objects constantly, even if they rarely write their own classes. A pandas `DataFrame`, a matplotlib `Figure`, and a string are all objects.
+For data analysis, students will use objects constantly, even if they rarely write their own classes. A **pandas** `DataFrame`, a matplotlib `Figure`, and a string are all objects.
 
 # Practice: functions, errors, and files
 
 1. Write a function `is_even(number)` that returns `True` if a number is even.
 2. Write a function `letter_grade(score)` that returns a letter grade.
-3. Write a function `average(scores)` that handles an empty list by returning `None`.
+3. Write a function `average(scores)` that handles an empty **list** by returning `None`.
 4. Write a program that reads a text file and counts how many lines it contains.
 5. Write a program that reads a CSV file of students and prints only students with scores above 90.
 
@@ -1695,11 +1695,11 @@ A typical workflow is:
 7. Visualize results.
 8. Communicate conclusions and limitations.
 
-Programming matters because real datasets are often too large, messy, or repetitive to handle manually.
+Programming matters because real **datasets** are often too large, messy, or repetitive to handle manually.
 
 ## A small teaching dataset
 
-The examples below use a small student dataset.
+The examples below use a small student **dataset**.
 
 ```{python}
 import pandas as pd
@@ -1719,9 +1719,9 @@ print(students)
 
 # NumPy basics
 
-NumPy is a library for numerical computing. Its main data structure is the array.
+**NumPy** is a library for numerical computing. Its main data structure is the array.
 
-A Python list is flexible. A NumPy array is designed for fast numerical operations.
+A Python **list** is flexible. A **NumPy** array is designed for fast numerical operations.
 
 ```{python}
 import numpy as np
@@ -1736,14 +1736,14 @@ print(scores.min())
 
 ## Vectorized operations
 
-With a Python list, multiplying by `2` repeats the list.
+With a Python **list**, multiplying by `2` repeats the list.
 
 ```{python}
 values = [1, 2, 3]
 print(values * 2)
 ```
 
-With a NumPy array, multiplying by `2` multiplies each value.
+With a **NumPy** array, multiplying by `2` multiplies each value.
 
 ```{python}
 import numpy as np
@@ -1771,13 +1771,13 @@ The expression `scores >= 90` produces a Boolean array.
 print(scores >= 90)
 ```
 
-NumPy is important because pandas uses similar ideas for columns and filters.
+**NumPy** is important because **pandas** uses similar ideas for columns and filters.
 
 # pandas basics
 
-pandas is a library for working with tabular data.
+**pandas** is a library for working with tabular data.
 
-The two most important pandas objects are:
+The two most important **pandas** objects are:
 
 | Object | Meaning |
 |---|---|
@@ -2103,14 +2103,14 @@ print(summary)
 
 Interpretation:
 
-- A positive correlation suggests that higher study time is associated with higher exam scores in this small dataset.
+- A positive correlation suggests that higher study time is associated with higher exam scores in this small **dataset**.
 - This does not prove that studying caused higher scores.
-- The dataset is tiny, so conclusions should be cautious.
-- Other variables, such as prior preparation, course difficulty, work hours, and attendance, may matter.
+- The **dataset** is tiny, so conclusions should be cautious.
+- Other **variables**, such as prior preparation, course difficulty, work hours, and attendance, may matter.
 
 # Practice: pandas
 
-Use the student dataset above.
+Use the student **dataset** above.
 
 1. Print only the `name` and `exam_score` columns.
 2. Filter to students who studied at least 5 hours.
@@ -2138,14 +2138,14 @@ print(pass_counts)
 
 # Why visualize data?
 
-Tables are precise, but plots make patterns easier to see. A good plot helps answer a question.
+Tables are precise, but plots make patterns easier to see. A good **plot** helps answer a question.
 
-Common reasons to make a plot:
+Common reasons to make a **plot**:
 
 - Compare groups.
 - Show a trend over time.
 - Show the distribution of a variable.
-- Show the relationship between two variables.
+- Show the relationship between two **variables**.
 - Detect unusual values.
 
 Common chart choices:
@@ -2170,7 +2170,7 @@ import matplotlib.pyplot as plt
 
 ## Line plot
 
-A line plot is useful for ordered data, especially time.
+A line **plot** is useful for ordered data, especially time.
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -2187,7 +2187,7 @@ plt.show()
 
 ## Scatter plot
 
-A scatter plot shows the relationship between two numeric variables.
+A scatter **plot** shows the relationship between two numeric **variables**.
 
 ```{python}
 import pandas as pd
@@ -2207,7 +2207,7 @@ plt.show()
 
 ## Bar chart
 
-A bar chart compares categories.
+A **bar chart** compares categories.
 
 ```{python}
 import pandas as pd
@@ -2247,7 +2247,7 @@ plt.show()
 
 ## Box plot
 
-A box plot summarizes a distribution and can show potential outliers.
+A box **plot** summarizes a distribution and can show potential outliers.
 
 ```{python}
 import pandas as pd
@@ -2270,7 +2270,7 @@ plt.show()
 
 ## Plotting directly from pandas
 
-pandas has convenient plotting methods built on matplotlib.
+**pandas** has convenient plotting methods built on matplotlib.
 
 ```{python}
 average_by_major.plot(kind="bar")
@@ -2286,7 +2286,7 @@ This is often faster for exploratory work. Matplotlib gives more control when po
 
 # Visual communication principles
 
-A good plot should be understandable without a long explanation.
+A good **plot** should be understandable without a long explanation.
 
 ## Use clear titles and labels
 
@@ -2300,7 +2300,7 @@ The title should describe the message, not just the chart type.
 
 Weak title:
 
-> Scatter plot
+> Scatter **plot**
 
 Better title:
 
@@ -2320,14 +2320,14 @@ Too many labels, colors, legends, or grid lines can make a chart hard to read. A
 
 Exploratory plots help you understand the data. Presentation plots help communicate a conclusion.
 
-Exploratory plot:
+Exploratory **plot**:
 
 ```{python}
 students.plot()
 plt.show()
 ```
 
-Presentation plot:
+Presentation **plot**:
 
 ```{python}
 average_by_major = students.groupby("major")["exam_score"].mean().sort_values()
@@ -2345,7 +2345,7 @@ plt.show()
 
 Question:
 
-> How do study hours, project submission, and exam scores relate in a small course dataset?
+> How do study hours, project submission, and exam scores relate in a small course **dataset**?
 
 ```{python}
 import pandas as pd
@@ -2381,14 +2381,14 @@ plt.show()
 
 Write a short interpretation:
 
-> In this sample, students who submitted the project had a higher average exam score. Students who studied more hours also tended to have higher scores. Because the dataset is small and observational, this does not prove causation.
+> In this sample, students who submitted the project had a higher average exam score. Students who studied more hours also tended to have higher scores. Because the **dataset** is small and observational, this does not prove causation.
 
 # Practice: plotting
 
 1. Make a histogram of exam scores.
-2. Make a bar chart of the number of students in each major.
-3. Make a scatter plot of hours studied and exam score.
-4. Add a title, x-axis label, and y-axis label to each plot.
+2. Make a **bar chart** of the number of students in each major.
+3. Make a scatter **plot** of hours studied and exam score.
+4. Add a title, x-axis label, and y-axis label to each **plot**.
 5. Write two sentences interpreting one plot.
 
 Example solution for exercise 2:
@@ -2460,7 +2460,7 @@ assessment_means = grades[["homework", "midterm", "project", "final_exam"]].mean
 print(assessment_means)
 ```
 
-Plot:
+**Plot**:
 
 ```{python}
 assessment_means.plot(kind="bar")
@@ -2498,7 +2498,7 @@ survey = pd.DataFrame({
 ## Questions
 
 1. What is the average confidence score?
-2. Do students who use AI tools report different confidence levels?
+2. Do students who use **AI** tools report different confidence levels?
 3. What programming language is most preferred?
 4. Is study time associated with confidence?
 
@@ -2511,7 +2511,7 @@ print(survey["preferred_language"].value_counts())
 print(survey["study_hours_per_week"].corr(survey["confidence"]))
 ```
 
-Plot:
+**Plot**:
 
 ```{python}
 language_counts = survey["preferred_language"].value_counts()
@@ -2525,7 +2525,7 @@ plt.show()
 
 # Mini-project 3: Personal data log
 
-Students can collect a small dataset about themselves for one week. Example variables:
+Students can collect a small **dataset** about themselves for one week. Example **variables**:
 
 - Date
 - Hours slept
@@ -2558,7 +2558,7 @@ print(log.describe())
 print(log[["sleep_hours", "study_hours", "exercise_minutes", "mood"]].corr())
 ```
 
-Possible plot:
+Possible **plot**:
 
 ```{python}
 plt.plot(log["date"], log["sleep_hours"], marker="o")
@@ -2580,10 +2580,10 @@ Personal data projects should be optional or designed with synthetic data. Stude
 Students create a short Quarto report that includes:
 
 1. A research question.
-2. A short description of the dataset.
+2. A short description of the **dataset**.
 3. Data loading code.
-4. At least three summary statistics.
-5. At least two visualizations.
+4. At least three summary **statistics**.
+5. At least two **visualizations**.
 6. A short interpretation.
 7. A limitations section.
 
@@ -2619,7 +2619,7 @@ What are the weaknesses of the data or method?
 
 # Part VII: Comparing Python, JavaScript, and C#
 
-Python, JavaScript, and C# can all teach the same programming concepts: variables, functions, conditionals, loops, collections, and objects. The differences are mostly syntax, runtime environment, typing style, and common use cases.
+Python, JavaScript, and C# can all teach the same programming concepts: **variables**, functions, **conditionals**, loops, collections, and objects. The differences are mostly syntax, runtime environment, typing style, and common use cases.
 
 ## Common uses
 
@@ -2831,7 +2831,7 @@ Key comparison:
 
 ## Lists and arrays
 
-Python list:
+Python **list**:
 
 ```{python}
 scores = [88, 76, 91]
@@ -2847,7 +2847,7 @@ scores.push(85);
 console.log(scores[0]);
 ```
 
-C# array and list:
+C# array and **list**:
 
 ```csharp
 int[] scoresArray = new int[] {88, 76, 91};
@@ -2937,15 +2937,15 @@ if (true) {
 console.log("outside block");
 ```
 
-The Python style encourages visually clean code, but it also means indentation errors matter.
+The Python style encourages visually clean code, but it also means indentation **errors** matter.
 
 ## What transfers across languages?
 
 The most important programming ideas transfer well:
 
 - Breaking a problem into steps.
-- Naming variables clearly.
-- Using conditionals for decisions.
+- Naming **variables** clearly.
+- Using **conditionals** for decisions.
 - Using loops for repetition.
 - Using functions for reusable logic.
 - Using data structures to organize information.
@@ -2957,11 +2957,11 @@ Syntax changes from language to language. Problem-solving habits transfer.
 
 # Part VIII: Programming in the age of AI
 
-AI tools can help students learn programming, but they can also hide misunderstandings. The course should teach students how to use AI as a tutor, reviewer, and assistant while still requiring them to reason about code.
+**AI** tools can help students learn programming, but they can also hide misunderstandings. The course should teach students how to use **AI** as a tutor, reviewer, and assistant while still requiring them to reason about code.
 
 # What AI can help with
 
-AI tools are useful for:
+**AI** tools are useful for:
 
 - Explaining unfamiliar code.
 - Generating small examples.
@@ -2978,7 +2978,7 @@ Example prompt:
 
 Example prompt:
 
-> Here is my function. It gives the wrong answer for an empty list. Help me find the bug, but do not give me the final answer immediately.
+> Here is my function. It gives the wrong answer for an empty **list**. Help me find the bug, but do not give me the final answer immediately.
 
 Example prompt:
 
@@ -2995,20 +2995,20 @@ Students still need to understand:
 - Whether the result is ethical and reproducible.
 - Whether a chart or statistic supports the claim being made.
 
-AI-generated code can be wrong, outdated, inefficient, insecure, or mismatched to the assignment. A student who cannot read the code cannot responsibly use it.
+**AI**-generated code can be wrong, outdated, inefficient, insecure, or mismatched to the assignment. A student who cannot read the code cannot responsibly use it.
 
 # A responsible AI workflow for beginners
 
-Use this workflow when AI helps with programming:
+Use this workflow when **AI** helps with programming:
 
 1. State the goal in your own words.
 2. Write or sketch a first attempt.
-3. Ask AI for targeted help, not a complete replacement.
+3. Ask **AI** for targeted help, not a complete replacement.
 4. Run the code.
 5. Read every line.
 6. Test with small examples where you know the answer.
 7. Explain the final code in your own words.
-8. Cite or disclose AI assistance if required by the course policy.
+8. Cite or disclose **AI** assistance if required by the course policy.
 
 ## Example: asking AI for debugging help
 
@@ -3018,7 +3018,7 @@ Weak prompt:
 
 Better prompt:
 
-> I am trying to calculate the average of a list of scores in Python. My code returns a `ZeroDivisionError` when the list is empty. Explain why this happens and give me two possible beginner-friendly ways to handle it.
+> I am trying to calculate the average of a **list** of scores in Python. My code returns a `ZeroDivisionError` when the list is empty. Explain why this happens and give me two possible beginner-friendly ways to handle it.
 
 ## Example: asking AI for concept explanation
 
@@ -3028,19 +3028,19 @@ Weak prompt:
 
 Better prompt:
 
-> Explain the difference between a Python list and dictionary for a student who has only learned variables and loops. Include one example of when each is useful.
+> Explain the difference between a Python **list** and dictionary for a student who has only learned **variables** and loops. Include one example of when each is useful.
 
 ## Example: asking AI for verification
 
 Prompt:
 
-> Review the following code for possible logic errors. Do not rewrite it unless necessary. First explain what the code currently does, then list possible problems, then suggest small tests.
+> Review the following code for possible logic **errors**. Do not rewrite it unless necessary. First explain what the code currently does, then **list** possible problems, then suggest small tests.
 
-This encourages the AI to act as a reviewer instead of silently replacing the student's work.
+This encourages the **AI** to act as a reviewer instead of silently replacing the student's work.
 
 # Testing AI-generated code
 
-Suppose AI gives this function:
+Suppose **AI** gives this function:
 
 ```{python}
 def average(scores):
@@ -3054,7 +3054,7 @@ assert average([80, 90, 100]) == 90
 assert average([10]) == 10
 ```
 
-The empty-list case needs a design decision.
+The empty-**list** case needs a design decision.
 
 ```{python}
 # This will cause ZeroDivisionError.
@@ -3080,7 +3080,7 @@ assert average([]) is None
 
 # Academic integrity and AI
 
-A course should give students a clear AI policy. A useful policy distinguishes between support and substitution.
+A course should give students a clear **AI** policy. A useful policy distinguishes between support and substitution.
 
 Possible allowed uses:
 
@@ -3094,12 +3094,12 @@ Possible restricted uses:
 
 - Submitting code the student cannot explain.
 - Generating an entire assignment without disclosure.
-- Using AI to bypass required practice.
+- Using **AI** to bypass required practice.
 - Fabricating data, sources, or results.
 
 Example disclosure statement:
 
-> I used an AI assistant to help understand a `KeyError` and to suggest test cases. I wrote the final code and verified the output.
+> I used an **AI** assistant to help understand a `KeyError` and to suggest test cases. I wrote the final code and verified the output.
 
 # Part IX: Good programming habits
 
@@ -3158,7 +3158,7 @@ Example workflow:
 3. Select one column.
 4. Create one filter.
 5. Calculate one summary.
-6. Make one plot.
+6. Make one **plot**.
 7. Combine into a final report.
 
 # Make code reproducible
@@ -3172,7 +3172,7 @@ Good habits:
 - Put imports at the top.
 - Set random seeds when using randomness.
 - Record package requirements for larger projects.
-- Explain data cleaning decisions.
+- Explain **data cleaning** decisions.
 - Avoid manual spreadsheet edits that are not documented.
 
 # Use meaningful file organization
@@ -3212,12 +3212,12 @@ Use frequent small activities:
 2. What is the difference between `print()` and `return`?
 3. Why does Python use indentation?
 4. When would you use a `for` loop instead of a `while` loop?
-5. What is the difference between a list and a dictionary?
+5. What is the difference between a **list** and a dictionary?
 6. What does a function parameter do?
 7. Why should we inspect data before analyzing it?
 8. Why does correlation not prove causation?
-9. What should you check before trusting AI-generated code?
-10. What makes a plot misleading?
+9. What should you check before trusting **AI**-generated code?
+10. What makes a **plot** misleading?
 
 # Code tracing exercise
 
@@ -3244,7 +3244,7 @@ Expected output:
 
 # Debugging exercise
 
-Find and fix the errors.
+Find and fix the **errors**.
 
 ```{python}
 scores = [82, 91, 77, 88]
@@ -3294,7 +3294,7 @@ Add error handling for invalid input.
 
 ## Assignment 3: List summary
 
-Given a list of numbers, write functions that return:
+Given a **list** of numbers, write functions that return:
 
 - Minimum
 - Maximum
@@ -3321,11 +3321,11 @@ Given a CSV file of students, write a program that:
 
 ## Assignment 6: Data visualization report
 
-Use a small dataset to create a report with:
+Use a small **dataset** to create a report with:
 
-- One table of summary statistics.
+- One table of summary **statistics**.
 - One histogram.
-- One scatter plot or bar chart.
+- One scatter **plot** or **bar chart**.
 - A short explanation of each figure.
 
 # Final project option
@@ -3336,13 +3336,13 @@ Required sections:
 
 1. Research question
 2. Data description
-3. Data cleaning
-4. Summary statistics
-5. Visualizations
+3. **Data cleaning**
+4. Summary **statistics**
+5. **Visualizations**
 6. Interpretation
 7. Limitations
 8. Reproducibility notes
-9. AI assistance disclosure, if applicable
+9. **AI** assistance disclosure, if applicable
 
 Possible project topics:
 
@@ -3350,8 +3350,8 @@ Possible project topics:
 - Public transportation ridership
 - Weather records
 - Campus event attendance
-- Sports statistics
-- Movie or music dataset
+- Sports **statistics**
+- Movie or music **dataset**
 - Simulated business sales data
 - Personal learning log using synthetic or anonymized data
 
@@ -3497,10 +3497,10 @@ Before submitting code, students should answer:
 3. Are functions used for repeated logic?
 4. Are edge cases handled?
 5. Are plots labeled clearly?
-6. Are data cleaning steps explained?
+6. Are **data cleaning** steps explained?
 7. Can I explain every line of code?
-8. Did I test AI-generated or AI-edited code?
-9. Did I disclose AI assistance if required?
+8. Did I test **AI**-generated or **AI**-edited code?
+9. Did I disclose **AI** assistance if required?
 
 # Further learning resources
 
@@ -3508,13 +3508,13 @@ Useful official or commonly used resources for students:
 
 - Python documentation: <https://docs.python.org/3/>
 - Python tutorial: <https://docs.python.org/3/tutorial/>
-- pandas documentation: <https://pandas.pydata.org/docs/>
-- NumPy documentation: <https://numpy.org/doc/>
+- **pandas** documentation: <https://pandas.pydata.org/docs/>
+- **NumPy** documentation: <https://numpy.org/doc/>
 - Matplotlib documentation: <https://matplotlib.org/stable/users/index.html>
 - Quarto documentation: <https://quarto.org/docs/>
 
 # Closing message for students
 
-Programming is a practical skill. It is learned by writing code, making mistakes, reading errors, testing ideas, and revising solutions.
+Programming is a practical skill. It is learned by writing code, making mistakes, reading **errors**, testing ideas, and revising solutions.
 
-Python is not only a language for professional programmers. It is also a tool for thinking clearly about data. In the age of AI, the most valuable skill is not memorizing every syntax detail. The valuable skill is knowing how to ask precise questions, evaluate answers, test code, interpret results, and communicate honestly.
+Python is not only a language for professional programmers. It is also a tool for thinking clearly about data. In the age of **AI**, the most valuable skill is not memorizing every syntax detail. The valuable skill is knowing how to ask precise questions, evaluate answers, test code, interpret results, and communicate honestly.

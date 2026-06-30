@@ -17,23 +17,23 @@ jupyter: python3
 
 # How To Use This Document
 
-This document introduces Python as a first programming language. It is written for students who may not have programmed before. The goal is not only to learn Python syntax, but also to learn the ideas behind programming: variables, functions, conditions, loops, data structures, files, data analysis, and visualization.
+This document introduces Python as a first programming language. It is written for students who may not have programmed before. The goal is not only to learn Python syntax, but also to learn the ideas behind programming: **variables**, functions, conditions, loops, data structures, files, data analysis, and **visualization**.
 
 The examples are intended to be typed, changed, and run. Programming is learned by experimenting. When you see a code block, try to predict what it will do before running it.
 
-In the age of AI, programming is not only about memorizing syntax. AI tools can help explain error messages, generate examples, and suggest code. But you still need the fundamentals so that you can judge whether code is correct, adapt it to your own problem, and debug it when it fails.
+In the age of **AI**, programming is not only about memorizing syntax. **AI** tools can help explain error messages, generate examples, and suggest code. But you still need the fundamentals so that you can judge whether code is correct, adapt it to your own problem, and debug it when it fails.
 
 ## Course Goals
 
 By the end of this material, students should be able to:
 
 - Explain what programming is and how Python executes code.
-- Use variables, expressions, functions, conditions, and loops.
-- Work with lists, dictionaries, strings, and files.
+- Use **variables**, expressions, functions, conditions, and loops.
+- Work with lists, **dictionaries**, strings, and files.
 - Write small programs that solve practical problems.
-- Read simple datasets and compute summaries.
+- Read simple **datasets** and compute summaries.
 - Create basic plots with `matplotlib` and `pandas`.
-- Use AI tools responsibly as a learning and productivity assistant.
+- Use **AI** tools responsibly as a learning and productivity assistant.
 
 # 1. What Is Programming?
 
@@ -42,7 +42,7 @@ Programming is the process of giving precise instructions to a computer. A progr
 A computer does not "understand" the world the way a person does. It follows instructions exactly. That is both powerful and frustrating:
 
 - Powerful because computers can repeat tasks quickly and consistently.
-- Frustrating because small mistakes in instructions can cause errors or wrong results.
+- Frustrating because small mistakes in instructions can cause **errors** or wrong results.
 
 ## A First Program
 
@@ -227,7 +227,7 @@ print(f"{name} earned a score of {score}.")
 
 # 4. Variables
 
-A variable is a name that refers to a value. Variables let us store information and reuse it later.
+A variable is a name that refers to a value. **Variables** let us store information and reuse it later.
 
 ```{python}
 temperature = 72
@@ -472,7 +472,7 @@ for number in [1, 2, 3, 4, 5]:
     print(number)
 ```
 
-The variable `number` takes each value from the list one at a time.
+The variable `number` takes each value from the **list** one at a time.
 
 ## `range()`
 
@@ -692,7 +692,7 @@ C# normally requires parameter and return types. Python and JavaScript usually d
 
 # 9. Lists
 
-A list stores multiple values in order.
+A **list** stores multiple values in order.
 
 ```{python}
 scores = [88, 92, 79, 95]
@@ -751,7 +751,7 @@ print(min(scores))
 print(max(scores))
 ```
 
-A method is a function attached to an object. For example, `scores.append(100)` calls the `append()` method on the list `scores`.
+A method is a function attached to an object. For example, `scores.append(100)` calls the `append()` method on the **list** `scores`.
 
 ```{python}
 scores = [88, 92, 79, 95]
@@ -762,7 +762,7 @@ print(scores)
 
 ## Slicing
 
-Slicing extracts part of a list.
+Slicing extracts part of a **list**.
 
 ```{python}
 scores = [88, 92, 79, 95, 84]
@@ -776,7 +776,7 @@ print(scores[:2])
 
 ## List Comprehensions
 
-A list comprehension is a compact way to create a new list.
+A **list** comprehension is a compact way to create a new list.
 
 ```{python}
 numbers = [1, 2, 3, 4, 5]
@@ -788,7 +788,7 @@ for number in numbers:
 print(squares)
 ```
 
-The same idea with a list comprehension:
+The same idea with a **list** comprehension:
 
 ```{python}
 numbers = [1, 2, 3, 4, 5]
@@ -797,7 +797,7 @@ squares = [number ** 2 for number in numbers]
 print(squares)
 ```
 
-Filtering with a list comprehension:
+Filtering with a **list** comprehension:
 
 ```{python}
 numbers = [1, 2, 3, 4, 5, 6]
@@ -935,7 +935,7 @@ The `strip()` method removes extra spaces. The `title()` method capitalizes word
 
 # 12. Errors And Debugging
 
-Errors are normal. Debugging is the process of finding and fixing problems in code.
+**Errors** are normal. Debugging is the process of finding and fixing problems in code.
 
 ## Syntax Errors
 
@@ -967,7 +967,7 @@ average = sum(scores) / 2
 print(average)
 ```
 
-Logic errors can be the hardest because Python may not show an error message.
+Logic **errors** can be the hardest because Python may not show an error message.
 
 ## A Debugging Checklist
 
@@ -978,7 +978,7 @@ When code fails:
 3. Check spelling, punctuation, and indentation.
 4. Print intermediate values.
 5. Test one small part at a time.
-6. Ask an AI tool to explain the error, but verify the answer.
+6. Ask an **AI** tool to explain the error, but verify the answer.
 
 Example:
 
@@ -1041,7 +1041,7 @@ Mode meanings:
 
 ## Reading CSV Files With The Standard Library
 
-CSV stands for comma-separated values. It is a common format for simple datasets.
+CSV stands for comma-separated values. It is a common format for simple **datasets**.
 
 Example file `students.csv`:
 
@@ -1304,7 +1304,7 @@ df.to_csv("students_with_results.csv", index=False)
 
 # 16. Plotting And Visualization
 
-Visualization helps us see patterns that are hard to understand from tables alone.
+**Visualization** helps us see patterns that are hard to understand from tables alone.
 
 ## Basic Plot With `matplotlib`
 
@@ -1410,7 +1410,7 @@ Common chart choices:
 
 # 17. Mini Project: Analyze Course Survey Data
 
-This project combines variables, lists, dictionaries, functions, loops, pandas, and plotting.
+This project combines **variables**, lists, **dictionaries**, functions, loops, **pandas**, and plotting.
 
 ## Scenario
 
@@ -1474,7 +1474,7 @@ plt.show()
 
 ## Compute A Correlation
 
-Correlation measures the direction and strength of a linear relationship between two numeric variables.
+Correlation measures the direction and strength of a linear relationship between two numeric **variables**.
 
 ```{python}
 correlation = survey["study_hours"].corr(survey["confidence"])
@@ -1493,11 +1493,11 @@ Important: correlation does not prove causation.
 
 Example conclusion:
 
-> In this small survey dataset, students who reported more study hours also tended to report higher Python confidence. The sample is very small, so this pattern should be treated as exploratory rather than conclusive.
+> In this small survey **dataset**, students who reported more study hours also tended to report higher Python confidence. The sample is very small, so this pattern should be treated as exploratory rather than conclusive.
 
 # 18. Object-Oriented Programming Preview
 
-Python supports object-oriented programming. This means organizing code around objects that combine data and behavior.
+Python supports **object-oriented programming**. This means organizing code around objects that combine data and behavior.
 
 Students do not need to master this immediately, but they should recognize the idea.
 
@@ -1574,11 +1574,11 @@ C# uses explicit types and access modifiers such as `public`. Python is less for
 
 # 19. Programming In The Age Of AI
 
-AI tools can make programming more accessible, but they do not remove the need to understand code.
+**AI** tools can make programming more accessible, but they do not remove the need to understand code.
 
 ## Useful Ways To Use AI
 
-AI can help with:
+**AI** can help with:
 
 - Explaining unfamiliar code.
 - Explaining error messages.
@@ -1590,7 +1590,7 @@ AI can help with:
 
 ## Risky Ways To Use AI
 
-Be careful when AI:
+Be careful when **AI**:
 
 - Produces code you cannot explain.
 - Makes up library functions or package names.
@@ -1624,7 +1624,7 @@ I am a beginner in Python. This code gives an error. Please explain what the err
 
 ## Always Verify AI-Generated Code
 
-When AI gives you code:
+When **AI** gives you code:
 
 1. Read it line by line.
 2. Run it on a small example.
@@ -1638,7 +1638,7 @@ These exercises are designed to reinforce the fundamentals.
 
 ## Variables And Expressions
 
-1. Create variables for your name, age, and major. Print a sentence using an f-string.
+1. Create **variables** for your name, age, and major. Print a sentence using an f-string.
 2. Convert a temperature from Fahrenheit to Celsius using the formula `(F - 32) * 5 / 9`.
 3. Calculate the total cost of three items with tax.
 
@@ -1652,20 +1652,20 @@ These exercises are designed to reinforce the fundamentals.
 
 1. Print the numbers from `1` to `20`.
 2. Print only the even numbers from `1` to `20`.
-3. Given a list of scores, calculate the average.
-4. Count how many words in a list have more than five letters.
+3. Given a **list** of scores, calculate the average.
+4. Count how many words in a **list** have more than five letters.
 
 ## Functions
 
 1. Write a function `square(number)` that returns the square of a number.
 2. Write a function `is_even(number)` that returns `True` if the number is even.
-3. Write a function `calculate_average(numbers)` that returns the average of a list.
+3. Write a function `calculate_average(numbers)` that returns the average of a **list**.
 4. Write a function `letter_grade(score)` that returns `"A"`, `"B"`, `"C"`, `"D"`, or `"F"`.
 
 ## Lists And Dictionaries
 
-1. Create a list of five cities. Print the first and last city.
-2. Add a new city to the list and remove one city.
+1. Create a **list** of five cities. Print the first and last city.
+2. Add a new city to the **list** and remove one city.
 3. Create a dictionary for a book with title, author, and year.
 4. Given a sentence, count how often each word appears.
 
@@ -1674,7 +1674,7 @@ These exercises are designed to reinforce the fundamentals.
 1. Create a DataFrame with at least five rows about movies, including title, year, genre, and rating.
 2. Find the average rating.
 3. Count how many movies are in each genre.
-4. Plot a bar chart of average rating by genre.
+4. **Plot** a **bar chart** of average rating by genre.
 
 # 21. Suggested Teaching Schedule
 
@@ -1693,13 +1693,13 @@ This document can be adapted to different course lengths. For a summer semester,
 
 # 22. Final Project Ideas
 
-Students can choose a small dataset and answer a question using Python.
+Students can choose a small **dataset** and answer a question using Python.
 
 Possible projects:
 
 - Analyze course survey results.
 - Explore movie ratings by genre and year.
-- Analyze sports statistics.
+- Analyze sports **statistics**.
 - Study weather trends.
 - Compare prices of products.
 - Analyze public health or demographic data.
@@ -1708,10 +1708,10 @@ Possible projects:
 A simple final project should include:
 
 1. A research question.
-2. A dataset.
-3. Data cleaning or preparation.
-4. At least two summary statistics.
-5. At least one visualization.
+2. A **dataset**.
+3. **Data cleaning** or preparation.
+4. At least two summary **statistics**.
+5. At least one **visualization**.
 6. A short written interpretation.
 7. A note about limitations.
 
@@ -1721,15 +1721,15 @@ Programming is about precise problem solving. Python is a readable language that
 
 The most important beginner concepts are:
 
-- Variables store values.
+- **Variables** store values.
 - Types describe kinds of values.
 - Conditions make decisions.
 - Loops repeat work.
 - Functions organize reusable logic.
-- Lists and dictionaries store collections.
+- Lists and **dictionaries** store collections.
 - Files and packages connect programs to the outside world.
 - Data analysis uses code to summarize, visualize, and interpret data.
-- AI can help, but understanding and verification remain essential.
+- **AI** can help, but understanding and verification remain essential.
 
 # Appendix A: Python Syntax Cheat Sheet
 
@@ -1859,7 +1859,7 @@ This can cause confusing behavior:
 #         numbers.remove(number)
 ```
 
-Use a new list instead:
+Use a new **list** instead:
 
 ```{python}
 numbers = [1, 2, 3, 4]

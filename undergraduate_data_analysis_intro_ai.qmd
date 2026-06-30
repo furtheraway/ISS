@@ -22,15 +22,15 @@ jupyter: python3
 
 ## How to use this document
 
-This document introduces undergraduate data analysis from the foundations of probability and statistics. It uses Python to make the ideas concrete through simulation, visualization, and analysis.
+This document introduces undergraduate data analysis from the foundations of probability and **statistics**. It uses Python to make the ideas concrete through simulation, **visualization**, and analysis.
 
 By the end, students should be able to:
 
-1. Explain random variables, probability distributions, expectation, variance, and sampling variability.
-2. Distinguish descriptive statistics from statistical inference.
+1. Explain **random variables**, **probability distributions**, expectation, variance, and sampling variability.
+2. Distinguish descriptive **statistics** from **statistical inference**.
 3. State null and alternative hypotheses and choose an appropriate test statistic.
-4. Interpret p-values, significance levels, confidence intervals, Type I error, Type II error, and statistical power.
-5. Fit, interpret, and diagnose a simple linear regression model.
+4. Interpret p-values, significance levels, **confidence intervals**, Type I error, Type II error, and statistical power.
+5. Fit, interpret, and diagnose a **simple linear regression** model.
 6. Explain why statistical significance is not the same as practical importance or causal proof.
 
 ### Python setup
@@ -74,7 +74,7 @@ flowchart LR
   G --> H[New questions]
 ```
 
-The key challenge is that we rarely observe an entire population. Instead, we observe a sample. Probability helps us reason about what samples tend to look like when a model is true. Statistics uses observed samples to estimate unknown quantities and assess uncertainty.
+The key challenge is that we rarely observe an entire population. Instead, we observe a sample. Probability helps us reason about what samples tend to look like when a model is true. **Statistics** uses observed samples to estimate unknown quantities and assess uncertainty.
 
 ## Probability foundations
 
@@ -98,19 +98,19 @@ $$
 P(A \cap B) = P(A)P(B).
 $$
 
-In data analysis, probability often describes a data-generating process: the process that could have produced the data we observed.
+In data analysis, probability often describes a **data-generating process**: the process that could have produced the data we observed.
 
 ### Random variables
 
-A random variable is a numerical outcome of a random process. Examples:
+A **random variable** is a numerical outcome of a random process. Examples:
 
 - $X = 1$ if a coin lands heads and $X = 0$ otherwise.
 - $Y$ = height of a randomly selected student.
 - $T$ = time until a machine fails.
 
-Random variables can be discrete or continuous.
+**Random variables** can be discrete or continuous.
 
-A **discrete** random variable takes countable values, such as 0, 1, 2, 3. A **continuous** random variable can take values along an interval, such as any positive real number.
+A **discrete** **random variable** takes countable values, such as 0, 1, 2, 3. A **continuous** random variable can take values along an interval, such as any positive real number.
 
 ### Example: simulating coin flips
 
@@ -151,7 +151,7 @@ The law of large numbers says that, under suitable conditions, a sample average 
 
 ### Probability distributions
 
-A probability distribution tells us the possible values of a random variable and how likely they are.
+A **probability distribution** tells us the possible values of a **random variable** and how likely they are.
 
 Common distributions in introductory data analysis include:
 
@@ -166,7 +166,7 @@ Common distributions in introductory data analysis include:
 
 ### Expectation and variance
 
-The expected value of a random variable is its probability-weighted average. For a discrete random variable,
+The expected value of a **random variable** is its probability-weighted average. For a discrete random variable,
 
 $$
 E[X] = \sum_x xP(X=x).
@@ -184,7 +184,7 @@ $$
 \operatorname{SD}(X) = \sqrt{\operatorname{Var}(X)}.
 $$
 
-For a Bernoulli random variable $X \sim \operatorname{Bernoulli}(p)$,
+For a Bernoulli **random variable** $X \sim \operatorname{Bernoulli}(p)$,
 
 $$
 E[X] = p, \qquad \operatorname{Var}(X)=p(1-p).
@@ -208,7 +208,7 @@ plt.legend()
 plt.show()
 ```
 
-For continuous variables, the curve is a density, not a direct probability. Probabilities correspond to areas under the curve.
+For continuous **variables**, the curve is a density, not a direct probability. Probabilities correspond to areas under the curve.
 
 ```{python}
 # Probability that a standard normal variable is less than 1.96
@@ -237,11 +237,11 @@ A **parameter** is a numerical feature of the population, such as the population
 | Proportion | $p$ | $\hat{p}$ |
 | Regression slope | $\beta_1$ | $\hat{\beta}_1$ |
 
-Statistical inference asks: what can we say about the population using the sample?
+**Statistical inference** asks: what can we say about the population using the sample?
 
 ### Sampling variability
 
-Even when the population does not change, different random samples produce different statistics.
+Even when the population does not change, different random samples produce different **statistics**.
 
 ```{python}
 #| label: fig-sampling-variability
@@ -319,11 +319,11 @@ This theorem is one reason normal-based methods are common. It does not mean all
 
 ## Descriptive statistics and exploratory data analysis
 
-Before formal inference, inspect the data. Descriptive statistics summarize what was observed; they do not automatically justify conclusions about a broader population.
+Before formal inference, inspect the data. Descriptive **statistics** summarize what was observed; they do not automatically justify conclusions about a broader population.
 
 ### A small teaching dataset
 
-The following simulated dataset represents students in an introductory course. Each row is one student. The variables are:
+The following simulated **dataset** represents students in an introductory course. Each row is one student. The **variables** are:
 
 - `study_hours`: hours studied for a test.
 - `attendance`: proportion of lectures attended.
@@ -427,7 +427,7 @@ mean_score
 
 ### Confidence intervals
 
-A confidence interval gives a range of plausible parameter values under a statistical model.
+A **confidence interval** gives a range of plausible parameter values under a statistical model.
 
 For a mean, when the population standard deviation is unknown, a common interval is
 
@@ -454,7 +454,7 @@ pd.DataFrame({
 })
 ```
 
-A 95% confidence interval does not mean there is a 95% probability that this particular interval contains the true mean, assuming a fixed frequentist parameter. Instead, if the same sampling procedure were repeated many times, about 95% of such intervals would contain the true parameter.
+A 95% **confidence interval** does not mean there is a 95% probability that this particular interval contains the true mean, assuming a fixed frequentist parameter. Instead, if the same sampling procedure were repeated many times, about 95% of such intervals would contain the true parameter.
 
 ### Confidence intervals by simulation
 
@@ -497,7 +497,7 @@ sum(contains), n_intervals
 
 ### Basic idea
 
-A hypothesis test compares observed data to what we would expect under a null hypothesis.
+A **hypothesis** test compares observed data to what we would expect under a null hypothesis.
 
 A common workflow is:
 
@@ -526,35 +526,35 @@ Examples:
 
 The terms are often used interchangeably, but it is useful to separate two related ideas.
 
-A **significance test** usually focuses on the p-value: how surprising are the data if the null hypothesis were true?
+A **significance test** usually focuses on the p-value: how surprising are the data if the null **hypothesis** were true?
 
-A **hypothesis test** often includes a pre-specified decision rule: reject $H_0$ if the p-value is less than a chosen significance level $\alpha$.
+A **hypothesis test** often includes a pre-specified decision rule: reject $H_0$ if the p-value is less than a chosen **significance level** $\alpha$.
 
 For example, with $\alpha = 0.05$:
 
 - If $p < 0.05$, reject $H_0$.
 - If $p \ge 0.05$, do not reject $H_0$.
 
-The phrase “do not reject” is important. It does not mean we have proven the null hypothesis true. It means the data did not provide strong enough evidence against it using the chosen test and significance level.
+The phrase “do not reject” is important. It does not mean we have proven the null **hypothesis** true. It means the data did not provide strong enough evidence against it using the chosen test and **significance level**.
 
 ### The p-value
 
-A p-value is the probability, assuming the null hypothesis is true, of getting a test statistic as extreme as or more extreme than the one observed.
+A p-value is the probability, assuming the null **hypothesis** is true, of getting a test statistic as extreme as or more extreme than the one observed.
 
 A p-value is not:
 
-- The probability that the null hypothesis is true.
-- The probability that the alternative hypothesis is true.
+- The probability that the null **hypothesis** is true.
+- The probability that the **alternative hypothesis** is true.
 - The probability that the result happened by chance.
 - A measure of the size or practical importance of an effect.
 
 ### Significance level, Type I error, Type II error, and power
 
-The significance level $\alpha$ is the long-run probability of rejecting a true null hypothesis when the test assumptions hold. This is called a **Type I error**.
+The **significance level** $\alpha$ is the long-run probability of rejecting a true null **hypothesis** when the test assumptions hold. This is called a **Type I error**.
 
-A **Type II error** happens when we fail to reject a false null hypothesis.
+A **Type II error** happens when we fail to reject a false null **hypothesis**.
 
-**Power** is the probability of rejecting a false null hypothesis:
+**Power** is the probability of rejecting a false null **hypothesis**:
 
 $$
 \text{Power} = 1 - P(\text{Type II error}).
@@ -639,7 +639,7 @@ A good interpretation includes all of the following:
 
 1. The parameter or comparison being tested.
 2. The estimate from the data.
-3. The p-value or confidence interval.
+3. The p-value or **confidence interval**.
 4. A conclusion in context.
 5. A warning about assumptions or limitations when relevant.
 
@@ -736,7 +736,7 @@ stats.ttest_ind(review, no_review, equal_var=False, alternative="greater")
 
 A test statistic is compared with a null distribution. We can often approximate a null distribution by simulation.
 
-For the review-session comparison, the null hypothesis says that group labels do not matter. A permutation test repeatedly shuffles the labels and recomputes the mean difference.
+For the review-session comparison, the null **hypothesis** says that group labels do not matter. A permutation test repeatedly shuffles the labels and recomputes the mean difference.
 
 ```{python}
 #| label: fig-permutation-test
@@ -770,7 +770,7 @@ plt.show()
 p_perm
 ```
 
-Permutation tests are valuable because they show the logic of inference directly: compare the observed statistic with values that would be plausible if the null hypothesis were true.
+Permutation tests are valuable because they show the logic of inference directly: compare the observed statistic with values that would be plausible if the null **hypothesis** were true.
 
 ### Multiple testing
 
@@ -800,7 +800,7 @@ Common responses to multiple testing include reducing the number of tests, pre-s
 
 ### The regression question
 
-Regression models relationships between variables. In simple linear regression, we model a numerical outcome $Y$ using one predictor $X$.
+Regression models relationships between **variables**. In **simple linear regression**, we model a numerical outcome $Y$ using one predictor $X$.
 
 The population model is:
 
@@ -836,7 +836,7 @@ $$
 \min_{b_0,b_1}\sum_{i=1}^n (y_i - b_0 - b_1x_i)^2.
 $$
 
-The slope estimate in simple linear regression is:
+The slope estimate in **simple linear regression** is:
 
 $$
 \hat{\beta}_1 = \frac{\sum_i (x_i-\bar{x})(y_i-\bar{y})}{\sum_i (x_i-\bar{x})^2}.
@@ -938,7 +938,7 @@ plt.show()
 
 ### Regression inference for the slope
 
-A common hypothesis test in simple regression is:
+A common **hypothesis** test in simple regression is:
 
 $$
 H_0: \beta_1 = 0
@@ -972,7 +972,7 @@ model.pvalues
 model.conf_int(alpha=0.05)
 ```
 
-The p-value for the slope tests evidence against a zero linear relationship. It does not prove that study hours cause higher scores. Students who study more may also differ in preparation, motivation, prior knowledge, attendance, or other variables.
+The p-value for the slope tests evidence against a zero linear relationship. It does not prove that study hours cause higher scores. Students who study more may also differ in preparation, motivation, prior knowledge, attendance, or other **variables**.
 
 ### Prediction
 
@@ -983,7 +983,7 @@ new_data = pd.DataFrame({"const": [1], "study_hours": [6]})
 model.predict(new_data)
 ```
 
-Statsmodels can also produce confidence intervals for the expected mean response and prediction intervals for individual outcomes.
+Statsmodels can also produce **confidence intervals** for the expected mean response and prediction intervals for individual outcomes.
 
 ```{python}
 new_data = sm.add_constant(pd.DataFrame({"study_hours": [2, 4, 6, 8, 10]}), has_constant="add")
@@ -991,19 +991,19 @@ pred = model.get_prediction(new_data).summary_frame(alpha=0.05)
 pred
 ```
 
-A confidence interval for the mean response is narrower than a prediction interval for a new individual observation. Predicting an individual outcome is harder than estimating an average outcome.
+A **confidence interval** for the mean response is narrower than a prediction interval for a new individual observation. Predicting an individual outcome is harder than estimating an average outcome.
 
 ### Regression assumptions
 
-Simple linear regression is often introduced with these assumptions:
+**Simple linear regression** is often introduced with these assumptions:
 
 1. **Linearity**: the expected value of $Y$ is a linear function of $X$.
 2. **Independence**: observations are independent.
-3. **Constant variance**: errors have the same variance across values of $X$.
+3. **Constant variance**: **errors** have the same variance across values of $X$.
 4. **Approximately normal errors**: mainly important for small-sample inference.
 5. **No extreme influential points**: a few observations should not dominate the fitted line.
 
-These assumptions are about the data-generating process and the model errors, not simply about the observed raw outcome variable.
+These assumptions are about the **data-generating process** and the model **errors**, not simply about the observed raw outcome variable.
 
 ### Diagnostic plots
 
@@ -1066,7 +1066,7 @@ plt.show()
 
 ### Correlation and simple regression
 
-Correlation measures the strength and direction of a linear association between two numerical variables:
+Correlation measures the strength and direction of a linear association between two numerical **variables**:
 
 $$
 r = \frac{\sum_i (x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_i (x_i-\bar{x})^2\sum_i (y_i-\bar{y})^2}}.
@@ -1079,7 +1079,7 @@ r = students[["study_hours", "score"]].corr().iloc[0, 1]
 r
 ```
 
-For simple linear regression with an intercept,
+For **simple linear regression** with an intercept,
 
 $$
 R^2 = r^2.
@@ -1109,13 +1109,13 @@ students.groupby("review_session")["score"].mean()
 model_review.params
 ```
 
-This connection helps unify regression and hypothesis testing. A t-test comparing two means and a regression with one binary predictor answer closely related questions.
+This connection helps unify regression and **hypothesis** testing. A t-test comparing two means and a regression with one binary predictor answer closely related questions.
 
 ## Case study: studying, review sessions, and exam scores
 
 ### Research questions
 
-For the teaching dataset, suppose we ask:
+For the teaching **dataset**, suppose we ask:
 
 1. Is the average exam score different from 75?
 2. Do students who attended the review session have different average scores from those who did not?
@@ -1140,7 +1140,7 @@ q1_summary
 
 Interpretation template:
 
-> The sample mean exam score is shown in the table. The one-sample t-test compares this estimate with 75. If the p-value is less than the chosen significance level, we reject the null hypothesis that the population mean is 75. The conclusion should be stated as evidence about the population mean, not as proof about every student.
+> The sample mean exam score is shown in the table. The one-sample t-test compares this estimate with 75. If the p-value is less than the chosen **significance level**, we reject the null **hypothesis** that the population mean is 75. The conclusion should be stated as evidence about the population mean, not as proof about every student.
 
 ### Question 2: review-session comparison
 
@@ -1173,25 +1173,25 @@ q3_model.summary()
 
 Interpretation template:
 
-> The slope estimates the expected difference in exam score associated with one additional study hour. The p-value for the slope tests whether the population linear slope is zero. The confidence interval gives a range of plausible slope values. The model is useful only to the extent that the linear form and other assumptions are reasonable.
+> The slope estimates the expected difference in exam score associated with one additional study hour. The p-value for the slope tests whether the population linear slope is zero. The **confidence interval** gives a range of plausible slope values. The model is useful only to the extent that the linear form and other assumptions are reasonable.
 
 ## Practical significance, statistical significance, and causality
 
 ### Statistical significance
 
-A statistically significant result means the observed data would be relatively unusual under the null hypothesis, according to the test model and chosen $\alpha$.
+A statistically significant result means the observed data would be relatively unusual under the null **hypothesis**, according to the test model and chosen $\alpha$.
 
 ### Practical significance
 
 Practical significance asks whether the effect is large enough to matter in context.
 
-For example, a 0.2-point increase in exam score may be statistically significant in a dataset with hundreds of thousands of students, but it may not matter educationally. A 5-point increase may matter in practice even if a small study lacks enough power to make it statistically significant.
+For example, a 0.2-point increase in exam score may be statistically significant in a **dataset** with hundreds of thousands of students, but it may not matter educationally. A 5-point increase may matter in practice even if a small study lacks enough power to make it statistically significant.
 
 ### Causality
 
 Regression and t-tests measure associations unless the study design supports causal interpretation. Stronger causal claims usually require randomized experiments, natural experiments, or careful causal designs.
 
-In the teaching dataset, students were not randomly assigned to study hours or review sessions. Therefore, differences may reflect confounding variables such as prior preparation or motivation.
+In the teaching **dataset**, students were not randomly assigned to study hours or review sessions. Therefore, differences may reflect confounding **variables** such as prior preparation or motivation.
 
 ## Common mistakes and better alternatives
 
@@ -1221,7 +1221,7 @@ Simulate 10,000 samples of 50 coin flips from a fair coin. For each sample, comp
 
 ### Exercise 2: confidence interval for a mean
 
-Using the `students` dataset, compute a 90% confidence interval for the mean exam score. Compare it with the 95% interval. Which is wider, and why?
+Using the `students` **dataset**, compute a 90% **confidence interval** for the mean exam score. Compare it with the 95% interval. Which is wider, and why?
 
 ```{python}
 # Write your code here.
@@ -1243,7 +1243,7 @@ Test whether the average attendance proportion differs from 0.80.
 
 Compare study hours between students who attended the review session and those who did not.
 
-1. Make a visualization.
+1. Make a **visualization**.
 2. Compute group means.
 3. Run Welch's t-test.
 4. Explain whether a difference in study hours might affect the interpretation of the review-session score comparison.
@@ -1254,7 +1254,7 @@ Compare study hours between students who attended the review session and those w
 
 ### Exercise 5: simple regression
 
-Fit a simple linear regression predicting score from attendance.
+Fit a **simple linear regression** predicting score from attendance.
 
 1. Interpret the intercept and slope.
 2. Report the p-value for the slope.
@@ -1431,23 +1431,23 @@ This table is only a starting point. The right method depends on study design, m
 
 ## Glossary
 
-**Alternative hypothesis**: the claim compared against the null hypothesis, often representing an effect or difference.
+**Alternative hypothesis**: the claim compared against the null **hypothesis**, often representing an effect or difference.
 
 **Bias**: systematic error in an estimate or study design.
 
 **Confidence interval**: an interval produced by a method that captures the true parameter at a stated long-run rate when assumptions hold.
 
-**Correlation**: a unitless measure of linear association between two numerical variables.
+**Correlation**: a unitless measure of linear association between two numerical **variables**.
 
 **Estimator**: a rule for estimating a population parameter from sample data.
 
-**Null hypothesis**: a baseline hypothesis used to define the reference distribution for a test statistic.
+**Null hypothesis**: a baseline **hypothesis** used to define the reference distribution for a test statistic.
 
 **p-value**: probability, assuming the null is true, of observing a test statistic as extreme as or more extreme than the observed statistic.
 
-**Parameter**: a numerical feature of a population or data-generating process.
+**Parameter**: a numerical feature of a population or **data-generating process**.
 
-**Power**: probability that a test rejects the null hypothesis when a specified alternative is true.
+**Power**: probability that a test rejects the null **hypothesis** when a specified alternative is true.
 
 **Regression slope**: estimated change in the expected outcome for a one-unit increase in a predictor.
 
@@ -1461,9 +1461,9 @@ This table is only a starting point. The right method depends on study design, m
 
 **Statistic**: a numerical summary computed from a sample.
 
-**Type I error**: rejecting a true null hypothesis.
+**Type I error**: rejecting a true null **hypothesis**.
 
-**Type II error**: failing to reject a false null hypothesis.
+**Type II error**: failing to reject a false null **hypothesis**.
 
 ## Final checklist for students
 
@@ -1471,11 +1471,11 @@ Before reporting an analysis, ask:
 
 1. What is the research question?
 2. What are the observational units?
-3. What are the outcome and predictor variables?
+3. What are the outcome and predictor **variables**?
 4. What parameter is being estimated or tested?
 5. What assumptions does the method require?
 6. What is the estimate?
-7. What is the uncertainty: standard error, confidence interval, or p-value?
+7. What is the uncertainty: standard error, **confidence interval**, or p-value?
 8. Is the effect practically meaningful?
 9. Does the study design support a causal interpretation?
 10. What limitations should be stated?

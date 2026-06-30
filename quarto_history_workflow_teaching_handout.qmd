@@ -25,7 +25,7 @@ editor: source
 ::: {.callout-note}
 ## Instructor note
 
-This handout is written as a `.qmd` file on purpose. Students can read it as a normal document, but they can also open the source file in Visual Studio Code and see the same ideas being demonstrated by the teaching material itself.
+This handout is written as a `.qmd` file on purpose. Students can read it as a normal document, but they can also open the source file in **Visual Studio Code** and see the same ideas being demonstrated by the teaching material itself.
 
 The main message is simple: **modern document tools are not scary if we separate source, tool, and output.**
 :::
@@ -34,23 +34,23 @@ The main message is simple: **modern document tools are not scary if we separate
 
 By the end of this lesson, students should be able to explain:
 
-1. Why plain-text documents are useful for writing, collaboration, and version control.
+1. Why plain-text documents are useful for writing, collaboration, and **version control**.
 2. How Markdown, LaTeX, notebooks, R Markdown, and Quarto are related.
 3. Why Quarto is useful for manuscripts, reports, slides, websites, and general professional documents.
-4. What role Visual Studio Code and Git play in a Quarto workflow.
-5. Why `.qmd` files are easier to review with AI tools and version control than binary files like `.docx` or `.pptx`.
+4. What role **Visual Studio Code** and **Git** play in a Quarto workflow.
+5. Why `.qmd` files are easier to review with **AI** tools and **version control** than binary files like `.docx` or `.pptx`.
 
 # The big idea: source, tool, output
 
-Many students first see document tools as a confusing list of names:
+Many students first see document tools as a confusing **list** of names:
 
 - LaTeX
 - Markdown
 - Jupyter Notebook
 - R Markdown
 - Quarto
-- Git
-- Visual Studio Code
+- **Git**
+- **Visual Studio Code**
 - RStudio / Positron
 - Word
 - PowerPoint
@@ -78,12 +78,12 @@ notebook.ipynb -> Jupyter        ->  interactive notebook / HTML / PDF
 
 A `.qmd` file is like a recipe. Quarto is the kitchen. The final PDF, Word file, website, or slide deck is the finished meal.
 
-If the recipe is plain text, it is easy to edit, compare, share, search, and improve with AI tools.
+If the recipe is plain text, it is easy to edit, compare, share, search, and improve with **AI** tools.
 :::
 
 # Why plain text matters
 
-A plain-text file stores the actual content as readable characters. You can open it in almost any editor. You can compare two versions line by line. You can ask Git to show what changed. You can ask an AI assistant to edit only a section without touching formatting.
+A plain-text file stores the actual content as readable characters. You can open it in almost any editor. You can compare two versions line by line. You can ask **Git** to show what changed. You can ask an **AI** assistant to edit only a section without touching formatting.
 
 A binary file, such as a typical `.docx` or `.pptx`, is not as easy to compare directly. These files are very useful as final delivery formats, but they are less friendly as the **source of truth** for version-controlled writing.
 
@@ -127,7 +127,7 @@ LaTeX became popular because it is excellent for:
 
 - equations,
 - automatic numbering,
-- cross-references,
+- **cross-references**,
 - bibliographies,
 - journal and conference templates,
 - high-quality PDF output.
@@ -170,7 +170,7 @@ However, plain Markdown by itself is limited for scientific writing. It does not
 
 - formal citations,
 - numbered figures,
-- cross-references,
+- **cross-references**,
 - equations,
 - multiple output formats,
 - executable analysis code.
@@ -189,7 +189,7 @@ Quarto is built on top of Pandoc, so Quarto inherits much of Pandoc's multi-form
 
 ## 5. Notebooks: writing and computation together
 
-Jupyter notebooks made it common to combine code, output, plots, math, and explanatory text in one interactive document.
+**Jupyter notebooks** made it common to combine code, output, plots, math, and explanatory text in one interactive document.
 
 A notebook is useful when you want to show the process:
 
@@ -197,13 +197,13 @@ A notebook is useful when you want to show the process:
 question -> code -> result -> explanation -> next question
 ```
 
-This is especially helpful in data science, statistics, machine learning, and scientific computing.
+This is especially helpful in data science, **statistics**, machine learning, and scientific computing.
 
 But notebooks can also become messy:
 
 - Cells may be run out of order.
 - Output may not match the current code.
-- Large `.ipynb` files can be harder to review in Git than plain-text files.
+- Large `.ipynb` files can be harder to review in **Git** than plain-text files.
 - A notebook can be excellent for exploration but less ideal as the final manuscript or report.
 
 ## 6. R Markdown: reproducible reports for R users
@@ -216,7 +216,7 @@ A typical R Markdown idea:
 narrative text + R code + output = reproducible report
 ```
 
-R Markdown became popular in statistics and data science education because it discouraged copy-and-paste workflows. Instead of copying a graph from one program into a Word document, the graph could be generated inside the report itself.
+R Markdown became popular in **statistics** and data science education because it discouraged copy-and-paste workflows. Instead of copying a graph from one program into a Word document, the graph could be generated inside the report itself.
 
 ## 7. Quarto: a modern, multi-language publishing system
 
@@ -458,7 +458,7 @@ quarto render index.qmd --to docx
 quarto render index.qmd --to pdf
 ```
 
-For version control:
+For **version control**:
 
 ```bash
 git status
@@ -476,7 +476,7 @@ A useful first-day goal is much smaller:
 1. Open a `.qmd` file.
 2. Edit a paragraph.
 3. Preview the document.
-4. Commit the change with Git.
+4. Commit the change with **Git**.
 :::
 
 # Recommended class project structure
@@ -588,7 +588,7 @@ The preview is the rendered document.
 
 ## Step 3: Make a small edit
 
-Change a title, add a paragraph, or add a bullet list.
+Change a title, add a paragraph, or add a bullet **list**.
 
 ## Step 4: Show Git status
 
@@ -597,7 +597,7 @@ git status
 git diff
 ```
 
-Explain that Git can show exactly what changed because `.qmd` is plain text.
+Explain that **Git** can show exactly what changed because `.qmd` is plain text.
 
 ## Step 5: Commit the change
 
@@ -652,9 +652,9 @@ Then ask them to preview it.
 
 # How AI fits into this workflow
 
-AI tools are especially useful when the source is plain text.
+**AI** tools are especially useful when the source is plain text.
 
-Instead of asking AI to edit a binary PowerPoint or Word file, students can ask AI to edit a specific source file:
+Instead of asking **AI** to edit a binary PowerPoint or Word file, students can ask **AI** to edit a specific source file:
 
 ```text
 Edit only the Discussion section of index.qmd.
@@ -664,13 +664,13 @@ Keep the tone appropriate for undergraduate readers.
 Return a summary of changes.
 ```
 
-Good AI workflow:
+Good **AI** workflow:
 
 ```text
 AI proposes changes -> student reviews diff -> student renders document -> student commits final version
 ```
 
-Bad AI workflow:
+Bad **AI** workflow:
 
 ```text
 AI rewrites everything -> student cannot tell what changed -> final document contains unsupported claims
@@ -679,9 +679,9 @@ AI rewrites everything -> student cannot tell what changed -> final document con
 ::: {.callout-important}
 ## Teaching point
 
-Version control is not just for programmers. It is also useful for writers, researchers, analysts, policy teams, designers, and content creators.
+**Version control** is not just for programmers. It is also useful for writers, researchers, analysts, policy teams, designers, and content creators.
 
-Git answers an important question: **what changed, when, and why?**
+**Git** answers an important question: **what changed, when, and why?**
 :::
 
 # A practical recommendation
@@ -727,7 +727,7 @@ Plain text source + rendering tool + version control = reproducible writing work
 - Notebooks taught us that code, explanation, and output can live together.
 - R Markdown taught us that reports can be reproducible.
 - Quarto combines these ideas into a modern publishing workflow.
-- Git makes the writing process reviewable and recoverable.
+- **Git** makes the writing process reviewable and recoverable.
 - VS Code gives students a practical environment for all of this.
 
 # Sources and suggested reading
@@ -763,7 +763,7 @@ These sources are good for instructors who want to verify the historical and tec
 
 # Optional discussion questions
 
-1. Why might a `.qmd` file be easier to review than a `.docx` file in Git?
+1. Why might a `.qmd` file be easier to review than a `.docx` file in **Git**?
 2. When would Word or PowerPoint still be the better tool?
 3. Why might a notebook be good for exploration but less ideal for final writing?
 4. Why does a citation manager plus `references.bib` help avoid messy reference formatting?
@@ -771,4 +771,4 @@ These sources are good for instructors who want to verify the historical and tec
 
 # One-sentence summary
 
-Quarto is a modern way to write structured documents in plain text, render them into many formats, include code and citations when needed, and track the whole process with Git.
+Quarto is a modern way to write structured documents in plain text, render them into many formats, include code and citations when needed, and track the whole process with **Git**.

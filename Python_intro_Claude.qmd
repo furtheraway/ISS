@@ -29,7 +29,7 @@ execute:
 
 This is a course reader. It assumes **you have never written a line of code
 before**. We use Python as the vehicle for learning programming itself, so most
-ideas here (variables, loops, functions) carry over to any other language.
+ideas here (**variables**, loops, functions) carry over to any other language.
 
 A few conventions:
 
@@ -65,7 +65,7 @@ computer has no common sense. If you tell it to do something slightly wrong, it
 will do that wrong thing perfectly, a billion times.
 
 **Programming** is the craft of writing down instructions precisely enough that
-a computer can follow them. A **program** is just a list of such instructions,
+a computer can follow them. A **program** is just a **list** of such instructions,
 saved in a file. A **programming language** (like Python) is a set of words and
 grammar rules that sit between human ideas and the computer's native language of
 1s and 0s.
@@ -93,13 +93,13 @@ The rest of this document teaches each of these, one at a time, in Python.
 
 Python was designed to be **readable**. Its code looks almost like English, it
 hides a lot of fussy machinery, and it has an enormous collection of free
-libraries for science, data, and AI. That is why it is the most common first
+libraries for science, data, and **AI**. That is why it is the most common first
 language taught at universities and the default language of data analysis and
 machine learning.
 
 The trade-off: Python is slower than languages like C# or C++ for raw number
 crunching. In practice this rarely matters, because the heavy libraries we use
-(NumPy, Pandas) are themselves written in fast C under the hood.
+(**NumPy**, **Pandas**) are themselves written in fast C under the hood.
 
 ---
 
@@ -283,7 +283,7 @@ Good names make code readable. Rules and conventions in Python:
 - Use lowercase words separated by underscores: `student_count`, `total_price`.
   (This style is called **snake_case**.)
 - Names may contain letters, digits, and `_`, but must not *start* with a digit.
-- Names are **case-sensitive**: `Age` and `age` are different variables.
+- Names are **case-sensitive**: `Age` and `age` are different **variables**.
 - Avoid Python's reserved words (`if`, `for`, `class`, `print` is best avoided
   too, etc.).
 
@@ -368,7 +368,7 @@ print("ha" * 3)               # * repeats a string => hahaha
 
 ## f-strings: the modern way to build text
 
-Putting an `f` before the quotes lets you drop variables straight into a string
+Putting an `f` before the quotes lets you drop **variables** straight into a string
 inside `{curly braces}`. This is the preferred style in modern Python.
 
 ```{python}
@@ -576,7 +576,7 @@ focus on the two you will use most: **lists** and **dictionaries**.
 | **dict**     | `{"a": 1, "b": 2}`      | yes\*    | yes         | labelled lookup (key→value)  |
 | **set**      | `{1, 2, 3}`             | no       | yes         | unique items, membership     |
 
-\*Dictionaries remember insertion order in modern Python.
+\***Dictionaries** remember insertion order in modern Python.
 
 ## Lists
 
@@ -608,7 +608,7 @@ print(numbers[:2])     # first two     => [10, 20]
 print(numbers[::2])    # every 2nd     => [10, 30, 50]
 ```
 
-A few list workhorses:
+A few **list** workhorses:
 
 ```{python}
 nums = [3, 1, 4, 1, 5, 9, 2]
@@ -621,7 +621,7 @@ print(len(nums))         # => 7
 
 ## Tuples
 
-A **tuple** is like a list but **immutable** — once created it cannot change.
+A **tuple** is like a **list** but **immutable** — once created it cannot change.
 Use it for a fixed group of values that belong together, such as coordinates.
 
 ```{python}
@@ -795,7 +795,7 @@ and avoids off-by-one mistakes.
 
 ## List comprehensions: a Python superpower
 
-A **list comprehension** builds a new list from an old one in a single readable
+A **list comprehension** builds a new **list** from an old one in a single readable
 line. It is so idiomatic that you will see it everywhere.
 
 ```{python}
@@ -874,7 +874,7 @@ print(power(base=2, exponent=10))# named for readability => 1024
 
 A variable created **inside** a function exists only inside that function. This
 is called **local scope**, and it is a feature: it keeps functions from
-accidentally clobbering each other's variables.
+accidentally clobbering each other's **variables**.
 
 ```{python}
 def compute():
@@ -932,8 +932,8 @@ the program ever runs; in Python that mistake only surfaces at run time.
 
 # When things go wrong: errors and exceptions {#sec-errors}
 
-Errors are normal — every programmer meets them constantly. Learning to **read**
-them is a core skill. Python errors come in two flavours.
+**Errors** are normal — every programmer meets them constantly. Learning to **read**
+them is a core skill. Python **errors** come in two flavours.
 
 **Syntax errors** mean your code is not valid Python (a missing colon, an
 unmatched bracket). Python refuses to run it at all:
@@ -1015,7 +1015,7 @@ with open("notes.txt", "r") as f:
 ```
 
 ::: {.callout-tip}
-For real datasets (spreadsheets, CSV files) you will rarely use raw `open`.
+For real **datasets** (spreadsheets, CSV files) you will rarely use raw `open`.
 Instead you will hand the file to the **Pandas** library, which understands
 tabular data — see @sec-pandas.
 :::
@@ -1061,7 +1061,7 @@ A few terms:
 - `self` refers to *the particular object* a method is working on. Every method's
   first parameter is `self`.
 
-Object-oriented programming is a large topic. For a first course it is enough to
+**Object-oriented programming** is a large topic. For a first course it is enough to
 **recognise** classes and feel comfortable *using* objects and their methods,
 since the data libraries below are built from them.
 
@@ -1120,8 +1120,8 @@ can stand on the shoulders of others.
 # Numerical computing with NumPy {#sec-numpy}
 
 `numpy` (Numerical Python) introduces the **array**: a grid of numbers that you
-can compute on all at once, far faster and more conveniently than a plain list.
-It is the foundation under almost every scientific and AI library in Python.
+can compute on all at once, far faster and more conveniently than a plain **list**.
+It is the foundation under almost every scientific and **AI** library in Python.
 
 ```{python}
 import numpy as np            # "np" is the universal nickname
@@ -1147,7 +1147,7 @@ doubled_np = np.array(nums) * 2
 print(doubled, doubled_np)
 ```
 
-NumPy also generates and reshapes data easily:
+**NumPy** also generates and reshapes data easily:
 
 ```{python}
 print(np.zeros(3))             # => [0. 0. 0.]
@@ -1180,7 +1180,7 @@ df
 
 ## Looking at your data
 
-The first thing you always do with a new dataset:
+The first thing you always do with a new **dataset**:
 
 ```{python}
 print(df.shape)          # (rows, columns) => (5, 4)
@@ -1240,7 +1240,7 @@ df.sort_values("score", ascending=False)
 5. **Visualise** it (next section).
 6. **Conclude** — state what you found.
 
-You will repeat this loop on every dataset you ever touch.
+You will repeat this loop on every **dataset** you ever touch.
 :::
 
 ---
@@ -1248,7 +1248,7 @@ You will repeat this loop on every dataset you ever touch.
 # Visualising data with Matplotlib {#sec-plotting}
 
 A picture makes patterns jump out that a table hides. `matplotlib` is Python's
-foundational plotting library. Pandas can even call it for you.
+foundational plotting library. **Pandas** can even call it for you.
 
 ## A line plot
 
@@ -1271,7 +1271,7 @@ plt.show()
 ```
 
 Every good chart shares the same anatomy: a **title**, **axis labels**, and the
-data itself. Label your axes — an unlabelled plot is a puzzle, not a result.
+data itself. Label your axes — an unlabelled **plot** is a puzzle, not a result.
 
 ## A bar chart from our DataFrame
 
@@ -1323,7 +1323,7 @@ go-to chart for "what does my data look like?"
 
 # A complete mini-analysis {#sec-capstone}
 
-Let us put the whole toolkit together on one small, made-up dataset, following
+Let us put the whole toolkit together on one small, made-up **dataset**, following
 the workflow from @sec-pandas. The goal: **does study time relate to exam
 score?**
 
@@ -1377,21 +1377,21 @@ aims to build.
 
 # Programming in the age of AI {#sec-ai}
 
-You are learning to code at a moment when AI assistants (like Claude, GitHub
+You are learning to code at a moment when **AI** assistants (like Claude, GitHub
 Copilot, ChatGPT) can write code from a plain-English description. This changes
 *how* you work, but it makes the fundamentals in this reader **more** important,
 not less. Here is how to use these tools well.
 
 ## What AI assistants are good at
 
-- **Boilerplate and syntax recall:** "How do I read a CSV in pandas?"
+- **Boilerplate and syntax recall:** "How do I read a CSV in **pandas**?"
 - **Explaining code or an error message** you do not understand.
 - **First drafts** of a function you then check and refine.
 - **Translating** an idea between languages ("do this Python in C#").
 
 ## Why the fundamentals still matter
 
-An AI assistant is a confident collaborator that is *sometimes wrong*. It can
+An **AI** assistant is a confident collaborator that is *sometimes wrong*. It can
 produce code that looks plausible but is subtly incorrect, inefficient, or
 solves the wrong problem. To use it safely you must be able to:
 
@@ -1401,7 +1401,7 @@ solves the wrong problem. To use it safely you must be able to:
 
 If you cannot read the code, you cannot tell good output from confident
 nonsense. The skills in this document are exactly the skills needed to
-*supervise* an AI, not compete with it.
+*supervise* an **AI**, not compete with it.
 
 ## How to ask well
 
@@ -1409,7 +1409,7 @@ Vague prompts get vague code. Good prompts are specific:
 
 > ❌ "Write code to analyse my data."
 >
-> ✅ "I have a pandas DataFrame `df` with columns `date` (string) and `sales`
+> ✅ "I have a **pandas** DataFrame `df` with columns `date` (string) and `sales`
 > (float). Write a function that returns total sales per month, and explain each
 > step."
 
@@ -1424,15 +1424,15 @@ to **explain**. Then read the explanation and verify the result yourself.
    are not ready to rely on it.
 4. **Verify** by running and testing. Never paste code you have not checked into
    anything that matters.
-5. **Cite and be honest** about what was AI-assisted, especially in coursework —
+5. **Cite and be honest** about what was **AI**-assisted, especially in coursework —
    follow your instructor's policy.
 
 ::: {.callout-important}
 ## The bottom line
-AI turns programming from *typing* into *deciding and verifying*. Those higher
+**AI** turns programming from *typing* into *deciding and verifying*. Those higher
 skills — framing a problem, reading a solution critically, testing it, judging
 whether it is correct — are built on exactly the fundamentals taught here.
-Learn them well, and AI becomes a force multiplier rather than a crutch.
+Learn them well, and **AI** becomes a force multiplier rather than a crutch.
 :::
 
 ---
