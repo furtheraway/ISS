@@ -379,16 +379,15 @@ Quarto's citation documentation explains how bibliographies and citation syntax 
 
 A regular Markdown code block displays code:
 
-````markdown
+~~~~markdown
 ```python
 print("This is displayed, not executed.")
 ```
-````
+~~~~
 
 A Quarto code chunk can be executed during rendering:
 
-````markdown
-```{python}
+<pre><code>&#96;&#96;&#96;{python}
 #| label: fig-example
 #| fig-cap: "A simple plot."
 
@@ -396,8 +395,7 @@ import matplotlib.pyplot as plt
 
 plt.plot([1, 2, 3], [1, 4, 9])
 plt.show()
-```
-````
+&#96;&#96;&#96;</code></pre>
 
 The `#|` lines are Quarto options. They can control labels, captions, warnings, messages, figure size, and more.
 

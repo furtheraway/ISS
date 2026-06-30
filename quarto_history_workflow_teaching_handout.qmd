@@ -370,24 +370,22 @@ A simple BibTeX entry looks like this:
 
 A displayed code block in ordinary Markdown looks like this:
 
-````qmd
+~~~~qmd
 ```python
 print("This code is shown, not executed.")
 ```
-````
+~~~~
 
 An executable Quarto code chunk uses braces around the language name:
 
-````qmd
-```{python}
+<pre><code>&#96;&#96;&#96;{python}
 #| label: fig-example
 #| fig-cap: "Example plot."
 
 import matplotlib.pyplot as plt
 plt.plot([1, 2, 3], [1, 4, 9])
 plt.show()
-```
-````
+&#96;&#96;&#96;</code></pre>
 
 For teaching beginners, this distinction is important:
 
