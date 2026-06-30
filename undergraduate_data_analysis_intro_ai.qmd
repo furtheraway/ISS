@@ -388,7 +388,7 @@ scores_no = students.loc[students["review_session"] == 0, "score"]
 scores_yes = students.loc[students["review_session"] == 1, "score"]
 
 plt.figure(figsize=(7, 4.5))
-plt.boxplot([scores_no, scores_yes], labels=["No review", "Review"])
+plt.boxplot([scores_no, scores_yes], tick_labels=["No review", "Review"])
 plt.ylabel("Exam score")
 plt.title("Scores by review-session attendance")
 plt.show()
@@ -1352,7 +1352,7 @@ study_review = students.loc[students["review_session"] == 1, "study_hours"]
 study_no_review = students.loc[students["review_session"] == 0, "study_hours"]
 
 plt.figure(figsize=(7, 4.5))
-plt.boxplot([study_no_review, study_review], labels=["No review", "Review"])
+plt.boxplot([study_no_review, study_review], tick_labels=["No review", "Review"])
 plt.ylabel("Study hours")
 plt.title("Study hours by review-session attendance")
 plt.show()
