@@ -1,0 +1,52 @@
+# Information System Architecture
+
+Information System is the hardware and software that collects, processes, stores, and distributes information. It is a combination of technology, people, and processes that work together to manage and utilize data effectively. It serves as a foundational support for decision-making, communication, and journalism.
+
+Build the vocuabulary of Information System Architecture. This includes understanding the key components, their roles, and how they interact within an information system. The following sections provide a comprehensive overview of essential concepts in this domain.
+
+
+## Terminal & Command Line
+
+Terminal known as command line interface (CLI) is a text-based interface that allows users to interact with the operating system or software by typing commands. It is a powerful tool for developers and system administrators, providing direct access to the underlying system functionalities.
+
+
+## Server vs Client
+In a client-server architecture, the server is a centralized system that provides resources or services to multiple clients. The server handles requests from clients and processes them, while clients are devices or applications that request services from the server. This architecture allows for efficient resource management and scalability.
+
+Examples of Server: Web servers, database servers, file servers
+
+Examples of Client: Web browsers, email clients, mobile applications
+
+
+## Database vs Data Warehouse
+
+A database is a structured collection of data that is organized and managed to support efficient storage, retrieval, and manipulation of information. It is designed for transactional processing and is optimized for quick access to individual records.
+
+Different types of databases include relational databases (e.g., MySQL, PostgreSQL), NoSQL databases (e.g., MongoDB, Cassandra), and in-memory databases (e.g., Redis).
+
+What is a relational database? A relational database is a type of database that organizes data into tables with rows and columns, allowing for relationships between different tables. It uses Structured Query Language (SQL) for querying and managing data.
+
+
+
+## Network Pieces
+
+DNS (Domain Name System): DNS is a hierarchical system that translates human-readable domain names (like www.example.com) into IP addresses that computers use to identify each other on the network. It acts as a phonebook for the internet, allowing users to access websites using easy-to-remember names instead of numerical IP addresses.
+
+Router: A router is a networking device that forwards data packets between computer networks. It connects multiple networks together and directs traffic based on IP addresses, ensuring that data reaches its intended destination. Routers are essential for enabling communication between devices on different networks, such as connecting a home network to the internet.
+
+
+## Where programming languages fit in
+
+Any place you want computer to do something, you need a programming language. Programming languages are used to write instructions that computers can understand and execute. They serve as a bridge between human logic and machine operations, allowing developers to create software applications, automate tasks, and manipulate data.
+
+For different purposes, different programming languages are used. For example, Python is often used for data analysis and machine learning, JavaScript is commonly used for web development, and C++ is used for system programming and game development. Each language has its own syntax, features, and strengths, making them suitable for specific tasks and applications.
+
+
+## Algorithms
+
+How to put an elephant in a refrigerator?
+
+Step 1: Open the refrigerator door.
+Step 2: Identify the appropriate shelf or compartment for the elephant.
+Step 3: Place the elephant on the shelf or in the compartment.
+Step 4: Close the refrigerator door securely.
