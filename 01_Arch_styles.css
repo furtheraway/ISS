@@ -1,0 +1,115 @@
+.reveal {
+  color: #16212c;
+  font-family: "Aptos", "Segoe UI", Arial, sans-serif;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  box-sizing: border-box;
+}
+
+.reveal h1,
+.reveal h2 {
+  color: #0d3b4c;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.reveal h1 {
+  font-size: 2.2em;
+}
+
+.reveal h2 {
+  font-size: 1.7em;
+}
+
+.reveal p,
+.reveal li {
+  font-size: 0.78em;
+  line-height: 1.34;
+}
+
+.reveal .slides section:not(.title-page) {
+  padding: 40px 56px !important;
+}
+
+.reveal .slides section:not(.title-page)::before {
+  background: linear-gradient(90deg, #0e7490, #f59e0b);
+  content: "";
+  height: 6px;
+  position: absolute;
+  right: 50px;
+  top: 34px;
+  width: 150px;
+}
+
+.reveal .slides section:not(.title-page)::after {
+  background: #0e7490;
+  bottom: 34px;
+  content: "";
+  height: 2px;
+  left: 56px;
+  opacity: 0.42;
+  position: absolute;
+  width: 220px;
+}
+
+.reveal .slides section.title-page {
+  box-sizing: border-box;
+  color: #f8fafc;
+  display: grid !important;
+  min-height: 100%;
+  padding: 0 80px !important;
+  place-items: center start;
+}
+
+.reveal .slides section.title-page > h2 {
+  display: none;
+}
+
+.title-grid {
+  max-width: 1030px;
+}
+
+.title-grid h1 {
+  color: #ffffff;
+  font-size: 2.55em;
+  line-height: 1.05;
+  margin: 0.32em 0 0.38em;
+}
+
+.title-grid p {
+  color: #e6f6f6;
+  font-size: 0.72em;
+  line-height: 1.3;
+  margin: 0.35em 0;
+}
+
+.title-grid .session {
+  border-bottom: 3px solid #f59e0b;
+  display: inline-block;
+  font-weight: 700;
+  padding-bottom: 0.28em;
+}
+
+.title-grid .course-code {
+  color: #b8e4e1;
+  font-weight: 700;
+}
+
+.title-grid .instructor {
+  color: #ffffff;
+  font-size: 0.82em;
+  font-weight: 700;
+}
+
+.reveal .slide-number {
+  color: #0d3b4c;
+}
+
+.reveal .title-page .slide-number {
+  color: #f8fafc;
+}
