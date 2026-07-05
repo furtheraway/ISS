@@ -26,7 +26,17 @@ Different types of databases include relational databases (e.g., MySQL, PostgreS
 
 What is a relational database? A relational database is a type of database that organizes data into tables with rows and columns, allowing for relationships between different tables. It uses Structured Query Language (SQL) for querying and managing data.
 
+## Types of Databases
 
+Relational Databases: These databases store data in structured tables with predefined relationships between them. They use SQL for querying and managing data. Examples include MySQL, PostgreSQL, and Oracle Database.
+
+Document-Oriented Databases: These databases store data in a flexible, semi-structured format, often using JSON or XML. They are suitable for handling unstructured or evolving data. Examples include MongoDB and CouchDB.
+
+Other types of databases include key-value stores (e.g., Redis), graph databases (e.g., Neo4j), and time-series databases (e.g., InfluxDB). Each type of database has its own strengths and is suited for specific use cases, depending on the nature of the data and the requirements of the application.
+
+
+## What is a database migration in MVC?
+In the context of the Model-View-Controller (MVC) architecture, a database migration refers to the process of managing changes to the database schema over time. It involves creating, modifying, or deleting database tables and columns to accommodate evolving application requirements. Migrations allow developers to version control their database schema and ensure that changes are applied consistently across different environments (e.g., development, testing, production).
 
 ## Network Pieces
 
