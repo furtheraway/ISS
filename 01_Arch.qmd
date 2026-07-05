@@ -8,9 +8,9 @@ format:
     width: 1280
     height: 720
     margin: 0.08
----I 
+---
 
-## {.title-page background-gradient="linear-gradient(135deg, #0d1b2a 0%, #17415f 48%, #2b7a78 100%)" background-color="#0d1b2a"}
+## {.title-page}
 
 <div class="title-grid">
   <p class="session">2026 BFSU International Summer Session</p>
@@ -19,19 +19,19 @@ format:
   <p class="instructor">Instructor: Yuan (John) Yao</p>
 </div>
 
-# Information System Architecture {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+# Information System Architecture {.section-opener}
 
 Information System is the hardware and software that collects, processes, stores, and distributes information. It is a combination of technology, people, and processes that work together to manage and utilize data effectively. It serves as a foundational support for decision-making, communication, and journalism.
 
 Build the vocabulary of Information System Architecture. This includes understanding the key components, their roles, and how they interact within an information system. The following sections provide a comprehensive overview of essential concepts in this domain.
 
 
-## Terminal & Command Line {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+## Terminal & Command Line
 
 Terminal known as command line interface (CLI) is a text-based interface that allows users to interact with the operating system or software by typing commands. It is a powerful tool for developers and system administrators, providing direct access to the underlying system functionalities.
 
 
-## Server vs Client {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+## Server vs Client
 In a client-server architecture, the server is a centralized system that provides resources or services to multiple clients. The server handles requests from clients and processes them, while clients are devices or applications that request services from the server. This architecture allows for efficient resource management and scalability.
 
 Examples of Server: Web servers, database servers, file servers
@@ -39,7 +39,7 @@ Examples of Server: Web servers, database servers, file servers
 Examples of Client: Web browsers, email clients, mobile applications
 
 
-## Database vs Data Warehouse {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+## Database vs Data Warehouse
 
 A database is a structured collection of data that is organized and managed to support efficient storage, retrieval, and manipulation of information. It is designed for transactional processing and is optimized for quick access to individual records.
 
@@ -47,7 +47,7 @@ Different types of databases include relational databases (e.g., MySQL, PostgreS
 
 What is a relational database? A relational database is a type of database that organizes data into tables with rows and columns, allowing for relationships between different tables. It uses Structured Query Language (SQL) for querying and managing data.
 
-## Types of Databases {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+## Types of Databases
 
 Relational Databases: These databases store data in structured tables with predefined relationships between them. They use SQL for querying and managing data. Examples include MySQL, PostgreSQL, and Oracle Database.
 
@@ -56,24 +56,24 @@ Document-Oriented Databases: These databases store data in a flexible, semi-stru
 Other types of databases include key-value stores (e.g., Redis), graph databases (e.g., Neo4j), and time-series databases (e.g., InfluxDB). Each type of database has its own strengths and is suited for specific use cases, depending on the nature of the data and the requirements of the application.
 
 
-## What is a database migration in MVC? {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+## What is a database migration in MVC?
 In the context of the Model-View-Controller (MVC) architecture, a database migration refers to the process of managing changes to the database schema over time. It involves creating, modifying, or deleting database tables and columns to accommodate evolving application requirements. Migrations allow developers to version control their database schema and ensure that changes are applied consistently across different environments (e.g., development, testing, production).
 
-## Network Pieces {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+## Network Pieces
 
 DNS (Domain Name System): DNS is a hierarchical system that translates human-readable domain names (like www.example.com) into IP addresses that computers use to identify each other on the network. It acts as a phonebook for the internet, allowing users to access websites using easy-to-remember names instead of numerical IP addresses.
 
 Router: A router is a networking device that forwards data packets between computer networks. It connects multiple networks together and directs traffic based on IP addresses, ensuring that data reaches its intended destination. Routers are essential for enabling communication between devices on different networks, such as connecting a home network to the internet.
 
 
-## Where programming languages fit in {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+## Where programming languages fit in
 
 Any place you want computer to do something, you need a programming language. Programming languages are used to write instructions that computers can understand and execute. They serve as a bridge between human logic and machine operations, allowing developers to create software applications, automate tasks, and manipulate data.
 
 For different purposes, different programming languages are used. For example, Python is often used for data analysis and machine learning, JavaScript is commonly used for web development, and C++ is used for system programming and game development. Each language has its own syntax, features, and strengths, making them suitable for specific tasks and applications.
 
 
-## Algorithms {background-gradient="linear-gradient(135deg, #f7fbfb 0%, #e8f1f3 54%, #d9e8ea 100%)" background-color="#f7fbfb"}
+## Algorithms
 
 How to put an elephant in a refrigerator?
 
