@@ -1,0 +1,1070 @@
+---
+title: "Git and GitHub for Beginners"
+subtitle: "A hands-on notebook for version control, collaboration, and reproducible work"
+author: "Teaching material"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-copy: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+execute:
+  enabled: false
+  eval: false
+  echo: true
+jupyter: python3
+editor: source
+---
+
+::: {.callout-note}
+## Instructor note
+
+This material is written as a Quarto notebook source file (`.qmd`) and can be converted to a Jupyter notebook (`.ipynb`). The runnable lab cells use Python to call Git commands, which is more portable than assuming that every student has Bash installed.
+
+To convert between formats:
+
+```bash
+quarto convert Git_GitHub_Beginners.qmd --output Git_GitHub_Beginners.ipynb
+quarto convert Git_GitHub_Beginners.ipynb --output Git_GitHub_Beginners_from_ipynb.qmd
+```
+:::
+
+# Learning Goals
+
+By the end of this lesson, students should be able to:
+
+1. Explain what Git tracks and why version control is useful.
+2. Use the basic local Git workflow: `status`, `add`, `commit`, `log`, and `diff`.
+3. Create and switch branches.
+4. Merge changes and understand why conflicts happen.
+5. Connect a local repository to GitHub.
+6. Clone, pull, push, and open a pull request.
+7. Use `.gitignore` and safe undo commands.
+8. Describe a practical daily workflow for individual and group projects.
+
+# Why Git Exists
+
+Many students start with file names like these:
+
+```text
+report.docx
+report_final.docx
+report_final_revised.docx
+report_final_revised_REAL.docx
+report_final_revised_REAL_2.docx
+```
+
+This is version control by file name. It works for a short time, but it becomes confusing when:
+
+- several people edit the same project,
+- you need to know who changed what,
+- you want to undo one specific change,
+- you need to compare two versions,
+- your project contains code, data, figures, notebooks, and written reports.
+
+Git solves this by recording the history of a project in a structured way.
+
+Git is a local version control system. It runs on your computer and tracks changes in a folder called a repository.
+
+GitHub is an online hosting and collaboration platform for Git repositories. It adds remote backup, issue tracking, pull requests, code review, project management, and sharing.
+
+::: {.callout-important}
+## Git and GitHub are not the same thing
+
+Git is the version control tool.
+
+GitHub is a website and cloud service that stores Git repositories and helps people collaborate.
+:::
+
+# A Mental Model
+
+Git has four common places where your work can be:
+
+| Place | Meaning | Typical command |
+|---|---|---|
+| Working tree | Files you are currently editing | edit files |
+| Staging area | Changes selected for the next commit | `git add` |
+| Local repository | Saved commits on your computer | `git commit` |
+| Remote repository | Copy on GitHub or another server | `git push`, `git pull` |
+
+The core workflow is:
+
+```text
+edit files -> stage changes -> commit locally -> push to GitHub
+```
+
+In commands:
+
+```bash
+git status
+git add README.md
+git commit -m "Describe the change"
+git push
+```
+
+# Before Class Setup
+
+Students should install:
+
+- Git: <https://git-scm.com/>
+- Visual Studio Code: <https://code.visualstudio.com/>
+- A GitHub account: <https://github.com/>
+- Optional: GitHub Desktop: <https://desktop.github.com/>
+
+After installing Git, check the version:
+
+```bash
+git --version
+```
+
+Configure your identity once on your own computer:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
+The name and email are stored in commits. Use the same email address that you use for GitHub, or use the private GitHub no-reply email from your GitHub account settings.
+
+::: {.callout-tip}
+## Windows note
+
+On Windows, Git usually installs Git Bash and Git Credential Manager. Git Credential Manager helps with browser-based GitHub sign-in when pushing over HTTPS.
+:::
+
+# Using This Notebook
+
+This notebook has two kinds of examples:
+
+1. Terminal examples shown as `bash` blocks. These are meant to be copied into Terminal, PowerShell, Git Bash, or the VS Code terminal.
+2. Runnable notebook examples shown as Python cells. These use Python's `subprocess` module to run Git commands inside a practice folder.
+
+The notebook cells do not require Bash. They require:
+
+- Python,
+- Git installed and available on the system path,
+- permission to create files in the folder where the notebook is running.
+
+The practice cells create a folder called `git_github_lab` in the current working directory. They do not change your real projects.
+
+# Notebook Helper
+
+Run this cell first if you are using the `.ipynb` notebook interactively.
+
+```{python}
+from pathlib import Path
+import subprocess
+import textwrap
+
+LAB = Path.cwd() / "git_github_lab"
+LAB.mkdir(exist_ok=True)
+
+def write_file(path, text):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(textwrap.dedent(text).lstrip(), encoding="utf-8")
+    print(f"Wrote {path}")
+
+def run(command, cwd=LAB, check=False):
+    """Run a shell command in the lab folder and print stdout/stderr."""
+    print(f"$ {command}")
+    result = subprocess.run(
+        command,
+        cwd=cwd,
+        shell=True,
+        text=True,
+        capture_output=True
+    )
+    if result.stdout:
+        print(result.stdout)
+    if result.stderr:
+        print(result.stderr)
+    if check and result.returncode != 0:
+        raise RuntimeError(f"Command failed with exit code {result.returncode}")
+    return result
+
+print(f"Lab folder: {LAB}")
+```
+
+# Part 1: Create a Repository
+
+A Git repository is a folder with a hidden `.git` directory inside it. The `.git` directory stores the project's history.
+
+In a terminal, the basic setup is:
+
+```bash
+mkdir git-github-lab
+cd git-github-lab
+git init
+git branch -M main
+```
+
+In this notebook, run:
+
+```{python}
+run("git init")
+run("git branch -M main")
+run("git status")
+```
+
+For this practice repository, configure a local teaching identity. This affects only this lab repository, not your global Git settings.
+
+```{python}
+run('git config user.name "Student Example"')
+run('git config user.email "student@example.com"')
+run("git config --local --list")
+```
+
+::: {.callout-note}
+## Repository scope
+
+`git config --global` changes your user settings for all repositories on your computer.
+
+`git config --local` changes settings only for the current repository.
+:::
+
+# Part 2: Check Repository Status
+
+`git status` is the safest Git command. Use it often.
+
+```bash
+git status
+```
+
+It answers:
+
+- Which branch am I on?
+- Are there untracked files?
+- Are there modified files?
+- Are there staged changes waiting to be committed?
+- Is my local branch ahead of or behind the remote branch?
+
+Run:
+
+```{python}
+run("git status")
+```
+
+# Part 3: Create and Track a File
+
+Create a `README.md` file.
+
+```{python}
+write_file(
+    LAB / "README.md",
+    """
+    # Git and GitHub Practice
+
+    This repository is for learning Git.
+
+    Today I will practice:
+
+    - checking status
+    - staging changes
+    - committing changes
+    - reading history
+    """
+)
+run("git status")
+```
+
+Git notices the file, but it does not automatically track it. The file is currently untracked.
+
+Stage the file:
+
+```{python}
+run("git add README.md")
+run("git status")
+```
+
+Commit the file:
+
+```{python}
+run('git commit -m "Add README"')
+run("git log --oneline")
+```
+
+::: {.callout-tip}
+## Commit message habit
+
+A useful commit message finishes this sentence:
+
+"This commit will ..."
+
+Examples:
+
+- `Add project README`
+- `Fix typo in setup instructions`
+- `Add data cleaning script`
+- `Update figure caption`
+:::
+
+# Part 4: Edit, Diff, Stage, Commit
+
+Edit the file.
+
+```{python}
+write_file(
+    LAB / "README.md",
+    """
+    # Git and GitHub Practice
+
+    This repository is for learning Git.
+
+    Today I will practice:
+
+    - checking status
+    - staging changes
+    - committing changes
+    - reading history
+    - comparing versions
+
+    My main takeaway: Git saves meaningful snapshots of a project.
+    """
+)
+run("git status")
+```
+
+Use `git diff` to see what changed before staging.
+
+```{python}
+run("git diff")
+```
+
+Stage and commit.
+
+```{python}
+run("git add README.md")
+run('git commit -m "Expand README learning goals"')
+run("git log --oneline")
+```
+
+# Part 5: What Is a Commit?
+
+A commit is a saved snapshot of the repository at a point in time.
+
+Each commit has:
+
+- a unique identifier called a hash,
+- an author,
+- a date,
+- a message,
+- a pointer to the previous commit,
+- the content changes recorded by Git.
+
+View the history:
+
+```bash
+git log
+git log --oneline
+git log --oneline --graph --decorate --all
+```
+
+Run:
+
+```{python}
+run("git log --oneline --graph --decorate --all")
+```
+
+::: {.callout-note}
+## Snapshot, not save button
+
+Git is not an automatic save system. Editing a file is not enough. You must decide when a change is worth saving as a commit.
+:::
+
+# Part 6: The Staging Area
+
+The staging area lets you choose exactly what goes into the next commit.
+
+This is useful when you changed several files but want to commit them as separate ideas.
+
+Example:
+
+```bash
+git add README.md
+git commit -m "Update README"
+
+git add analysis.py
+git commit -m "Add analysis script"
+```
+
+One commit should usually represent one logical change.
+
+::: {.callout-warning}
+## Avoid giant commits
+
+`Update stuff` is not a helpful commit message.
+
+A better commit history is a sequence of small, understandable changes.
+:::
+
+# Part 7: Branches
+
+A branch is a movable pointer to a line of work.
+
+Use branches when you want to work on a feature, experiment, or fix without disturbing the stable version.
+
+Common commands:
+
+```bash
+git branch
+git switch -c notes
+git switch main
+git merge notes
+```
+
+Create a branch:
+
+```{python}
+run("git branch")
+run("git switch -c notes")
+run("git branch")
+```
+
+Add a new file on the branch:
+
+```{python}
+write_file(
+    LAB / "notes.md",
+    """
+    # Class Notes
+
+    Important Git ideas:
+
+    - The working tree contains files I edit.
+    - The staging area contains changes selected for the next commit.
+    - A commit is a snapshot with a message.
+    - A branch is a line of work.
+    """
+)
+run("git add notes.md")
+run('git commit -m "Add class notes"')
+run("git log --oneline --graph --decorate --all")
+```
+
+Switch back to `main`.
+
+```{python}
+run("git switch main")
+run("dir" if subprocess.run("ver", shell=True, capture_output=True).returncode == 0 else "ls")
+run("git log --oneline --graph --decorate --all")
+```
+
+Merge the branch into `main`.
+
+```{python}
+run("git merge notes")
+run("git log --oneline --graph --decorate --all")
+```
+
+After a successful merge, the branch name can be deleted if it is no longer needed:
+
+```bash
+git branch -d notes
+```
+
+# Part 8: GitHub Remote Workflow
+
+A remote is another copy of the repository, usually on GitHub.
+
+The usual first-time GitHub workflow is:
+
+1. Create a repository on GitHub.
+2. Copy the repository URL.
+3. Connect your local repository to the GitHub repository.
+4. Push your commits.
+
+Commands:
+
+```bash
+git remote add origin https://github.com/YOUR-USER/YOUR-REPO.git
+git push -u origin main
+```
+
+After the first push, you can usually use:
+
+```bash
+git push
+```
+
+To see remotes:
+
+```bash
+git remote -v
+```
+
+::: {.callout-important}
+## Do not paste these commands blindly
+
+Replace `YOUR-USER` and `YOUR-REPO` with your actual GitHub username and repository name.
+
+The notebook does not run these commands because they require your own GitHub account and authentication.
+:::
+
+# Part 9: Clone an Existing Repository
+
+To clone means to download a repository and its history.
+
+```bash
+git clone https://github.com/YOUR-USER/YOUR-REPO.git
+cd YOUR-REPO
+git status
+```
+
+Use clone when:
+
+- joining an existing project,
+- downloading your own repository onto a new computer,
+- starting from a course repository created by an instructor.
+
+# Part 10: Pull and Push
+
+Once a repository has a remote, two commands become part of daily work.
+
+`git pull` gets changes from GitHub and integrates them into your local branch.
+
+`git push` uploads your local commits to GitHub.
+
+Typical daily rhythm:
+
+```bash
+git status
+git pull
+
+# edit files
+
+git status
+git add .
+git commit -m "Describe the change"
+git push
+```
+
+::: {.callout-warning}
+## Pull before starting work
+
+In group projects, pull before editing. This reduces the chance that your local work conflicts with changes already pushed by someone else.
+:::
+
+# Part 11: Pull Requests
+
+A pull request is a discussion around proposed changes.
+
+Despite the name, a pull request usually means:
+
+"Please review my branch and merge it into the main branch."
+
+Typical GitHub collaboration workflow:
+
+```bash
+git switch main
+git pull
+git switch -c improve-readme
+
+# edit files
+
+git add README.md
+git commit -m "Improve README"
+git push -u origin improve-readme
+```
+
+Then on GitHub:
+
+1. Open a pull request from `improve-readme` into `main`.
+2. Ask for review.
+3. Discuss comments.
+4. Update the branch if needed.
+5. Merge the pull request.
+6. Delete the branch after merging.
+
+# Part 12: Merge Conflicts
+
+A conflict happens when Git cannot automatically combine changes.
+
+This often happens when two people edit the same lines of the same file.
+
+Conflict markers look like this:
+
+```text
+<<<<<<< HEAD
+Your current version
+=======
+Incoming version
+>>>>>>> branch-name
+```
+
+To resolve a conflict:
+
+1. Open the file.
+2. Decide what the final text should be.
+3. Remove the conflict markers.
+4. Save the file.
+5. Stage the resolved file.
+6. Commit the resolution.
+
+Commands:
+
+```bash
+git status
+
+# edit conflicted files
+
+git add conflicted-file.md
+git commit -m "Resolve merge conflict"
+```
+
+::: {.callout-tip}
+## Conflict mindset
+
+A conflict does not mean Git is broken. It means Git needs a human decision.
+:::
+
+# Part 13: `.gitignore`
+
+Some files should not be committed.
+
+Examples:
+
+- temporary files,
+- cache folders,
+- large generated outputs,
+- secrets and passwords,
+- local environment folders,
+- operating system files.
+
+Create a `.gitignore` file:
+
+```{python}
+write_file(
+    LAB / ".gitignore",
+    """
+    # Temporary files
+    *.tmp
+    *.log
+
+    # Python cache
+    __pycache__/
+    .ipynb_checkpoints/
+
+    # Local environment files
+    .env
+
+    # Rendered Quarto artifacts
+    *_files/
+    *_cache/
+    .quarto/
+    """
+)
+write_file(LAB / "debug.log", "This log file should not be tracked.\n")
+run("git status")
+```
+
+Stage and commit `.gitignore`.
+
+```{python}
+run("git add .gitignore")
+run('git commit -m "Add gitignore rules"')
+run("git status")
+```
+
+Notice that `debug.log` does not appear because it matches `*.log`.
+
+::: {.callout-important}
+## Never commit secrets
+
+Do not commit passwords, API keys, private tokens, database credentials, or private personal data.
+
+If a secret has already been committed, deleting it in a later commit is not enough. The secret still exists in the repository history and should be rotated.
+:::
+
+# Part 14: Safe Undo Commands
+
+Git has powerful undo commands. Some are safer for beginners than others.
+
+| Goal | Safer command |
+|---|---|
+| See what changed | `git diff` |
+| Unstage a file but keep the edit | `git restore --staged FILE` |
+| Discard uncommitted edits in a file | `git restore FILE` |
+| Create a new commit that reverses an old commit | `git revert COMMIT` |
+| Move to another branch | `git switch BRANCH` |
+
+Commands to use carefully:
+
+| Command | Why careful |
+|---|---|
+| `git reset --hard` | discards local changes |
+| `git clean -fd` | deletes untracked files and folders |
+| force push | rewrites shared remote history |
+
+Practice unstaging:
+
+```{python}
+write_file(LAB / "scratch.txt", "Temporary note\n")
+run("git add scratch.txt")
+run("git status")
+run("git restore --staged scratch.txt")
+run("git status")
+```
+
+The file is no longer staged, but it still exists in the working tree.
+
+# Part 15: Reading History
+
+Useful history commands:
+
+```bash
+git log --oneline
+git log --oneline --graph --decorate --all
+git show HEAD
+git show HEAD~1
+git diff HEAD~1 HEAD
+```
+
+Run:
+
+```{python}
+run("git log --oneline --graph --decorate --all")
+run("git show --stat HEAD")
+```
+
+Vocabulary:
+
+| Term | Meaning |
+|---|---|
+| `HEAD` | the commit currently checked out |
+| `HEAD~1` | one commit before `HEAD` |
+| `HEAD~2` | two commits before `HEAD` |
+| hash | a commit identifier |
+| branch | a name pointing to a commit |
+| tag | a permanent label for an important commit |
+
+# Part 16: Working With VS Code
+
+VS Code can help beginners see Git state visually.
+
+Useful VS Code features:
+
+- Source Control panel,
+- file change indicators,
+- side-by-side diffs,
+- staging and unstaging buttons,
+- commit box,
+- branch selector,
+- terminal inside the project folder.
+
+Even when using the interface, learn the command-line meaning:
+
+| VS Code action | Git concept |
+|---|---|
+| Stage Changes | `git add` |
+| Commit | `git commit` |
+| Sync Changes | usually pull then push |
+| Create Branch | `git switch -c` |
+| Publish Branch | `git push -u origin branch-name` |
+
+::: {.callout-tip}
+## Best beginner habit
+
+Use VS Code to inspect changes visually, but keep `git status` as your truth-check command.
+:::
+
+# Part 17: GitHub Issues and Project Work
+
+GitHub is not only a place to store code. It also helps coordinate work.
+
+Issues are useful for:
+
+- bug reports,
+- feature requests,
+- tasks,
+- discussion,
+- assignment tracking.
+
+A good issue includes:
+
+- the goal,
+- the current problem,
+- steps to reproduce if there is a bug,
+- expected result,
+- relevant screenshots or files,
+- owner and deadline if used for a team.
+
+Example issue title:
+
+```text
+Add installation instructions for Windows students
+```
+
+Example issue body:
+
+```text
+The README explains macOS setup but not Windows setup.
+
+Tasks:
+
+- Add Git installation link.
+- Explain Git Bash vs PowerShell.
+- Add a screenshot of the VS Code terminal.
+- Test the commands on a Windows machine.
+```
+
+# Part 18: Good Repository Hygiene
+
+A beginner-friendly repository should usually include:
+
+| File or folder | Purpose |
+|---|---|
+| `README.md` | project overview and instructions |
+| `.gitignore` | files Git should ignore |
+| `data/` | data files, if appropriate |
+| `src/` or `scripts/` | code |
+| `notebooks/` | exploratory notebooks |
+| `docs/` | documentation |
+| `LICENSE` | reuse rules |
+
+README checklist:
+
+- What is this project?
+- Who is it for?
+- How do I install or open it?
+- How do I run it?
+- What files matter first?
+- Where should collaborators ask questions?
+
+# Part 19: Common Beginner Problems
+
+## "Git says not a git repository"
+
+You are probably in the wrong folder.
+
+Check:
+
+```bash
+pwd
+ls
+git status
+```
+
+On Windows PowerShell:
+
+```powershell
+Get-Location
+Get-ChildItem
+git status
+```
+
+## "Nothing to commit"
+
+Possibilities:
+
+- You did not save the file.
+- You are in the wrong repository.
+- You already committed the change.
+- The file is ignored by `.gitignore`.
+
+Check:
+
+```bash
+git status
+git log --oneline
+git check-ignore -v FILENAME
+```
+
+## "Rejected push"
+
+Usually the remote has commits that you do not have locally.
+
+Try:
+
+```bash
+git pull
+git push
+```
+
+If there are conflicts, resolve them, commit the resolution, then push again.
+
+## "Authentication failed"
+
+GitHub does not use normal account passwords for Git operations over HTTPS.
+
+Use one of these:
+
+- browser sign-in through Git Credential Manager,
+- GitHub CLI authentication,
+- SSH keys,
+- a personal access token if required by your environment.
+
+# Part 20: Responsible AI Use With Git
+
+AI tools can help with Git, but students should still inspect commands before running them.
+
+Good AI prompts:
+
+```text
+Explain what this Git error means in beginner language.
+```
+
+```text
+I ran git status and got this output. What should I do next?
+```
+
+```text
+Suggest a clear commit message for this diff.
+```
+
+Risky prompts:
+
+```text
+Give me one command to force fix my Git repo.
+```
+
+```text
+Delete all untracked files and reset everything.
+```
+
+Before running an AI-suggested command, ask:
+
+- Will this delete local work?
+- Will this rewrite shared history?
+- Am I on the correct branch?
+- Did I run `git status` first?
+
+# Class Lab
+
+Use this sequence for a 60 to 90 minute beginner workshop.
+
+## Lab A: Local Repository
+
+1. Create a repository.
+2. Add a `README.md`.
+3. Commit it.
+4. Edit it.
+5. View the diff.
+6. Commit the edit.
+7. Read the log.
+
+Core commands:
+
+```bash
+git init
+git branch -M main
+git status
+git add README.md
+git commit -m "Add README"
+git diff
+git log --oneline
+```
+
+## Lab B: Branch and Merge
+
+1. Create a branch called `experiment`.
+2. Add a new file.
+3. Commit the new file.
+4. Switch back to `main`.
+5. Merge the branch.
+
+Core commands:
+
+```bash
+git switch -c experiment
+git add .
+git commit -m "Add experiment notes"
+git switch main
+git merge experiment
+```
+
+## Lab C: GitHub
+
+1. Create an empty GitHub repository.
+2. Add it as a remote.
+3. Push `main`.
+4. Confirm the files appear on GitHub.
+5. Edit the README on GitHub.
+6. Pull the GitHub edit back to the local computer.
+
+Core commands:
+
+```bash
+git remote add origin https://github.com/YOUR-USER/YOUR-REPO.git
+git push -u origin main
+git pull
+```
+
+## Lab D: Pull Request
+
+1. Create a branch.
+2. Make a small edit.
+3. Push the branch.
+4. Open a pull request on GitHub.
+5. Merge the pull request.
+6. Pull the merged change locally.
+
+Core commands:
+
+```bash
+git switch main
+git pull
+git switch -c improve-docs
+git add .
+git commit -m "Improve documentation"
+git push -u origin improve-docs
+```
+
+# Quick Reference
+
+| Task | Command |
+|---|---|
+| Check state | `git status` |
+| Start tracking a repository | `git init` |
+| Stage a file | `git add FILE` |
+| Stage all current changes | `git add .` |
+| Commit staged changes | `git commit -m "Message"` |
+| View short history | `git log --oneline` |
+| View changes before staging | `git diff` |
+| View staged changes | `git diff --staged` |
+| List branches | `git branch` |
+| Create and switch branch | `git switch -c BRANCH` |
+| Switch branch | `git switch BRANCH` |
+| Merge branch into current branch | `git merge BRANCH` |
+| Add GitHub remote | `git remote add origin URL` |
+| Push first time | `git push -u origin main` |
+| Push after first time | `git push` |
+| Pull latest remote changes | `git pull` |
+| Clone repository | `git clone URL` |
+
+# Exit Ticket
+
+Answer these questions at the end of class:
+
+1. What is the difference between Git and GitHub?
+2. What does `git status` tell you?
+3. What is the difference between staging and committing?
+4. Why should commit messages be specific?
+5. What is a branch useful for?
+6. What should you do before starting work in a shared repository?
+7. What should you never commit to Git?
+
+# Suggested Homework
+
+Create a GitHub repository for a small personal learning project.
+
+Requirements:
+
+1. The repository has a `README.md`.
+2. The repository has at least three commits.
+3. The commit messages are specific.
+4. The repository has a `.gitignore`.
+5. A branch was created and merged.
+6. The final version is pushed to GitHub.
+
+Submit:
+
+- the GitHub repository URL,
+- a screenshot of `git log --oneline --graph --decorate --all`,
+- a short paragraph explaining one mistake or confusion you encountered and how you fixed it.
