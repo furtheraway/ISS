@@ -1,0 +1,564 @@
+---
+title: "Information Systems: Components & Architecture"
+subtitle: "From **users** and **apps** to **servers**, **algorithms**, and **data**"
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    slide-number: true
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    code-overflow: wrap
+    controls: true
+    progress: true
+    html-math-method: katex
+include-in-header:
+  text: |
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #59657a;
+        --blue: #2563eb;
+        --cyan: #0891b2;
+        --green: #059669;
+        --amber: #d97706;
+        --rose: #e11d48;
+        --violet: #7c3aed;
+        --bg: #fbfcff;
+        --soft: #eef5ff;
+        --line: #d7e2f2;
+      }
+      .reveal { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); }
+      .reveal h1, .reveal h2, .reveal h3 { letter-spacing: -0.035em; color: var(--ink); }
+      .reveal h1 { font-size: 2.35em; }
+      .reveal h2 { font-size: 1.65em; margin-bottom: 0.55em; }
+      .reveal h3 { font-size: 1.05em; }
+      .reveal strong { color: var(--blue); font-weight: 800; }
+      .reveal p, .reveal li { font-size: 0.72em; line-height: 1.32; }
+      .reveal ul { margin-top: 0.15em; }
+      .reveal li { margin: 0.22em 0; }
+      .subtitle { color: var(--muted); }
+      .muted { color: var(--muted); }
+      .small { font-size: 0.64em !important; }
+      .tiny { font-size: 0.52em !important; }
+      .accent { color: var(--blue); }
+      .big-idea {
+        margin-top: 0.9em;
+        padding: 0.8em 1em;
+        border-left: 8px solid var(--blue);
+        background: linear-gradient(90deg, #eef5ff 0%, #ffffff 80%);
+        border-radius: 14px;
+      }
+      .icon-row, .icon-grid {
+        display: grid;
+        gap: 0.72rem;
+        margin-top: 0.6rem;
+      }
+      .icon-row { grid-template-columns: repeat(4, 1fr); }
+      .icon-grid { grid-template-columns: repeat(3, 1fr); }
+      .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 0.6rem; }
+      .tile {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 0.72rem 0.82rem;
+        background: rgba(255,255,255,0.92);
+        box-shadow: 0 8px 24px rgba(23, 32, 51, 0.06);
+      }
+      .tile i { font-size: 1.18rem; color: var(--blue); margin-right: 0.42rem; }
+      .tile .label { font-size: 0.74em; font-weight: 800; color: var(--ink); }
+      .tile .desc { font-size: 0.50em; color: var(--muted); margin-top: 0.25rem; line-height: 1.2; }
+      .callout {
+        border-radius: 18px;
+        background: #f8fbff;
+        border: 1px solid var(--line);
+        padding: 0.8rem 1rem;
+      }
+      .term-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-top: 0.55rem;
+      }
+      .term-strip span {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.25rem 0.55rem;
+        background: #ffffff;
+        font-size: 0.50em;
+        font-weight: 750;
+      }
+      .two-col { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 1.1rem; align-items: start; }
+      .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+      .layer-title { font-size: 0.82em; font-weight: 850; margin-bottom: 0.25rem; }
+      .layer-note { font-size: 0.52em; color: var(--muted); line-height: 1.2; }
+      .tag-blue { color: var(--blue); }
+      .tag-cyan { color: var(--cyan); }
+      .tag-green { color: var(--green); }
+      .tag-amber { color: var(--amber); }
+      .tag-violet { color: var(--violet); }
+      .footnote { position: absolute; bottom: 20px; left: 65px; right: 65px; font-size: 0.45em; color: var(--muted); }
+      .mermaid { font-size: 0.86em; }
+      .reveal pre code { max-height: 520px; }
+      section.slide.level2 { background: var(--bg); }
+    </style>
+---
+
+## Learning goal
+
+<div class="big-idea">
+By the end, you should be able to explain how **people**, **apps**, **networks**, **servers**, **programs**, **algorithms**, and **data stores** work together inside an **information system**.
+</div>
+
+<div class="term-strip">
+<span><i class="fa-solid fa-user"></i> <strong>people</strong></span>
+<span><i class="fa-solid fa-display"></i> <strong>clients</strong></span>
+<span><i class="fa-solid fa-globe"></i> <strong>HTTP/TCP</strong></span>
+<span><i class="fa-solid fa-server"></i> <strong>servers</strong></span>
+<span><i class="fa-solid fa-code"></i> <strong>programming</strong></span>
+<span><i class="fa-solid fa-diagram-project"></i> <strong>algorithms</strong></span>
+<span><i class="fa-solid fa-database"></i> <strong>data</strong></span>
+</div>
+
+::: {.notes}
+Use this opening to frame the session as one connected picture, not a list of disconnected terms.
+:::
+
+## The large picture
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#EEF5FF", "primaryTextColor": "#172033", "primaryBorderColor": "#9BB8E8", "lineColor": "#6B7C93", "secondaryColor": "#ECFEFF", "tertiaryColor": "#F0FDF4"}, "flowchart": {"htmlLabels": true, "curve": "basis"}} }%%
+flowchart LR
+  U["👥<br/><b>People / Users</b>"]
+  C["🖥️📱<br/><b>Client / Frontend</b><br/>UI · CLI · Browser · Apps"]
+  N["🌐<br/><b>Network</b><br/>HTTP/HTTPS over TCP/IP"]
+  S["🧠🖧<br/><b>Server / Backend</b><br/>Programs · Algorithms · Rules"]
+  D["🗄️<br/><b>Data Layer</b><br/>Databases · Files · Cloud"]
+  O["📊<br/><b>Outputs</b><br/>Reports · Decisions · Actions"]
+
+  U --> C
+  C -->|request| N
+  N --> S
+  S -->|read / write| D
+  D --> S
+  S -->|response| N
+  N --> C
+  C --> O
+
+  classDef user fill:#fff7ed,stroke:#fdba74,stroke-width:2px;
+  classDef client fill:#eff6ff,stroke:#93c5fd,stroke-width:2px;
+  classDef net fill:#ecfeff,stroke:#67e8f9,stroke-width:2px;
+  classDef server fill:#f5f3ff,stroke:#c4b5fd,stroke-width:2px;
+  classDef data fill:#f0fdf4,stroke:#86efac,stroke-width:2px;
+  classDef output fill:#fff1f2,stroke:#fda4af,stroke-width:2px;
+  class U user;
+  class C client;
+  class N net;
+  class S server;
+  class D data;
+  class O output;
+```
+
+## Major components
+
+<div class="icon-grid">
+  <div class="tile"><span class="label"><i class="fa-solid fa-microchip"></i><strong>Hardware</strong></span><div class="desc">Devices: laptops, phones, servers, routers, storage.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-window-restore"></i><strong>Software</strong></span><div class="desc">Operating systems, applications, services, tools.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-database"></i><strong>Data</strong></span><div class="desc">Facts stored as records, files, events, logs.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-users"></i><strong>People</strong></span><div class="desc">Users, managers, developers, admins, support.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-route"></i><strong>Processes</strong></span><div class="desc">Workflows, policies, procedures, approvals.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-network-wired"></i><strong>Networks</strong></span><div class="desc">Internet, LAN, Wi‑Fi, APIs, secure channels.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-shield-halved"></i><strong>Security</strong></span><div class="desc">Access control, encryption, backups, audit logs.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-code"></i><strong>Programming</strong></span><div class="desc">Code that defines system behavior and automation.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-diagram-project"></i><strong>Algorithms</strong></span><div class="desc">Step-by-step logic for solving business problems.</div></div>
+</div>
+
+## Core information flow
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#EEF5FF", "primaryTextColor": "#172033", "primaryBorderColor": "#93C5FD", "lineColor": "#64748B"}, "flowchart": {"htmlLabels": true, "curve": "linear"}} }%%
+flowchart LR
+  A["⌨️<br/><b>Input</b><br/>forms · commands · events"] -->
+  B["⚙️<br/><b>Processing</b><br/>rules · programs · algorithms"] -->
+  C["🗄️<br/><b>Storage</b><br/>database · files · logs"] -->
+  D["📤<br/><b>Output</b><br/>reports · dashboards · alerts"] -->
+  E["🔁<br/><b>Feedback</b><br/>corrections · decisions · actions"]
+  E -. improves .-> A
+
+  classDef input fill:#eff6ff,stroke:#60a5fa,stroke-width:2px;
+  classDef process fill:#f5f3ff,stroke:#a78bfa,stroke-width:2px;
+  classDef store fill:#f0fdf4,stroke:#4ade80,stroke-width:2px;
+  classDef output fill:#fff1f2,stroke:#fb7185,stroke-width:2px;
+  classDef feedback fill:#fffbeb,stroke:#f59e0b,stroke-width:2px;
+  class A input;
+  class B process;
+  class C store;
+  class D output;
+  class E feedback;
+```
+
+<div class="callout small">
+An **information system** turns **input** into useful **output** through **processing**, **storage**, and **feedback**.
+</div>
+
+## Client side: where interaction begins
+
+<div class="two-col">
+<div>
+
+- **Client** = user-facing device or program.
+- **Frontend** = visible interaction layer.
+- **UI** = visual controls: buttons, forms, menus.
+- **CLI** = text commands in a terminal.
+- **Browser** = web client for websites and web apps.
+- **Apps** = mobile, desktop, or web software.
+
+</div>
+<div class="mini-grid">
+  <div class="tile"><span class="label"><i class="fa-solid fa-window-maximize"></i><strong>Browser</strong></span><div class="desc">Loads pages, runs frontend code, sends HTTP requests.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-mobile-screen"></i><strong>Mobile app</strong></span><div class="desc">Native client with touch UI and device features.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-terminal"></i><strong>CLI</strong></span><div class="desc">Fast, scriptable text-based interaction.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-desktop"></i><strong>Desktop app</strong></span><div class="desc">Local interface that may also call backend services.</div></div>
+</div>
+</div>
+
+## Client–server pattern
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"actorBorder": "#93c5fd", "actorBkg": "#eff6ff", "activationBorderColor": "#7c3aed", "activationBkgColor": "#f5f3ff", "sequenceNumberColor": "#172033", "signalColor": "#334155", "signalTextColor": "#172033"}} }%%
+sequenceDiagram
+  autonumber
+  participant User as 👤 User
+  participant Client as 🖥️ Client / Frontend
+  participant Network as 🌐 HTTP(S) over TCP/IP
+  participant Server as 🖧 Server / Backend
+  participant Data as 🗄️ Database
+
+  User->>Client: Clicks, types, or runs command
+  Client->>Network: HTTP request
+  Network->>Server: Delivers request packets
+  Server->>Server: Run program + algorithm
+  Server->>Data: Read / write data
+  Data-->>Server: Return records
+  Server-->>Network: HTTP response
+  Network-->>Client: Deliver response packets
+  Client-->>User: Show result
+```
+
+<div class="callout small">
+The **client** asks; the **server** processes; the **network** carries messages; the **database** remembers.
+</div>
+
+## Network layer: HTTP and TCP/IP
+
+<div class="two-col">
+<div>
+
+- **TCP/IP** moves data across networks in packets.
+- **HTTP** defines web-style requests and responses.
+- **HTTPS** = **HTTP** plus encryption.
+- **APIs** expose backend capabilities to clients.
+- **Internet**, **LAN**, and **Wi‑Fi** provide paths.
+
+</div>
+<div>
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#EEF5FF", "primaryTextColor": "#172033", "primaryBorderColor": "#93C5FD", "lineColor": "#64748B"}, "flowchart": {"htmlLabels": true, "curve": "linear"}} }%%
+flowchart TB
+  A["🌍<br/><b>Application Protocols</b><br/>HTTP · HTTPS · APIs"] -->
+  B["📦<br/><b>Transport</b><br/>TCP: reliable delivery"] -->
+  C["🧭<br/><b>Internet Layer</b><br/>IP: addressing + routing"] -->
+  D["📡<br/><b>Network Access</b><br/>Wi‑Fi · Ethernet · Cellular"]
+
+  classDef app fill:#eff6ff,stroke:#60a5fa,stroke-width:2px;
+  classDef tcp fill:#ecfeff,stroke:#22d3ee,stroke-width:2px;
+  classDef ip fill:#f5f3ff,stroke:#a78bfa,stroke-width:2px;
+  classDef access fill:#f0fdf4,stroke:#4ade80,stroke-width:2px;
+  class A app;
+  class B tcp;
+  class C ip;
+  class D access;
+```
+
+</div>
+</div>
+
+## Server side: where rules live
+
+<div class="two-col">
+<div>
+
+- **Server** = machine or service that handles requests.
+- **Backend** = hidden application logic.
+- **Programming** creates backend behavior.
+- **Algorithms** make decisions step by step.
+- **Business logic** enforces organizational rules.
+- **Authentication** verifies identity.
+- **Validation** checks input before storage.
+
+</div>
+<div>
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#F5F3FF", "primaryTextColor": "#172033", "primaryBorderColor": "#A78BFA", "lineColor": "#64748B"}, "flowchart": {"htmlLabels": true, "curve": "basis"}} }%%
+flowchart TB
+  R["📥<br/><b>Request</b>"] --> A["🔐<br/><b>Authenticate</b>"]
+  A --> V["✅<br/><b>Validate</b>"]
+  V --> L["🧠<br/><b>Business Logic</b>"]
+  L --> G["🔢<br/><b>Algorithm</b>"]
+  G --> T["🧾<br/><b>Transaction</b>"]
+  T --> X["📤<br/><b>Response</b>"]
+
+  classDef node fill:#f5f3ff,stroke:#a78bfa,stroke-width:2px;
+  class R,A,V,L,G,T,X node;
+```
+
+</div>
+</div>
+
+## Data layer: persistent memory
+
+<div class="three-col">
+<div class="tile">
+  <div class="layer-title"><i class="fa-solid fa-database tag-green"></i> <strong>Database</strong></div>
+  <div class="layer-note">Structured records: customers, orders, products, accounts.</div>
+</div>
+<div class="tile">
+  <div class="layer-title"><i class="fa-solid fa-file-lines tag-blue"></i> <strong>Files</strong></div>
+  <div class="layer-note">Documents, images, exports, configuration files.</div>
+</div>
+<div class="tile">
+  <div class="layer-title"><i class="fa-solid fa-cloud tag-cyan"></i> <strong>Cloud storage</strong></div>
+  <div class="layer-note">Scalable storage managed over network services.</div>
+</div>
+<div class="tile">
+  <div class="layer-title"><i class="fa-solid fa-warehouse tag-amber"></i> <strong>Data warehouse</strong></div>
+  <div class="layer-note">Historical data organized for analytics and reporting.</div>
+</div>
+<div class="tile">
+  <div class="layer-title"><i class="fa-solid fa-list-check tag-violet"></i> <strong>Logs</strong></div>
+  <div class="layer-note">Events used for debugging, monitoring, and auditing.</div>
+</div>
+<div class="tile">
+  <div class="layer-title"><i class="fa-solid fa-shield-halved tag-green"></i> <strong>Controls</strong></div>
+  <div class="layer-note">Permissions, encryption, backups, retention, recovery.</div>
+</div>
+</div>
+
+<div class="callout small">
+The **data layer** protects system memory: what happened, what exists now, and what can be analyzed later.
+</div>
+
+## Common architecture: three tiers
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#EEF5FF", "primaryTextColor": "#172033", "primaryBorderColor": "#93C5FD", "lineColor": "#64748B"}, "flowchart": {"htmlLabels": true, "curve": "basis"}} }%%
+flowchart TB
+  subgraph P["<b>Presentation Tier</b>"]
+    UI["🎨 <b>UI</b>"]
+    CLI["⌨️ <b>CLI</b>"]
+    Browser["🌐 <b>Browser</b>"]
+    App["📱 <b>Apps</b>"]
+  end
+
+  subgraph A["<b>Application Tier</b>"]
+    API["🔌 <b>API</b>"]
+    Logic["🧠 <b>Business Logic</b>"]
+    Algo["🔢 <b>Algorithms</b>"]
+    Auth["🔐 <b>Security</b>"]
+  end
+
+  subgraph D["<b>Data Tier</b>"]
+    DB["🗄️ <b>Database</b>"]
+    Files["📄 <b>Files</b>"]
+    WH["📊 <b>Warehouse</b>"]
+  end
+
+  UI --> API
+  CLI --> API
+  Browser --> API
+  App --> API
+  API --> Logic
+  Logic --> Algo
+  Logic --> Auth
+  Logic --> DB
+  Logic --> Files
+  Logic --> WH
+
+  classDef presentation fill:#eff6ff,stroke:#60a5fa,stroke-width:2px;
+  classDef appTier fill:#f5f3ff,stroke:#a78bfa,stroke-width:2px;
+  classDef dataTier fill:#f0fdf4,stroke:#4ade80,stroke-width:2px;
+  class UI,CLI,Browser,App presentation;
+  class API,Logic,Algo,Auth appTier;
+  class DB,Files,WH dataTier;
+```
+
+<div class="term-strip">
+<span><strong>Frontend</strong> ≈ presentation tier</span>
+<span><strong>Backend</strong> ≈ application tier</span>
+<span><strong>Database</strong> ≈ data tier</span>
+</div>
+
+## Frontend vs backend
+
+<div class="two-col">
+<div class="callout">
+
+### <i class="fa-solid fa-palette"></i> **Frontend**
+
+- **Visible** to the user.
+- Handles **layout**, **forms**, **navigation**, and **feedback**.
+- Runs in a **browser**, **mobile app**, **desktop app**, or **CLI**.
+- Sends **requests** to the backend.
+
+</div>
+<div class="callout">
+
+### <i class="fa-solid fa-gears"></i> **Backend**
+
+- Usually **hidden** from the user.
+- Handles **rules**, **security**, **processing**, and **data access**.
+- Runs on **servers** or **cloud services**.
+- Sends **responses** back to clients.
+
+</div>
+</div>
+
+<div class="big-idea small">
+**Frontend** asks: “What should the user see or do?”  
+**Backend** asks: “What should the system calculate, enforce, store, or return?”
+</div>
+
+## Programming and algorithms
+
+<div class="two-col">
+<div>
+
+- **Programming** turns requirements into executable **software**.
+- **Programs** connect **UI**, **network**, **backend**, and **data**.
+- **Algorithms** are precise steps for solving a task.
+- Good systems separate **presentation**, **logic**, and **storage**.
+
+</div>
+<div>
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#FFF7ED", "primaryTextColor": "#172033", "primaryBorderColor": "#FDBA74", "lineColor": "#64748B"}, "flowchart": {"htmlLabels": true, "curve": "linear"}} }%%
+flowchart TB
+  Problem["❓<br/><b>Problem</b><br/>Approve a login"] --> Steps["🧩<br/><b>Algorithm</b><br/>Check user → compare password → allow/deny"]
+  Steps --> Code["💻<br/><b>Program</b><br/>Implemented in code"]
+  Code --> System["🏗️<br/><b>Information System</b><br/>Runs inside frontend/backend/data architecture"]
+
+  classDef node fill:#fff7ed,stroke:#fdba74,stroke-width:2px;
+  class Problem,Steps,Code,System node;
+```
+
+</div>
+</div>
+
+## Example: online shopping transaction
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"actorBorder": "#93c5fd", "actorBkg": "#eff6ff", "activationBorderColor": "#059669", "activationBkgColor": "#f0fdf4", "signalColor": "#334155", "signalTextColor": "#172033"}} }%%
+sequenceDiagram
+  autonumber
+  participant Customer as 🧑 Customer
+  participant App as 🛒 Browser / App
+  participant API as 🔌 Backend API
+  participant Logic as 🧠 Order Logic
+  participant DB as 🗄️ Database
+  participant Pay as 💳 Payment Service
+
+  Customer->>App: Clicks “Buy Now”
+  App->>API: HTTPS request
+  API->>Logic: Start order workflow
+  Logic->>DB: Check inventory + customer data
+  DB-->>Logic: Return records
+  Logic->>Pay: Authorize payment
+  Pay-->>Logic: Payment result
+  Logic->>DB: Save order + update stock
+  Logic-->>API: Confirmation data
+  API-->>App: HTTPS response
+  App-->>Customer: Receipt + order status
+```
+
+## Relationship map
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#EEF5FF", "primaryTextColor": "#172033", "primaryBorderColor": "#93C5FD", "lineColor": "#64748B"}, "flowchart": {"htmlLabels": true, "curve": "basis"}} }%%
+flowchart LR
+  IS["🏗️<br/><b>Information System</b>"]
+
+  IS --> People["👥 <b>People</b>"]
+  IS --> Tech["🧰 <b>Technology</b>"]
+  IS --> Data["🗄️ <b>Data</b>"]
+  IS --> Process["🔁 <b>Processes</b>"]
+  IS --> Security["🛡️ <b>Security</b>"]
+
+  Tech --> Hardware["🔌 <b>Hardware</b>"]
+  Tech --> Software["💻 <b>Software</b>"]
+  Tech --> Network["🌐 <b>Networks</b>"]
+
+  Software --> Frontend["🎨 <b>Frontend</b>"]
+  Software --> Backend["⚙️ <b>Backend</b>"]
+  Software --> Apps["📱 <b>Apps</b>"]
+
+  Frontend --> UI["🖱️ <b>UI</b>"]
+  Frontend --> CLI["⌨️ <b>CLI</b>"]
+  Frontend --> Browser["🌍 <b>Browser</b>"]
+
+  Network --> HTTP["📨 <b>HTTP/HTTPS</b>"]
+  Network --> TCP["📦 <b>TCP/IP</b>"]
+
+  Backend --> Server["🖧 <b>Server</b>"]
+  Backend --> Program["💻 <b>Programming</b>"]
+  Backend --> Algorithm["🔢 <b>Algorithms</b>"]
+  Backend --> Database["🗄️ <b>Database Access</b>"]
+
+  classDef core fill:#fff7ed,stroke:#fdba74,stroke-width:2px;
+  classDef branch fill:#eff6ff,stroke:#93c5fd,stroke-width:2px;
+  classDef sub fill:#f8fafc,stroke:#cbd5e1,stroke-width:1.5px;
+  class IS core;
+  class People,Tech,Data,Process,Security branch;
+  class Hardware,Software,Network,Frontend,Backend,Apps,UI,CLI,Browser,HTTP,TCP,Server,Program,Algorithm,Database sub;
+```
+
+## Mini-check: trace a login
+
+<div class="two-col">
+<div>
+
+When a user logs in, identify each part:
+
+1. User types credentials into the **UI**.
+2. The **client** sends an **HTTPS** request.
+3. **TCP/IP** carries the packets.
+4. The **server/backend** receives the request.
+5. A **program** runs a login **algorithm**.
+6. The **database** checks the account record.
+7. The **client** shows success or failure.
+
+</div>
+<div class="tile">
+  <div class="layer-title"><i class="fa-solid fa-key tag-amber"></i> <strong>Login algorithm</strong></div>
+  <div class="layer-note">
+  Receive input → validate format → find account → compare password securely → create session → return result.
+  </div>
+</div>
+</div>
+
+## Key takeaways
+
+<div class="icon-row">
+  <div class="tile"><span class="label"><i class="fa-solid fa-layer-group"></i><strong>Architecture</strong></span><div class="desc">Most systems separate presentation, application logic, and data.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-handshake-angle"></i><strong>Client–server</strong></span><div class="desc">Clients request; servers process; responses return through the network.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-code"></i><strong>Programming</strong></span><div class="desc">Code implements workflows, rules, security, and algorithms.</div></div>
+  <div class="tile"><span class="label"><i class="fa-solid fa-database"></i><strong>Data</strong></span><div class="desc">Databases, files, logs, and warehouses preserve system memory.</div></div>
+</div>
+
+<div class="big-idea small">
+A modern **information system** is a connected environment: **people** use **clients** over **networks** to reach **servers** running **programs** and **algorithms** that manage **data** and produce useful **outputs**.
+</div>

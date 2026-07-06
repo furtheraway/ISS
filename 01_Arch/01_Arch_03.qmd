@@ -1,0 +1,861 @@
+---
+title: "Information Systems: Components & Architecture"
+subtitle: "A connected picture: **clients**, **networks**, **servers**, **programs**, **algorithms**, and **data**"
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    slide-number: true
+    width: 1280
+    height: 720
+    margin: 0.04
+    center: false
+    code-overflow: wrap
+    controls: true
+    progress: true
+    html-math-method: katex
+include-in-header:
+  text: |
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons@latest/css/regular/rounded.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons@latest/css/solid/rounded.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+      :root {
+        --ink: #152033;
+        --muted: #5c667a;
+        --blue: #2563eb;
+        --cyan: #0891b2;
+        --green: #059669;
+        --amber: #d97706;
+        --rose: #e11d48;
+        --violet: #7c3aed;
+        --slate: #475569;
+        --bg: #fbfcff;
+        --panel: #ffffff;
+        --soft-blue: #eef5ff;
+        --soft-cyan: #ecfeff;
+        --soft-green: #f0fdf4;
+        --soft-amber: #fff7ed;
+        --soft-rose: #fff1f2;
+        --soft-violet: #f5f3ff;
+        --line: #d9e3f2;
+      }
+
+      .reveal {
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      .reveal .slides section {
+        box-sizing: border-box;
+        padding: 24px 54px !important;
+        overflow: hidden;
+      }
+      .reveal h1, .reveal h2, .reveal h3 {
+        letter-spacing: -0.035em;
+        color: var(--ink);
+      }
+      .reveal h1 { font-size: 2.05em; line-height: 1.02; margin-bottom: 0.2em; }
+      .reveal h2 { font-size: 1.48em; line-height: 1.05; margin-bottom: 0.38em; }
+      .reveal h3 { font-size: 0.86em; margin: 0 0 0.3em; }
+      .reveal strong { color: var(--blue); font-weight: 850; }
+      .reveal p, .reveal li { font-size: 0.61em; line-height: 1.22; }
+      .reveal ul { margin-top: 0.1em; }
+      .reveal li { margin: 0.16em 0; }
+      .subtitle { color: var(--muted); }
+      .muted { color: var(--muted); }
+      .small { font-size: 0.56em !important; }
+      .tiny { font-size: 0.45em !important; }
+
+      .fi, .fa-solid { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+      .fi::before, .fa-solid::before { margin: 0 !important; }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 0.86fr;
+        gap: 1rem;
+        align-items: center;
+        min-height: 500px;
+      }
+      .big-idea {
+        padding: 0.78em 0.95em;
+        border-left: 8px solid var(--blue);
+        background: linear-gradient(90deg, #eef5ff 0%, #ffffff 76%);
+        border-radius: 18px;
+        box-shadow: 0 14px 32px rgba(37, 99, 235, 0.08);
+      }
+      .big-idea p { margin: 0; }
+
+      .term-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.36rem;
+        margin-top: 0.65rem;
+      }
+      .term-strip span {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.26rem 0.52rem;
+        background: #ffffff;
+        font-size: 0.46em;
+        font-weight: 750;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28rem;
+      }
+      .term-strip i { color: var(--blue); font-size: 1.05rem; }
+
+      .icon-orbit {
+        position: relative;
+        height: 440px;
+        border-radius: 30px;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(37,99,235,0.10), transparent 36%),
+          linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 42px rgba(23, 32, 51, 0.08);
+      }
+      .orbit-core {
+        position: absolute;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);
+        width: 178px; height: 178px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        border-radius: 999px;
+        background: linear-gradient(145deg, #2563eb, #0891b2);
+        color: white;
+        box-shadow: 0 20px 45px rgba(37, 99, 235, 0.26);
+      }
+      .orbit-core i { font-size: 4.4rem; margin-bottom: 0.2rem; }
+      .orbit-core strong { color: white; font-size: 0.92em; }
+      .orbit-dot {
+        position: absolute;
+        width: 112px; height: 112px;
+        border-radius: 26px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        background: white;
+        border: 1px solid var(--line);
+        box-shadow: 0 12px 28px rgba(23, 32, 51, 0.08);
+      }
+      .orbit-dot i { font-size: 3.2rem; color: var(--blue); }
+      .orbit-dot span { font-size: 0.42em; font-weight: 850; margin-top: -0.3rem; }
+      .o1 { left: 38px; top: 46px; } .o2 { right: 54px; top: 34px; }
+      .o3 { left: 42px; bottom: 44px; } .o4 { right: 40px; bottom: 54px; }
+      .o5 { left: 50%; top: 10px; transform: translateX(-50%); } .o6 { left: 50%; bottom: 10px; transform: translateX(-50%); }
+
+      .flow-board {
+        margin-top: 0.25rem;
+        padding: 1rem 0.7rem 0.75rem;
+        border-radius: 26px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 44px rgba(23, 32, 51, 0.07);
+      }
+      .flow-row {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 0.62rem;
+        align-items: stretch;
+      }
+      .flow-row.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .flow-row.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .node-card {
+        position: relative;
+        min-height: 158px;
+        border-radius: 22px;
+        padding: 0.62rem 0.48rem;
+        background: white;
+        border: 1px solid var(--line);
+        text-align: center;
+        box-shadow: 0 12px 30px rgba(23, 32, 51, 0.07);
+      }
+      .node-card::after {
+        content: "→";
+        position: absolute;
+        right: -0.51rem;
+        top: 45%;
+        transform: translateY(-50%);
+        font-size: 1.7rem;
+        color: #8aa0bd;
+        font-weight: 800;
+        z-index: 2;
+      }
+      .flow-row .node-card:last-child::after { content: ""; }
+      .icon-bubble {
+        width: 70px; height: 70px;
+        border-radius: 22px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 0.45rem;
+        background: var(--soft-blue);
+      }
+      .icon-bubble i { font-size: 3rem; color: var(--blue); }
+      .node-title { font-size: 0.57em; font-weight: 850; line-height: 1.05; }
+      .node-desc { font-size: 0.40em; color: var(--muted); line-height: 1.15; margin-top: 0.25rem; }
+      .chipline {
+        margin-top: 0.64rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+      }
+      .chipbox {
+        border: 1px dashed #b8c7dd;
+        border-radius: 18px;
+        padding: 0.42rem 0.55rem;
+        background: #ffffff;
+        font-size: 0.46em;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .accent-blue .icon-bubble { background: var(--soft-blue); } .accent-blue .icon-bubble i { color: var(--blue); }
+      .accent-cyan .icon-bubble { background: var(--soft-cyan); } .accent-cyan .icon-bubble i { color: var(--cyan); }
+      .accent-green .icon-bubble { background: var(--soft-green); } .accent-green .icon-bubble i { color: var(--green); }
+      .accent-amber .icon-bubble { background: var(--soft-amber); } .accent-amber .icon-bubble i { color: var(--amber); }
+      .accent-rose .icon-bubble { background: var(--soft-rose); } .accent-rose .icon-bubble i { color: var(--rose); }
+      .accent-violet .icon-bubble { background: var(--soft-violet); } .accent-violet .icon-bubble i { color: var(--violet); }
+
+      .grid-3x3, .grid-3x2, .grid-4x2 {
+        display: grid;
+        gap: 0.62rem;
+        margin-top: 0.2rem;
+      }
+      .grid-3x3 { grid-template-columns: repeat(3, 1fr); }
+      .grid-3x2 { grid-template-columns: repeat(3, 1fr); }
+      .grid-4x2 { grid-template-columns: repeat(4, 1fr); }
+      .tile {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 0.58rem 0.68rem;
+        background: rgba(255,255,255,0.96);
+        box-shadow: 0 10px 28px rgba(23, 32, 51, 0.06);
+      }
+      .tile-title {
+        display: flex;
+        align-items: center;
+        gap: 0.52rem;
+        font-size: 0.55em;
+        line-height: 1.05;
+        font-weight: 850;
+      }
+      .tile-title i {
+        flex: 0 0 52px;
+        width: 52px; height: 52px;
+        border-radius: 17px;
+        display: inline-grid;
+        place-items: center;
+        font-size: 2.3rem;
+        background: var(--soft-blue);
+        color: var(--blue);
+      }
+      .tile-note { font-size: 0.41em; color: var(--muted); line-height: 1.17; margin-top: 0.45rem; }
+      .tile-tight { min-height: 116px; }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 0.9rem;
+        align-items: start;
+      }
+      .two-even { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: #ffffff;
+        box-shadow: 0 12px 32px rgba(23, 32, 51, 0.07);
+        padding: 0.78rem 0.9rem;
+      }
+      .panel-title {
+        display: flex;
+        gap: 0.55rem;
+        align-items: center;
+        font-size: 0.64em;
+        line-height: 1;
+        font-weight: 850;
+        margin-bottom: 0.42rem;
+      }
+      .panel-title i {
+        width: 62px; height: 62px;
+        border-radius: 20px;
+        display: grid;
+        place-items: center;
+        background: var(--soft-blue);
+        color: var(--blue);
+        font-size: 2.7rem;
+      }
+      .callout {
+        border-radius: 18px;
+        background: #f8fbff;
+        border: 1px solid var(--line);
+        padding: 0.58rem 0.76rem;
+      }
+
+      .protocol-stack { display: grid; gap: 0.55rem; }
+      .stack-layer {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        align-items: center;
+        gap: 0.62rem;
+        min-height: 86px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: white;
+        padding: 0.45rem 0.62rem;
+        box-shadow: 0 9px 24px rgba(23, 32, 51, 0.06);
+      }
+      .stack-layer i {
+        width: 64px; height: 64px;
+        display: grid;
+        place-items: center;
+        border-radius: 20px;
+        font-size: 2.55rem;
+        background: var(--soft-cyan);
+        color: var(--cyan);
+      }
+      .stack-title { font-size: 0.56em; font-weight: 850; }
+      .stack-note { font-size: 0.40em; color: var(--muted); line-height: 1.14; margin-top: 0.18rem; }
+
+      .message-board {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.6rem;
+        margin-top: 0.26rem;
+      }
+      .message-stage {
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: white;
+        min-height: 350px;
+        padding: 0.64rem;
+        position: relative;
+        box-shadow: 0 12px 30px rgba(23, 32, 51, 0.07);
+      }
+      .stage-icon {
+        width: 78px; height: 78px;
+        display: grid;
+        place-items: center;
+        border-radius: 24px;
+        background: var(--soft-blue);
+        color: var(--blue);
+        margin-bottom: 0.45rem;
+      }
+      .stage-icon i { font-size: 3.25rem; }
+      .stage-title { font-size: 0.58em; font-weight: 850; line-height: 1.05; }
+      .stage-body { font-size: 0.41em; color: var(--muted); line-height: 1.17; margin-top: 0.5rem; }
+      .stage-arrow {
+        position: absolute;
+        right: -0.54rem;
+        top: 43%;
+        color: #8aa0bd;
+        font-size: 1.95rem;
+        font-weight: 900;
+        z-index: 5;
+      }
+      .message-stage:last-child .stage-arrow { display: none; }
+      .return-band {
+        margin-top: 0.55rem;
+        border-radius: 18px;
+        border: 1px dashed #b8c7dd;
+        padding: 0.5rem 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: var(--muted);
+        font-size: 0.48em;
+        background: white;
+      }
+      .return-band i { color: var(--green); font-size: 1.45rem; }
+
+      .server-pipeline {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 0.46rem;
+        margin-top: 0.25rem;
+      }
+      .pipe-step {
+        position: relative;
+        min-height: 138px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: white;
+        text-align: center;
+        padding: 0.56rem 0.35rem;
+        box-shadow: 0 10px 24px rgba(23, 32, 51, 0.06);
+      }
+      .pipe-step::after {
+        content: "→";
+        position: absolute;
+        right: -0.37rem;
+        top: 44%;
+        transform: translateY(-50%);
+        font-size: 1.45rem;
+        color: #8aa0bd;
+        font-weight: 900;
+      }
+      .pipe-step:last-child::after { content: ""; }
+      .pipe-step i { font-size: 2.4rem; color: var(--violet); margin: 0.15rem 0 0.48rem; }
+      .pipe-step div { font-size: 0.45em; font-weight: 820; line-height: 1.1; }
+
+      .tier-stack { display: grid; gap: 0.5rem; margin-top: 0.1rem; }
+      .tier {
+        display: grid;
+        grid-template-columns: 190px 1fr;
+        gap: 0.65rem;
+        align-items: stretch;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: white;
+        padding: 0.55rem;
+        box-shadow: 0 10px 24px rgba(23, 32, 51, 0.06);
+      }
+      .tier-label {
+        border-radius: 20px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 0.3rem;
+        background: var(--soft-blue);
+      }
+      .tier-label i { font-size: 2.9rem; color: var(--blue); }
+      .tier-label div { font-size: 0.48em; font-weight: 850; line-height: 1.05; margin-top: 0.25rem; }
+      .tier-items { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.42rem; }
+      .tier-item {
+        display: grid;
+        place-items: center;
+        text-align: center;
+        border: 1px dashed #c7d3e5;
+        border-radius: 16px;
+        min-height: 86px;
+        padding: 0.28rem;
+      }
+      .tier-item i { font-size: 2.1rem; color: var(--slate); }
+      .tier-item span { font-size: 0.39em; font-weight: 800; margin-top: -0.05rem; }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 0.5rem;
+        margin-top: 0.2rem;
+      }
+      .story-step {
+        position: relative;
+        min-height: 200px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: white;
+        padding: 0.56rem 0.42rem;
+        text-align: center;
+        box-shadow: 0 12px 28px rgba(23, 32, 51, 0.06);
+      }
+      .story-step::after {
+        content: "→";
+        position: absolute;
+        right: -0.38rem;
+        top: 36%;
+        color: #8aa0bd;
+        font-size: 1.5rem;
+        font-weight: 900;
+      }
+      .story-step:last-child::after { content: ""; }
+      .story-step i { font-size: 3rem; color: var(--amber); margin: 0.15rem 0 0.42rem; }
+      .story-title { font-size: 0.45em; font-weight: 850; line-height: 1.05; }
+      .story-note { font-size: 0.36em; color: var(--muted); line-height: 1.14; margin-top: 0.32rem; }
+
+      .concept-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.86fr 1.05fr;
+        grid-template-rows: repeat(3, 140px);
+        gap: 0.55rem;
+        align-items: stretch;
+        margin-top: 0.08rem;
+      }
+      .concept-card, .concept-core {
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: white;
+        box-shadow: 0 12px 28px rgba(23, 32, 51, 0.06);
+        padding: 0.55rem 0.65rem;
+      }
+      .concept-core {
+        grid-column: 2;
+        grid-row: 2;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        background: linear-gradient(145deg, #2563eb, #0891b2);
+        color: white;
+      }
+      .concept-core i { font-size: 3.5rem; margin-bottom: 0.25rem; }
+      .concept-core strong { color: white; font-size: 0.7em; }
+      .concept-card { position: relative; }
+      .concept-card i { font-size: 2.2rem; color: var(--blue); float: left; margin-right: 0.52rem; }
+      .concept-title { font-size: 0.5em; font-weight: 850; line-height: 1.04; }
+      .concept-note { font-size: 0.36em; color: var(--muted); line-height: 1.12; margin-top: 0.28rem; }
+      .connector { text-align: center; color: #8aa0bd; font-size: 0.36em; margin-top: 0.24rem; font-weight: 780; }
+
+      .login-strip {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 0.42rem;
+        margin-top: 0.25rem;
+      }
+      .login-card {
+        position: relative;
+        min-height: 140px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: white;
+        text-align: center;
+        padding: 0.45rem 0.28rem;
+        box-shadow: 0 9px 22px rgba(23, 32, 51, 0.06);
+      }
+      .login-card::after {
+        content: "→";
+        position: absolute;
+        right: -0.33rem;
+        top: 39%;
+        color: #8aa0bd;
+        font-size: 1.25rem;
+        font-weight: 900;
+      }
+      .login-card:last-child::after { content: ""; }
+      .login-card i { font-size: 2.3rem; color: var(--green); margin: 0.1rem 0 0.34rem; }
+      .login-card div { font-size: 0.38em; font-weight: 830; line-height: 1.08; }
+
+      .credit {
+        position: absolute;
+        left: 54px;
+        bottom: 18px;
+        right: 54px;
+        font-size: 0.34em;
+        color: var(--muted);
+      }
+      .credit a { color: var(--muted); }
+    </style>
+---
+
+## Learning goal
+
+<div class="hero">
+<div>
+
+<div class="big-idea">
+<p>Explain how <strong>people</strong>, <strong>apps</strong>, <strong>networks</strong>, <strong>servers</strong>, <strong>programs</strong>, <strong>algorithms</strong>, and <strong>data stores</strong> work together inside an <strong>information system</strong>.</p>
+</div>
+
+<div class="term-strip">
+<span><i class="fi fi-rr-users"></i> <strong>people</strong></span>
+<span><i class="fi fi-rr-laptop"></i> <strong>clients</strong></span>
+<span><i class="fi fi-rr-network"></i> <strong>HTTP/TCP</strong></span>
+<span><i class="fa-solid fa-server"></i> <strong>servers</strong></span>
+<span><i class="fi fi-rr-code-branch"></i> <strong>programming</strong></span>
+<span><i class="fi fi-rr-route-interstate"></i> <strong>algorithms</strong></span>
+<span><i class="fi fi-rr-database"></i> <strong>data</strong></span>
+</div>
+
+</div>
+<div class="icon-orbit">
+  <div class="orbit-core"><div><i class="fa-solid fa-diagram-project"></i><br><strong>Information<br>System</strong></div></div>
+  <div class="orbit-dot o1"><i class="fi fi-rr-users"></i><span><strong>People</strong></span></div>
+  <div class="orbit-dot o2"><i class="fi fi-rr-laptop-mobile"></i><span><strong>Apps</strong></span></div>
+  <div class="orbit-dot o3"><i class="fi fi-rr-network"></i><span><strong>Network</strong></span></div>
+  <div class="orbit-dot o4"><i class="fi fi-rr-database"></i><span><strong>Data</strong></span></div>
+  <div class="orbit-dot o5"><i class="fi fi-rr-code-branch"></i><span><strong>Code</strong></span></div>
+  <div class="orbit-dot o6"><i class="fi fi-rr-shield-check"></i><span><strong>Security</strong></span></div>
+</div>
+</div>
+
+<div class="credit">Large vector icons use Flaticon UIcons by Freepik Company via jsDelivr, plus Font Awesome for selected system/server symbols.</div>
+
+## The large picture
+
+<div class="flow-board">
+<div class="flow-row">
+  <div class="node-card accent-amber"><div class="icon-bubble"><i class="fi fi-rr-users"></i></div><div class="node-title"><strong>People</strong></div><div class="node-desc">goals · inputs · feedback</div></div>
+  <div class="node-card accent-blue"><div class="icon-bubble"><i class="fi fi-rr-laptop-mobile"></i></div><div class="node-title"><strong>Client / Frontend</strong></div><div class="node-desc">UI · CLI · browser · apps</div></div>
+  <div class="node-card accent-cyan"><div class="icon-bubble"><i class="fi fi-rr-network"></i></div><div class="node-title"><strong>Network</strong></div><div class="node-desc">HTTP/HTTPS over TCP/IP</div></div>
+  <div class="node-card accent-violet"><div class="icon-bubble"><i class="fa-solid fa-server"></i></div><div class="node-title"><strong>Server / Backend</strong></div><div class="node-desc">programs · rules · algorithms</div></div>
+  <div class="node-card accent-green"><div class="icon-bubble"><i class="fi fi-rr-database"></i></div><div class="node-title"><strong>Data Layer</strong></div><div class="node-desc">databases · files · cloud</div></div>
+  <div class="node-card accent-rose"><div class="icon-bubble"><i class="fi fi-rr-chart-histogram"></i></div><div class="node-title"><strong>Outputs</strong></div><div class="node-desc">reports · decisions · actions</div></div>
+</div>
+
+<div class="chipline">
+  <div class="chipbox"><strong>Frontend</strong> collects interaction</div>
+  <div class="chipbox"><strong>Backend</strong> applies logic</div>
+  <div class="chipbox"><strong>Data layer</strong> preserves memory</div>
+</div>
+</div>
+
+## Major components
+
+<div class="grid-3x3">
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-laptop"></i><strong>Hardware</strong></div><div class="tile-note">Laptops, phones, servers, routers, storage.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-settings-window"></i><strong>Software</strong></div><div class="tile-note">Operating systems, applications, services, tools.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-database"></i><strong>Data</strong></div><div class="tile-note">Records, files, events, logs, transactions.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-users"></i><strong>People</strong></div><div class="tile-note">Users, managers, developers, admins, support.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-route-interstate"></i><strong>Processes</strong></div><div class="tile-note">Workflows, policies, approvals, procedures.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-network"></i><strong>Networks</strong></div><div class="tile-note">Internet, LAN, Wi‑Fi, APIs, secure channels.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-shield-check"></i><strong>Security</strong></div><div class="tile-note">Access control, encryption, backups, audits.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-code-branch"></i><strong>Programming</strong></div><div class="tile-note">Code that defines behavior and automation.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-route-interstate"></i><strong>Algorithms</strong></div><div class="tile-note">Step-by-step logic for system decisions.</div></div>
+</div>
+
+## Core information flow
+
+<div class="flow-board">
+<div class="flow-row five">
+  <div class="node-card accent-blue"><div class="icon-bubble"><i class="fi fi-rr-terminal"></i></div><div class="node-title"><strong>Input</strong></div><div class="node-desc">forms · commands · events</div></div>
+  <div class="node-card accent-violet"><div class="icon-bubble"><i class="fi fi-rr-settings"></i></div><div class="node-title"><strong>Processing</strong></div><div class="node-desc">rules · programs · algorithms</div></div>
+  <div class="node-card accent-green"><div class="icon-bubble"><i class="fi fi-rr-database"></i></div><div class="node-title"><strong>Storage</strong></div><div class="node-desc">database · files · logs</div></div>
+  <div class="node-card accent-rose"><div class="icon-bubble"><i class="fi fi-rr-chart-histogram"></i></div><div class="node-title"><strong>Output</strong></div><div class="node-desc">reports · dashboards · alerts</div></div>
+  <div class="node-card accent-amber"><div class="icon-bubble"><i class="fi fi-rr-refresh"></i></div><div class="node-title"><strong>Feedback</strong></div><div class="node-desc">corrections · decisions · actions</div></div>
+</div>
+</div>
+
+<div class="callout small" style="margin-top:0.62rem;">
+An <strong>information system</strong> turns <strong>input</strong> into useful <strong>output</strong> through <strong>processing</strong>, <strong>storage</strong>, and <strong>feedback</strong>.
+</div>
+
+## Client side: where interaction begins
+
+<div class="two-col">
+<div class="panel">
+<div class="panel-title"><i class="fi fi-rr-laptop-mobile"></i><strong>Client / Frontend</strong></div>
+
+- <strong>Client</strong>: user-facing device or program.
+- <strong>Frontend</strong>: visible interaction layer.
+- <strong>UI</strong>: buttons, forms, menus.
+- <strong>CLI</strong>: typed commands in a terminal.
+- <strong>Browser</strong>: web client for sites and web apps.
+- <strong>Apps</strong>: mobile, desktop, or web software.
+
+</div>
+<div class="grid-3x2">
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-browser"></i><strong>Browser</strong></div><div class="tile-note">Loads pages, runs frontend code, sends HTTP requests.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-mobile-button"></i><strong>Mobile app</strong></div><div class="tile-note">Touch UI plus device features.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-terminal"></i><strong>CLI</strong></div><div class="tile-note">Fast, scriptable, text-based control.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-laptop"></i><strong>Desktop app</strong></div><div class="tile-note">Local interface, often connected to backend services.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-settings-window"></i><strong>UI</strong></div><div class="tile-note">Screens, layout, controls, validation messages.</div></div>
+  <div class="tile tile-tight"><div class="tile-title"><i class="fi fi-rr-shopping-cart"></i><strong>App logic</strong></div><div class="tile-note">Client-side behavior before server processing.</div></div>
+</div>
+</div>
+
+## Client–server pattern
+
+<div class="message-board">
+  <div class="message-stage"><div class="stage-icon"><i class="fi fi-rr-laptop-mobile"></i></div><div class="stage-title"><strong>Client</strong></div><div class="stage-body">User clicks, types, or runs a command in a <strong>UI</strong>, <strong>CLI</strong>, <strong>browser</strong>, or <strong>app</strong>.</div><div class="stage-arrow">→</div></div>
+  <div class="message-stage"><div class="stage-icon" style="background:var(--soft-cyan);color:var(--cyan);"><i class="fi fi-rr-network"></i></div><div class="stage-title"><strong>Network</strong></div><div class="stage-body"><strong>HTTP/HTTPS</strong> structures the message; <strong>TCP/IP</strong> moves it across networks.</div><div class="stage-arrow">→</div></div>
+  <div class="message-stage"><div class="stage-icon" style="background:var(--soft-violet);color:var(--violet);"><i class="fa-solid fa-server"></i></div><div class="stage-title"><strong>Server / Backend</strong></div><div class="stage-body">Backend <strong>programs</strong> run <strong>business logic</strong>, <strong>security</strong>, and <strong>algorithms</strong>.</div><div class="stage-arrow">→</div></div>
+  <div class="message-stage"><div class="stage-icon" style="background:var(--soft-green);color:var(--green);"><i class="fi fi-rr-database"></i></div><div class="stage-title"><strong>Data Layer</strong></div><div class="stage-body">The system reads or writes <strong>records</strong>, <strong>files</strong>, <strong>events</strong>, and <strong>logs</strong>.</div></div>
+</div>
+<div class="return-band"><i class="fi fi-rr-refresh"></i> <strong>Response path:</strong> backend result → network → client → user sees updated output.</div>
+
+## Network layer: HTTP and TCP/IP
+
+<div class="two-col">
+<div class="panel">
+<div class="panel-title"><i class="fi fi-rr-network"></i><strong>Communication stack</strong></div>
+
+- <strong>HTTP</strong>: web-style request/response.
+- <strong>HTTPS</strong>: encrypted HTTP.
+- <strong>TCP</strong>: reliable delivery between machines.
+- <strong>IP</strong>: addressing and routing.
+- <strong>APIs</strong>: controlled access to backend capabilities.
+
+</div>
+<div class="protocol-stack">
+  <div class="stack-layer"><i class="fi fi-rr-browser"></i><div><div class="stack-title"><strong>Application</strong></div><div class="stack-note"><strong>HTTP</strong>, <strong>HTTPS</strong>, <strong>APIs</strong>: request meaning.</div></div></div>
+  <div class="stack-layer"><i class="fi fi-rr-box"></i><div><div class="stack-title"><strong>Transport</strong></div><div class="stack-note"><strong>TCP</strong>: ordered, reliable delivery.</div></div></div>
+  <div class="stack-layer"><i class="fi fi-rr-route-interstate"></i><div><div class="stack-title"><strong>Internet</strong></div><div class="stack-note"><strong>IP</strong>: addressing and routing across networks.</div></div></div>
+  <div class="stack-layer"><i class="fi fi-rr-wifi-alt"></i><div><div class="stack-title"><strong>Network access</strong></div><div class="stack-note"><strong>Wi‑Fi</strong>, <strong>Ethernet</strong>, <strong>cellular</strong>: physical/link path.</div></div></div>
+</div>
+</div>
+
+## Server side: where rules live
+
+<div class="panel" style="margin-bottom:0.58rem;">
+<div class="panel-title"><i class="fa-solid fa-server"></i><strong>Backend processing</strong></div>
+
+- <strong>Server</strong>: machine or service handling requests.
+- <strong>Backend</strong>: hidden application logic.
+- <strong>Programming</strong>: creates backend behavior.
+- <strong>Algorithms</strong>: decision steps inside workflows.
+
+</div>
+
+<div class="server-pipeline">
+  <div class="pipe-step"><i class="fi fi-rr-box"></i><div><strong>Request</strong></div></div>
+  <div class="pipe-step"><i class="fi fi-rr-key"></i><div><strong>Authenticate</strong></div></div>
+  <div class="pipe-step"><i class="fi fi-rr-box-check"></i><div><strong>Validate</strong></div></div>
+  <div class="pipe-step"><i class="fi fi-rr-settings-sliders"></i><div><strong>Business logic</strong></div></div>
+  <div class="pipe-step"><i class="fi fi-rr-route-interstate"></i><div><strong>Algorithm</strong></div></div>
+  <div class="pipe-step"><i class="fi fi-rr-database"></i><div><strong>Transaction</strong></div></div>
+  <div class="pipe-step"><i class="fi fi-rr-paper-plane"></i><div><strong>Response</strong></div></div>
+</div>
+
+## Data layer: persistent memory
+
+<div class="grid-3x2">
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-database"></i><strong>Database</strong></div><div class="tile-note">Structured records: customers, orders, products, accounts.</div></div>
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-file"></i><strong>Files</strong></div><div class="tile-note">Documents, images, exports, configuration files.</div></div>
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-cloud"></i><strong>Cloud storage</strong></div><div class="tile-note">Scalable storage accessed over network services.</div></div>
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-warehouse-alt"></i><strong>Data warehouse</strong></div><div class="tile-note">Historical data for analytics and reporting.</div></div>
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-list-check"></i><strong>Logs</strong></div><div class="tile-note">Events for debugging, monitoring, and auditing.</div></div>
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-shield-check"></i><strong>Controls</strong></div><div class="tile-note">Permissions, encryption, backups, retention, recovery.</div></div>
+</div>
+
+<div class="callout small" style="margin-top:0.6rem;">
+The <strong>data layer</strong> preserves what happened, what exists now, and what can be analyzed later.
+</div>
+
+## Common architecture: three tiers
+
+<div class="tier-stack">
+  <div class="tier">
+    <div class="tier-label"><div><i class="fi fi-rr-laptop-mobile"></i><div><strong>Presentation Tier</strong><br><span class="muted">Frontend</span></div></div></div>
+    <div class="tier-items">
+      <div class="tier-item"><i class="fi fi-rr-settings-window"></i><span><strong>UI</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-terminal"></i><span><strong>CLI</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-browser"></i><span><strong>Browser</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-mobile-button"></i><span><strong>Apps</strong></span></div>
+    </div>
+  </div>
+  <div class="tier">
+    <div class="tier-label" style="background:var(--soft-violet);"><div><i class="fa-solid fa-server" style="color:var(--violet);"></i><div><strong>Application Tier</strong><br><span class="muted">Backend</span></div></div></div>
+    <div class="tier-items">
+      <div class="tier-item"><i class="fi fi-rr-plug-connection"></i><span><strong>API</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-settings-sliders"></i><span><strong>Business logic</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-route-interstate"></i><span><strong>Algorithms</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-shield-check"></i><span><strong>Security</strong></span></div>
+    </div>
+  </div>
+  <div class="tier">
+    <div class="tier-label" style="background:var(--soft-green);"><div><i class="fi fi-rr-database" style="color:var(--green);"></i><div><strong>Data Tier</strong><br><span class="muted">Storage</span></div></div></div>
+    <div class="tier-items">
+      <div class="tier-item"><i class="fi fi-rr-database"></i><span><strong>Database</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-file"></i><span><strong>Files</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-cloud"></i><span><strong>Cloud</strong></span></div>
+      <div class="tier-item"><i class="fi fi-rr-chart-histogram"></i><span><strong>Warehouse</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="term-strip">
+<span><strong>Frontend</strong> ≈ presentation tier</span>
+<span><strong>Backend</strong> ≈ application tier</span>
+<span><strong>Database</strong> ≈ data tier</span>
+</div>
+
+## Frontend vs backend
+
+<div class="two-even">
+<div class="panel">
+<div class="panel-title"><i class="fi fi-rr-palette"></i><strong>Frontend</strong></div>
+
+- <strong>Visible</strong> to the user.
+- Handles <strong>layout</strong>, <strong>forms</strong>, <strong>navigation</strong>, and <strong>feedback</strong>.
+- Runs in a <strong>browser</strong>, <strong>mobile app</strong>, <strong>desktop app</strong>, or <strong>CLI</strong>.
+- Sends <strong>requests</strong> to the backend.
+
+</div>
+<div class="panel">
+<div class="panel-title"><i class="fi fi-rr-settings-sliders"></i><strong>Backend</strong></div>
+
+- Usually <strong>hidden</strong> from the user.
+- Handles <strong>rules</strong>, <strong>security</strong>, <strong>processing</strong>, and <strong>data access</strong>.
+- Runs on <strong>servers</strong> or <strong>cloud services</strong>.
+- Sends <strong>responses</strong> back to clients.
+
+</div>
+</div>
+
+<div class="big-idea small" style="margin-top:0.72rem;">
+<strong>Frontend</strong>: “What should the user see or do?” &nbsp; | &nbsp; <strong>Backend</strong>: “What should the system calculate, enforce, store, or return?”
+</div>
+
+## Programming and algorithms
+
+<div class="two-col">
+<div class="panel">
+<div class="panel-title"><i class="fi fi-rr-code-branch"></i><strong>From problem to system</strong></div>
+
+- <strong>Programming</strong> turns requirements into executable <strong>software</strong>.
+- <strong>Programs</strong> connect <strong>UI</strong>, <strong>network</strong>, <strong>backend</strong>, and <strong>data</strong>.
+- <strong>Algorithms</strong> are precise steps for solving a task.
+- Good systems separate <strong>presentation</strong>, <strong>logic</strong>, and <strong>storage</strong>.
+
+</div>
+<div class="flow-board" style="padding:0.78rem;">
+<div class="flow-row four">
+  <div class="node-card accent-amber"><div class="icon-bubble"><i class="fi fi-rr-question-square"></i></div><div class="node-title"><strong>Problem</strong></div><div class="node-desc">Approve a login</div></div>
+  <div class="node-card accent-violet"><div class="icon-bubble"><i class="fi fi-rr-route-interstate"></i></div><div class="node-title"><strong>Algorithm</strong></div><div class="node-desc">check → compare → allow/deny</div></div>
+  <div class="node-card accent-blue"><div class="icon-bubble"><i class="fi fi-rr-code-branch"></i></div><div class="node-title"><strong>Program</strong></div><div class="node-desc">implemented in code</div></div>
+  <div class="node-card accent-green"><div class="icon-bubble"><i class="fa-solid fa-diagram-project"></i></div><div class="node-title"><strong>System</strong></div><div class="node-desc">runs in architecture</div></div>
+</div>
+</div>
+</div>
+
+## Example: online shopping transaction
+
+<div class="story-grid">
+  <div class="story-step"><i class="fi fi-rr-user"></i><div class="story-title"><strong>Customer</strong></div><div class="story-note">Clicks <strong>Buy Now</strong>.</div></div>
+  <div class="story-step"><i class="fi fi-rr-shopping-cart"></i><div class="story-title"><strong>Browser / App</strong></div><div class="story-note">Collects order details.</div></div>
+  <div class="story-step"><i class="fi fi-rr-network"></i><div class="story-title"><strong>HTTPS + TCP/IP</strong></div><div class="story-note">Carries the request.</div></div>
+  <div class="story-step"><i class="fa-solid fa-server"></i><div class="story-title"><strong>Backend API</strong></div><div class="story-note">Starts the order workflow.</div></div>
+  <div class="story-step"><i class="fi fi-rr-route-interstate"></i><div class="story-title"><strong>Algorithms</strong></div><div class="story-note">Check stock, price, payment.</div></div>
+  <div class="story-step"><i class="fi fi-rr-database"></i><div class="story-title"><strong>Database</strong></div><div class="story-note">Saves order and updates inventory.</div></div>
+</div>
+
+<div class="return-band"><i class="fi fi-rr-chart-histogram"></i> Output: <strong>receipt</strong>, <strong>order status</strong>, <strong>inventory update</strong>, and <strong>sales report</strong>.</div>
+
+## Relationship map
+
+<div class="concept-grid">
+  <div class="concept-card"><i class="fi fi-rr-users"></i><div class="concept-title"><strong>People</strong></div><div class="concept-note">Set goals, enter data, interpret outputs.</div><div class="connector">↘ uses</div></div>
+  <div class="concept-card"><i class="fi fi-rr-laptop"></i><div class="concept-title"><strong>Hardware</strong></div><div class="concept-note">Devices and infrastructure run the system.</div><div class="connector">↓ hosts</div></div>
+  <div class="concept-card"><i class="fi fi-rr-database"></i><div class="concept-title"><strong>Data</strong></div><div class="concept-note">Raw facts become useful information.</div><div class="connector">↙ feeds</div></div>
+
+  <div class="concept-card"><i class="fi fi-rr-laptop-mobile"></i><div class="concept-title"><strong>Frontend / Apps</strong></div><div class="concept-note"><strong>UI</strong>, <strong>CLI</strong>, <strong>browser</strong>, and <strong>apps</strong>.</div><div class="connector">→ requests</div></div>
+  <div class="concept-core"><div><i class="fa-solid fa-diagram-project"></i><br><strong>Information<br>System</strong></div></div>
+  <div class="concept-card"><i class="fa-solid fa-server"></i><div class="concept-title"><strong>Backend / Server</strong></div><div class="concept-note"><strong>Programs</strong>, <strong>rules</strong>, and <strong>algorithms</strong>.</div><div class="connector">← responds</div></div>
+
+  <div class="concept-card"><i class="fi fi-rr-network"></i><div class="concept-title"><strong>Network</strong></div><div class="concept-note"><strong>HTTP/HTTPS</strong> over <strong>TCP/IP</strong>.</div><div class="connector">↗ connects</div></div>
+  <div class="concept-card"><i class="fi fi-rr-route-interstate"></i><div class="concept-title"><strong>Processes</strong></div><div class="concept-note">Workflows, approvals, transactions.</div><div class="connector">↑ guides</div></div>
+  <div class="concept-card"><i class="fi fi-rr-shield-check"></i><div class="concept-title"><strong>Security</strong></div><div class="concept-note">Identity, permissions, encryption, backups.</div><div class="connector">↖ protects</div></div>
+</div>
+
+## Mini-check: trace a login
+
+<div class="login-strip">
+  <div class="login-card"><i class="fi fi-rr-user"></i><div><strong>User</strong><br>enters credentials</div></div>
+  <div class="login-card"><i class="fi fi-rr-settings-window"></i><div><strong>UI</strong><br>collects input</div></div>
+  <div class="login-card"><i class="fi fi-rr-lock"></i><div><strong>HTTPS</strong><br>sends request</div></div>
+  <div class="login-card"><i class="fi fi-rr-network"></i><div><strong>TCP/IP</strong><br>moves packets</div></div>
+  <div class="login-card"><i class="fa-solid fa-server"></i><div><strong>Backend</strong><br>runs program</div></div>
+  <div class="login-card"><i class="fi fi-rr-database"></i><div><strong>Database</strong><br>checks account</div></div>
+  <div class="login-card"><i class="fi fi-rr-check-circle"></i><div><strong>Client</strong><br>shows result</div></div>
+</div>
+
+<div class="big-idea small" style="margin-top:0.78rem;">
+<strong>Login algorithm:</strong> receive input → validate format → find account → compare password securely → create session → return result.
+</div>
+
+## Key takeaways
+
+<div class="grid-4x2" style="margin-top:0.35rem;">
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-layer-plus"></i><strong>Architecture</strong></div><div class="tile-note">Separate <strong>presentation</strong>, <strong>application logic</strong>, and <strong>data</strong>.</div></div>
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-network"></i><strong>Client–server</strong></div><div class="tile-note"><strong>Clients</strong> request; <strong>servers</strong> process; responses return.</div></div>
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-code-branch"></i><strong>Programming</strong></div><div class="tile-note"><strong>Code</strong> implements workflows, rules, security, and algorithms.</div></div>
+  <div class="tile"><div class="tile-title"><i class="fi fi-rr-database"></i><strong>Data</strong></div><div class="tile-note"><strong>Databases</strong>, <strong>files</strong>, <strong>logs</strong>, and <strong>warehouses</strong> preserve memory.</div></div>
+</div>
+
+<div class="big-idea small" style="margin-top:0.78rem;">
+A modern <strong>information system</strong> is a connected environment: <strong>people</strong> use <strong>clients</strong> over <strong>networks</strong> to reach <strong>servers</strong> running <strong>programs</strong> and <strong>algorithms</strong> that manage <strong>data</strong> and produce useful <strong>outputs</strong>.
+</div>
+
+<div class="credit">Icons: Flaticon UIcons by Freepik Company. Free license requires attribution; CDN provided by jsDelivr. Selected system/server symbols use Font Awesome Free.</div>
