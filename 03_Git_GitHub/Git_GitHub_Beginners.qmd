@@ -1,6 +1,6 @@
 ---
 title: "Git and GitHub for Beginners"
-subtitle: "A hands-on notebook for version control, collaboration, and reproducible work"
+subtitle: "A terminal-first handout for version control, collaboration, and reproducible work"
 author: "Teaching material"
 date: today
 format:
@@ -15,38 +15,216 @@ format:
     number-sections: true
     colorlinks: true
 execute:
-  enabled: false
   eval: false
   echo: true
-jupyter: python3
 editor: source
 ---
 
 ::: {.callout-note}
 ## Instructor note
 
-This material is written as a Quarto notebook source file (`.qmd`) and can be converted to a Jupyter notebook (`.ipynb`). The runnable lab cells use Python to call Git commands, which is more portable than assuming that every student has Bash installed.
+This handout is written as a Quarto source file (`.qmd`), but it is no longer designed as a runnable notebook. The command blocks are teaching examples for a live terminal demonstration.
 
-To convert between formats:
-
-```bash
-quarto convert Git_GitHub_Beginners.qmd --output Git_GitHub_Beginners.ipynb
-quarto convert Git_GitHub_Beginners.ipynb --output Git_GitHub_Beginners_from_ipynb.qmd
-```
+Use **Git Bash** on Windows, **Terminal** on macOS, or the integrated terminal in **Visual Studio Code**. Students should run commands one at a time and compare their terminal output with the explanation in class.
 :::
 
 # Learning Goals
 
 By the end of this lesson, students should be able to:
 
-1. Explain what Git tracks and why version control is useful.
-2. Use the basic local Git workflow: `status`, `add`, `commit`, `log`, and `diff`.
-3. Create and switch branches.
-4. Merge changes and understand why conflicts happen.
-5. Connect a local repository to GitHub.
-6. Clone, pull, push, and open a pull request.
-7. Use `.gitignore` and safe undo commands.
-8. Describe a practical daily workflow for individual and group projects.
+1. Explain what a command-line interface is and why Git is usually taught from a terminal.
+2. Navigate folders and inspect files with common terminal commands.
+3. Explain what Git tracks and why version control is useful.
+4. Use the basic local Git workflow: `status`, `add`, `commit`, `log`, and `diff`.
+5. Create and switch branches.
+6. Merge changes and understand why conflicts happen.
+7. Connect a local repository to GitHub.
+8. Clone, pull, push, and open a pull request.
+9. Use `.gitignore` and safe undo commands.
+10. Describe a practical daily workflow for individual and group projects.
+
+# Part 0: Command-Line Basics
+
+Git is often taught in a command-line interface, or **CLI**, because the commands are precise, repeatable, and easy to document.
+
+A terminal has two parts:
+
+| Term | Meaning |
+|---|---|
+| Terminal app | The window where you type commands. |
+| Shell | The program that interprets your commands. |
+| Prompt | The text shown before the place where you type. |
+| Current working directory | The folder where your commands are currently running. |
+
+On Windows, this lesson uses **Git Bash**, which is installed with Git for Windows. Git Bash gives Windows students a Unix-like command style that is close to macOS and Linux.
+
+On macOS, this lesson uses **Terminal**. The default macOS shell is usually `zsh`, but the basic commands in this handout work the same way for beginner Git use.
+
+::: {.callout-tip}
+## VS Code option
+
+In Visual Studio Code, use **Terminal > New Terminal**. On Windows, choose **Git Bash** as the terminal profile if it is available. On macOS, the default terminal profile is fine.
+:::
+
+## Reading a Prompt
+
+A Git Bash prompt might look like this:
+
+```text
+student@LAPTOP MINGW64 ~/Documents
+$
+```
+
+A macOS Terminal prompt might look like this:
+
+```text
+student@MacBook Documents %
+```
+
+The prompt shows context. You type the command after the prompt. In this handout, command blocks do **not** include `$` or `%` so students can copy only the command itself.
+
+## Files, Folders, and Paths
+
+The command line always has a current folder. Use `pwd` to print it:
+
+```bash
+pwd
+```
+
+Common path symbols:
+
+| Symbol | Meaning |
+|---|---|
+| `.` | the current folder |
+| `..` | the parent folder |
+| `~` | your home folder |
+| `/` | folder separator in Git Bash and macOS Terminal |
+
+Windows File Explorer often shows paths with backslashes, such as:
+
+```text
+C:\Users\Student\Documents
+```
+
+Git Bash uses Unix-style paths instead:
+
+```text
+/c/Users/Student/Documents
+```
+
+Most beginner commands are the same in Git Bash and macOS Terminal:
+
+```bash
+cd ~/Documents
+pwd
+ls
+```
+
+If a folder name contains spaces, wrap the path in quotes:
+
+```bash
+cd "My Class Project"
+```
+
+## Common CLI Commands
+
+| Task | Git Bash on Windows | macOS Terminal | Notes |
+|---|---|---|---|
+| Show current folder | `pwd` | `pwd` | Short for "print working directory." |
+| List files | `ls` | `ls` | Shows visible files and folders. |
+| List all files | `ls -la` | `ls -la` | Includes hidden files such as `.git`. |
+| Change folder | `cd folder-name` | `cd folder-name` | Moves into a folder. |
+| Go to home folder | `cd ~` | `cd ~` | Returns to your user folder. |
+| Go up one folder | `cd ..` | `cd ..` | Moves to the parent folder. |
+| Make a folder | `mkdir git-github-lab` | `mkdir git-github-lab` | Creates a new folder. |
+| Create an empty file | `touch README.md` | `touch README.md` | Useful for quick practice files. |
+| Open file in VS Code | `code README.md` | `code README.md` | Requires the VS Code command-line tool. |
+| Open current folder in VS Code | `code .` | `code .` | The dot means current folder. |
+| View a text file | `cat README.md` | `cat README.md` | Prints the file in the terminal. |
+| Copy a file | `cp old.txt new.txt` | `cp old.txt new.txt` | Copies from source to destination. |
+| Rename or move a file | `mv old.txt new.txt` | `mv old.txt new.txt` | Same command for rename and move. |
+| Delete a file | `rm scratch.txt` | `rm scratch.txt` | Use carefully; this does not use the recycle bin. |
+| Remove an empty folder | `rmdir old-folder` | `rmdir old-folder` | Works only when the folder is empty. |
+| Clear the terminal | `clear` | `clear` | Removes previous output from view. |
+| Open current folder in file manager | `explorer .` | `open .` | Windows uses Explorer; macOS uses Finder. |
+
+::: {.callout-warning}
+## Be careful with deletion commands
+
+For beginners, avoid `rm -r`, `rm -rf`, and `git clean -fd` unless an instructor explains exactly what will be deleted. These commands can remove folders and untracked files permanently.
+:::
+
+## Writing Small Files from the Terminal
+
+For teaching, it is usually clearer to create or edit files in VS Code:
+
+```bash
+code README.md
+```
+
+Sometimes instructors may show quick terminal examples:
+
+```bash
+echo "# Git Practice" > README.md
+echo "This repository is for learning Git." >> README.md
+cat README.md
+```
+
+The difference matters:
+
+| Command | Meaning |
+|---|---|
+| `>` | write output to a file, replacing the file if it already exists |
+| `>>` | append output to the end of a file |
+
+## Safe Terminal Habits
+
+Before running Git commands, students should learn this rhythm:
+
+```bash
+pwd
+ls
+git status
+```
+
+This answers three questions:
+
+1. Where am I?
+2. What files are here?
+3. Is this a Git repository, and what changed?
+
+Run one command at a time during practice. If the output is confusing, stop and read it before trying another command.
+
+# Before Class Setup
+
+Students should install:
+
+- Git: <https://git-scm.com/>
+- Visual Studio Code: <https://code.visualstudio.com/>
+- A GitHub account: <https://github.com/>
+- Optional: GitHub Desktop: <https://desktop.github.com/>
+
+After installing Git, check the version:
+
+```bash
+git --version
+```
+
+Configure your identity once on your own computer:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git config --global init.defaultBranch main
+```
+
+The name and email are stored in commits. Use the same email address that you use for GitHub, or use the private GitHub no-reply email from your GitHub account settings.
+
+::: {.callout-tip}
+## Windows note
+
+On Windows, Git usually installs Git Bash and Git Credential Manager. Git Credential Manager helps with browser-based GitHub sign-in when pushing over HTTPS.
+:::
 
 # Why Git Exists
 
@@ -108,117 +286,43 @@ git commit -m "Describe the change"
 git push
 ```
 
-# Before Class Setup
+::: {.callout-note}
+## Git is not automatic save
 
-Students should install:
-
-- Git: <https://git-scm.com/>
-- Visual Studio Code: <https://code.visualstudio.com/>
-- A GitHub account: <https://github.com/>
-- Optional: GitHub Desktop: <https://desktop.github.com/>
-
-After installing Git, check the version:
-
-```bash
-git --version
-```
-
-Configure your identity once on your own computer:
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
-```
-
-The name and email are stored in commits. Use the same email address that you use for GitHub, or use the private GitHub no-reply email from your GitHub account settings.
-
-::: {.callout-tip}
-## Windows note
-
-On Windows, Git usually installs Git Bash and Git Credential Manager. Git Credential Manager helps with browser-based GitHub sign-in when pushing over HTTPS.
+Editing a file is not enough. Git records a version only when you stage and commit the change.
 :::
 
-# Using This Notebook
-
-This notebook has two kinds of examples:
-
-1. Terminal examples shown as `bash` blocks. These are meant to be copied into Terminal, PowerShell, Git Bash, or the VS Code terminal.
-2. Runnable notebook examples shown as Python cells. These use Python's `subprocess` module to run Git commands inside a practice folder.
-
-The notebook cells do not require Bash. They require:
-
-- Python,
-- Git installed and available on the system path,
-- permission to create files in the folder where the notebook is running.
-
-The practice cells create a folder called `git_github_lab` in the current working directory. They do not change your real projects.
-
-# Notebook Helper
-
-Run this cell first if you are using the `.ipynb` notebook interactively.
-
-```{python}
-from pathlib import Path
-import subprocess
-import textwrap
-
-LAB = Path.cwd() / "git_github_lab"
-LAB.mkdir(exist_ok=True)
-
-def write_file(path, text):
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(textwrap.dedent(text).lstrip(), encoding="utf-8")
-    print(f"Wrote {path}")
-
-def run(command, cwd=LAB, check=False):
-    """Run a shell command in the lab folder and print stdout/stderr."""
-    print(f"$ {command}")
-    result = subprocess.run(
-        command,
-        cwd=cwd,
-        shell=True,
-        text=True,
-        capture_output=True
-    )
-    if result.stdout:
-        print(result.stdout)
-    if result.stderr:
-        print(result.stderr)
-    if check and result.returncode != 0:
-        raise RuntimeError(f"Command failed with exit code {result.returncode}")
-    return result
-
-print(f"Lab folder: {LAB}")
-```
-
-# Part 1: Create a Repository
+# Part 1: Create a Local Repository
 
 A Git repository is a folder with a hidden `.git` directory inside it. The `.git` directory stores the project's history.
 
-In a terminal, the basic setup is:
+Start in a safe place such as `Documents`, then create a practice folder:
 
 ```bash
+cd ~/Documents
 mkdir git-github-lab
 cd git-github-lab
 git init
 git branch -M main
+git status
 ```
 
-In this notebook, run:
+After `git init`, the folder becomes a Git repository.
 
-```{python}
-run("git init")
-run("git branch -M main")
-run("git status")
+Use `ls -la` to show hidden files:
+
+```bash
+ls -la
 ```
 
-For this practice repository, configure a local teaching identity. This affects only this lab repository, not your global Git settings.
+You should see a hidden `.git` folder.
 
-```{python}
-run('git config user.name "Student Example"')
-run('git config user.email "student@example.com"')
-run("git config --local --list")
+For a classroom practice repository, an instructor may configure a local teaching identity. This affects only this repository:
+
+```bash
+git config --local user.name "Student Example"
+git config --local user.email "student@example.com"
+git config --local --list
 ```
 
 ::: {.callout-note}
@@ -245,49 +349,59 @@ It answers:
 - Are there staged changes waiting to be committed?
 - Is my local branch ahead of or behind the remote branch?
 
-Run:
+::: {.callout-tip}
+## Beginner habit
 
-```{python}
-run("git status")
+When in doubt, run:
+
+```bash
+git status
 ```
+:::
 
 # Part 3: Create and Track a File
 
-Create a `README.md` file.
+Create a `README.md` file:
 
-```{python}
-write_file(
-    LAB / "README.md",
-    """
-    # Git and GitHub Practice
+```bash
+code README.md
+```
 
-    This repository is for learning Git.
+Type this content, save the file, and return to the terminal:
 
-    Today I will practice:
+```markdown
+# Git and GitHub Practice
 
-    - checking status
-    - staging changes
-    - committing changes
-    - reading history
-    """
-)
-run("git status")
+This repository is for learning Git.
+
+Today I will practice:
+
+- checking status
+- staging changes
+- committing changes
+- reading history
+```
+
+Check status:
+
+```bash
+git status
 ```
 
 Git notices the file, but it does not automatically track it. The file is currently untracked.
 
 Stage the file:
 
-```{python}
-run("git add README.md")
-run("git status")
+```bash
+git add README.md
+git status
 ```
 
 Commit the file:
 
-```{python}
-run('git commit -m "Add README"')
-run("git log --oneline")
+```bash
+git commit -m "Add README"
+git log --oneline
 ```
 
 ::: {.callout-tip}
@@ -307,42 +421,49 @@ Examples:
 
 # Part 4: Edit, Diff, Stage, Commit
 
-Edit the file.
+Open the file again:
 
-```{python}
-write_file(
-    LAB / "README.md",
-    """
-    # Git and GitHub Practice
-
-    This repository is for learning Git.
-
-    Today I will practice:
-
-    - checking status
-    - staging changes
-    - committing changes
-    - reading history
-    - comparing versions
-
-    My main takeaway: Git saves meaningful snapshots of a project.
-    """
-)
-run("git status")
+```bash
+code README.md
 ```
 
-Use `git diff` to see what changed before staging.
+Add one more bullet and a takeaway sentence:
 
-```{python}
-run("git diff")
+```markdown
+- comparing versions
+
+My main takeaway: Git saves meaningful snapshots of a project.
 ```
 
-Stage and commit.
+Save the file, then check status:
 
-```{python}
-run("git add README.md")
-run('git commit -m "Expand README learning goals"')
-run("git log --oneline")
+```bash
+git status
+```
+
+Use `git diff` to see what changed before staging:
+
+```bash
+git diff
+```
+
+Stage the file:
+
+```bash
+git add README.md
+```
+
+Use `git diff --staged` to see what is ready to commit:
+
+```bash
+git diff --staged
+```
+
+Commit the change:
+
+```bash
+git commit -m "Expand README learning goals"
+git log --oneline
 ```
 
 # Part 5: What Is a Commit?
@@ -364,12 +485,6 @@ View the history:
 git log
 git log --oneline
 git log --oneline --graph --decorate --all
-```
-
-Run:
-
-```{python}
-run("git log --oneline --graph --decorate --all")
 ```
 
 ::: {.callout-note}
@@ -421,52 +536,62 @@ git merge notes
 
 Create a branch:
 
-```{python}
-run("git branch")
-run("git switch -c notes")
-run("git branch")
+```bash
+git branch
+git switch -c notes
+git branch
 ```
 
 Add a new file on the branch:
 
-```{python}
-write_file(
-    LAB / "notes.md",
-    """
-    # Class Notes
-
-    Important Git ideas:
-
-    - The working tree contains files I edit.
-    - The staging area contains changes selected for the next commit.
-    - A commit is a snapshot with a message.
-    - A branch is a line of work.
-    """
-)
-run("git add notes.md")
-run('git commit -m "Add class notes"')
-run("git log --oneline --graph --decorate --all")
+```bash
+code notes.md
 ```
 
-Switch back to `main`.
+Type this content and save:
 
-```{python}
-run("git switch main")
-run("dir" if subprocess.run("ver", shell=True, capture_output=True).returncode == 0 else "ls")
-run("git log --oneline --graph --decorate --all")
+```markdown
+# Class Notes
+
+Important Git ideas:
+
+- The working tree contains files I edit.
+- The staging area contains changes selected for the next commit.
+- A commit is a snapshot with a message.
+- A branch is a line of work.
 ```
 
-Merge the branch into `main`.
+Stage and commit:
 
-```{python}
-run("git merge notes")
-run("git log --oneline --graph --decorate --all")
+```bash
+git add notes.md
+git commit -m "Add class notes"
+git log --oneline --graph --decorate --all
 ```
 
-After a successful merge, the branch name can be deleted if it is no longer needed:
+Switch back to `main`:
+
+```bash
+git switch main
+ls
+git log --oneline --graph --decorate --all
+```
+
+The `notes.md` file may disappear from the folder view because it exists on the `notes` branch but has not yet been merged into `main`.
+
+Merge the branch into `main`:
+
+```bash
+git merge notes
+git log --oneline --graph --decorate --all
+ls
+```
+
+After a successful merge, delete the branch name if it is no longer needed:
 
 ```bash
 git branch -d notes
+git branch
 ```
 
 # Part 8: GitHub Remote Workflow
@@ -484,6 +609,7 @@ Commands:
 
 ```bash
 git remote add origin https://github.com/YOUR-USER/YOUR-REPO.git
+git remote -v
 git push -u origin main
 ```
 
@@ -493,18 +619,12 @@ After the first push, you can usually use:
 git push
 ```
 
-To see remotes:
-
-```bash
-git remote -v
-```
-
 ::: {.callout-important}
 ## Do not paste these commands blindly
 
 Replace `YOUR-USER` and `YOUR-REPO` with your actual GitHub username and repository name.
 
-The notebook does not run these commands because they require your own GitHub account and authentication.
+The instructor should demonstrate these commands live because they require a real GitHub account and authentication.
 :::
 
 # Part 9: Clone an Existing Repository
@@ -512,6 +632,7 @@ The notebook does not run these commands because they require your own GitHub ac
 To clone means to download a repository and its history.
 
 ```bash
+cd ~/Documents
 git clone https://github.com/YOUR-USER/YOUR-REPO.git
 cd YOUR-REPO
 git status
@@ -522,6 +643,12 @@ Use clone when:
 - joining an existing project,
 - downloading your own repository onto a new computer,
 - starting from a course repository created by an instructor.
+
+::: {.callout-tip}
+## Clone location
+
+Run `pwd` before `git clone` so you know where the new repository folder will be created.
+:::
 
 # Part 10: Pull and Push
 
@@ -639,40 +766,38 @@ Examples:
 
 Create a `.gitignore` file:
 
-```{python}
-write_file(
-    LAB / ".gitignore",
-    """
-    # Temporary files
-    *.tmp
-    *.log
-
-    # Python cache
-    __pycache__/
-    .ipynb_checkpoints/
-
-    # Local environment files
-    .env
-
-    # Rendered Quarto artifacts
-    *_files/
-    *_cache/
-    .quarto/
-    """
-)
-write_file(LAB / "debug.log", "This log file should not be tracked.\n")
-run("git status")
+```bash
+code .gitignore
 ```
 
-Stage and commit `.gitignore`.
+Example `.gitignore` content:
 
-```{python}
-run("git add .gitignore")
-run('git commit -m "Add gitignore rules"')
-run("git status")
+```gitignore
+# Temporary files
+*.tmp
+*.log
+
+# Python cache
+__pycache__/
+.ipynb_checkpoints/
+
+# Local environment files
+.env
+
+# Rendered Quarto artifacts
+*_files/
+*_cache/
+.quarto/
 ```
 
-Notice that `debug.log` does not appear because it matches `*.log`.
+Stage and commit `.gitignore`:
+
+```bash
+git status
+git add .gitignore
+git commit -m "Add gitignore rules"
+git status
+```
 
 ::: {.callout-important}
 ## Never commit secrets
@@ -689,6 +814,7 @@ Git has powerful undo commands. Some are safer for beginners than others.
 | Goal | Safer command |
 |---|---|
 | See what changed | `git diff` |
+| See staged changes | `git diff --staged` |
 | Unstage a file but keep the edit | `git restore --staged FILE` |
 | Discard uncommitted edits in a file | `git restore FILE` |
 | Create a new commit that reverses an old commit | `git revert COMMIT` |
@@ -704,12 +830,12 @@ Commands to use carefully:
 
 Practice unstaging:
 
-```{python}
-write_file(LAB / "scratch.txt", "Temporary note\n")
-run("git add scratch.txt")
-run("git status")
-run("git restore --staged scratch.txt")
-run("git status")
+```bash
+touch scratch.txt
+git add scratch.txt
+git status
+git restore --staged scratch.txt
+git status
 ```
 
 The file is no longer staged, but it still exists in the working tree.
@@ -724,13 +850,6 @@ git log --oneline --graph --decorate --all
 git show HEAD
 git show HEAD~1
 git diff HEAD~1 HEAD
-```
-
-Run:
-
-```{python}
-run("git log --oneline --graph --decorate --all")
-run("git show --stat HEAD")
 ```
 
 Vocabulary:
@@ -847,17 +966,40 @@ Check:
 
 ```bash
 pwd
+ls -la
+git status
+```
+
+Look for a `.git` folder. If there is no `.git` folder, either move into the correct repository or initialize a new repository intentionally with `git init`.
+
+## "The command line says no such file or directory"
+
+Possibilities:
+
+- You misspelled a folder or file name.
+- You are in the wrong folder.
+- The path contains spaces and needs quotes.
+
+Check:
+
+```bash
+pwd
 ls
-git status
 ```
 
-On Windows PowerShell:
+If needed, use quotes:
 
-```powershell
-Get-Location
-Get-ChildItem
-git status
+```bash
+cd "folder with spaces"
 ```
+
+## "`code` command does not work"
+
+The VS Code command-line shortcut may not be installed.
+
+On macOS, open VS Code and run **Shell Command: Install 'code' command in PATH** from the Command Palette.
+
+On Windows, the shortcut is often installed automatically. If it is not available, open the folder from VS Code using **File > Open Folder**.
 
 ## "Nothing to commit"
 
@@ -937,7 +1079,7 @@ Before running an AI-suggested command, ask:
 
 # Class Lab
 
-Use this sequence for a 60 to 90 minute beginner workshop.
+Use this sequence for a 60 to 90 minute beginner workshop. The instructor demonstrates each section in a terminal. Students follow along in their own practice repository.
 
 ## Lab A: Local Repository
 
@@ -952,9 +1094,13 @@ Use this sequence for a 60 to 90 minute beginner workshop.
 Core commands:
 
 ```bash
+cd ~/Documents
+mkdir git-github-lab
+cd git-github-lab
 git init
 git branch -M main
 git status
+code README.md
 git add README.md
 git commit -m "Add README"
 git diff
@@ -973,10 +1119,12 @@ Core commands:
 
 ```bash
 git switch -c experiment
-git add .
+code experiment.md
+git add experiment.md
 git commit -m "Add experiment notes"
 git switch main
 git merge experiment
+git branch -d experiment
 ```
 
 ## Lab C: GitHub
@@ -992,6 +1140,7 @@ Core commands:
 
 ```bash
 git remote add origin https://github.com/YOUR-USER/YOUR-REPO.git
+git remote -v
 git push -u origin main
 git pull
 ```
@@ -1011,44 +1160,75 @@ Core commands:
 git switch main
 git pull
 git switch -c improve-docs
-git add .
+code README.md
+git add README.md
 git commit -m "Improve documentation"
 git push -u origin improve-docs
 ```
 
 # Quick Reference
 
+## Terminal Commands
+
+| Task | Git Bash | macOS Terminal |
+|---|---|---|
+| Show current folder | `pwd` | `pwd` |
+| List files | `ls` | `ls` |
+| List hidden files | `ls -la` | `ls -la` |
+| Change folder | `cd folder` | `cd folder` |
+| Go home | `cd ~` | `cd ~` |
+| Go up one level | `cd ..` | `cd ..` |
+| Create folder | `mkdir folder` | `mkdir folder` |
+| Create file | `touch file.txt` | `touch file.txt` |
+| Open file in VS Code | `code file.txt` | `code file.txt` |
+| Open folder in VS Code | `code .` | `code .` |
+| View file | `cat file.txt` | `cat file.txt` |
+| Rename or move | `mv old.txt new.txt` | `mv old.txt new.txt` |
+| Copy file | `cp old.txt copy.txt` | `cp old.txt copy.txt` |
+| Delete file | `rm file.txt` | `rm file.txt` |
+| Clear screen | `clear` | `clear` |
+| Open file manager | `explorer .` | `open .` |
+
+## Git Commands
+
 | Task | Command |
 |---|---|
 | Check state | `git status` |
 | Start tracking a repository | `git init` |
+| Rename current branch to main | `git branch -M main` |
 | Stage a file | `git add FILE` |
 | Stage all current changes | `git add .` |
 | Commit staged changes | `git commit -m "Message"` |
 | View short history | `git log --oneline` |
+| View graph history | `git log --oneline --graph --decorate --all` |
 | View changes before staging | `git diff` |
 | View staged changes | `git diff --staged` |
 | List branches | `git branch` |
 | Create and switch branch | `git switch -c BRANCH` |
 | Switch branch | `git switch BRANCH` |
 | Merge branch into current branch | `git merge BRANCH` |
+| Delete merged branch | `git branch -d BRANCH` |
 | Add GitHub remote | `git remote add origin URL` |
+| Show remotes | `git remote -v` |
 | Push first time | `git push -u origin main` |
 | Push after first time | `git push` |
 | Pull latest remote changes | `git pull` |
 | Clone repository | `git clone URL` |
+| Unstage a file | `git restore --staged FILE` |
+| Discard local edits in a file | `git restore FILE` |
 
 # Exit Ticket
 
 Answer these questions at the end of class:
 
 1. What is the difference between Git and GitHub?
-2. What does `git status` tell you?
-3. What is the difference between staging and committing?
-4. Why should commit messages be specific?
-5. What is a branch useful for?
-6. What should you do before starting work in a shared repository?
-7. What should you never commit to Git?
+2. What does `pwd` tell you?
+3. What does `git status` tell you?
+4. What is the difference between staging and committing?
+5. Why should commit messages be specific?
+6. What is a branch useful for?
+7. What should you do before starting work in a shared repository?
+8. What should you never commit to Git?
 
 # Suggested Homework
 
