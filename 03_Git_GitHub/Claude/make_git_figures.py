@@ -166,7 +166,7 @@ def fig_three_areas():
     desc(ax, 8.55, 2.63, "unstage - index matches last commit", fs=8.6)
 
     # time-travel arc under the bottom
-    arrow(ax, (10.8, 2.55), (1.8, 2.55), color=SEC, lw=1.6, ls=dash, rad=0.22)
+    arrow(ax, (10.8, 2.55), (1.8, 2.55), color=SEC, lw=1.6, ls=dash, rad=-0.22)
     chip(ax, 6.3, 1.62, "git switch <branch>")
     desc(ax, 6.3, 1.26, "load a commit into workspace + index  (also: git checkout)")
 
