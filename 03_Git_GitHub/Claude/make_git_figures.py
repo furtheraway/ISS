@@ -261,14 +261,15 @@ def fig_local_remote():
 
     arrow(ax, (8.15, 2.5), (4.85, 2.5), lw=1.8)            # <- fetch
     chip(ax, 6.5, 2.5, "git fetch")
-    desc(ax, 6.5, 2.16, "download new commits - updates origin/main only", fs=8.6)
+    desc(ax, 6.5, 2.14, "download new commits\nupdates origin/main only", fs=8.6,
+         linespacing=1.35)
 
     # pull: remote history -> workspace (elbow up, then left)
     arrow(ax, (10.9, 2.9), (4.85, 4.95), lw=1.8,
           conn="angle,angleA=90,angleB=0,rad=12")
     chip(ax, 6.5, 4.95, "git pull")
-    desc(ax, 6.5, 4.59, "fetch + merge: bring teammates' commits into your files",
-         fs=8.6)
+    desc(ax, 6.5, 4.56, "fetch + merge: bring teammates'\ncommits into your files",
+         fs=8.6, linespacing=1.35)
 
     # clone: one-time arc underneath
     arrow(ax, (9.9, 1.15), (2.9, 1.15), color=SEC, lw=1.6,
