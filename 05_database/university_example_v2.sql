@@ -301,14 +301,17 @@ SELECT (SELECT COUNT(*) FROM departments) AS departments,
 -- SELECT, WHERE, LIKE, NULL, ORDER BY, LIMIT, DISTINCT, expressions.
 -- ==============================================================================
 
+
+select  * from students
+
 -- Choosing columns
-SELECT name, major, age, home_city FROM students LIMIT 10;
+SELECT name, major, age, home_city FROM students LIMIT 3;
 
 -- WHERE with several conditions
 SELECT name, major, year, age
 FROM   students
-WHERE  age BETWEEN 20 AND 22
-  AND  major IN ('CS', 'Math')
+WHERE  age BETWEEN 20 AND 20
+  AND  major IN ('Math')
 ORDER BY age DESC, name;
 
 -- LIKE: all 'Intro' courses; ILIKE is the PostgreSQL case-insensitive variant
@@ -336,8 +339,12 @@ ORDER BY seats_per_credit DESC;
 -- Now with four tables to walk through.
 -- ==============================================================================
 
+select * from students limit 3;
+select * from enrollments limit 3;
+select * from courses limit 3;
+
 -- Three-table join: who got an A in Intro to Databases?
-SELECT s.name, s.major
+SELECT s.name, s.major, c.title, e.grade
 FROM   students    s
 JOIN   enrollments e ON s.sid = e.sid
 JOIN   courses     c ON e.cid = c.cid
@@ -352,7 +359,7 @@ JOIN   departments d ON c.dept = d.dept
 WHERE  s.sid = 1;
 
 -- LEFT JOIN trick: students enrolled in nothing (Chloe & friends)
-SELECT s.sid, s.name, s.major
+SELECT s.sid, s.name, s.major, e.cid, e.grade
 FROM   students s
 LEFT JOIN enrollments e ON s.sid = e.sid
 WHERE  e.sid IS NULL;
