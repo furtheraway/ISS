@@ -36,7 +36,7 @@ _freeze/
 ## 3. Final report needs to be included in the repo as a pdf file, and include qmd file which generates this pdf.
 
 
-# Evaluation criteria 
+# Evaluation criteria (total 60 points):
 
 
 1. Clearly state the problem to be solved (5 points)
@@ -62,5 +62,5 @@ If in the end you solve the bottleneck, please also add the following:
 
 - Solutions we found:
 
----
+
 ### Report submission deadline: 11:59 PM, July 25th (Beijing Time)
