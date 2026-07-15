@@ -1,8 +1,8 @@
 # SUM26001 Final Project Report Expectations
 
-This final report is the the "paper" of this course, which will take 60% of students' final grade.
+This final report is the "paper" of this course, which will take 60% of students' final grade.
 
-The report should be a submitted as a GitHub repository link, through the class's website: [https://classproject-iss-bfsu.azurewebsites.net/report/](https://classproject-iss-bfsu.azurewebsites.net/report/)
+The report should be submitted as a GitHub repository link, through the class's website: [https://classproject-iss-bfsu.azurewebsites.net/report/](https://classproject-iss-bfsu.azurewebsites.net/report/)
 
 
 # Required components of the GitHub repository:
@@ -49,13 +49,13 @@ _freeze/
 
 5. Proper format (qmd, pdf, `README.md`, and `.gitignore`) (15 points)
 
-Regarding item 2, if your project moves smoothly, just write out your progress and result. But if you run into some bottlenecks that prevent your from getting results, you need to write down the challenges you face and how you accommodate them. In the following way:
+Regarding item 2, if your project moves smoothly, just write out your progress and result. But if you run into some bottlenecks that prevent you from getting results, you need to write down the challenges you face and how you accommodate them. In the following way:
 
 
-For each of the bottleneck you encounter, please write down the following:
+For each of the bottlenecks you encounter, please write down the following:
 
 - Core challenges we face (the goal you try to achieve):
-- Where/How are got stuck (what stops you from achieving the goal): 
+- Where/How we got stuck (what stops you from achieving the goal): 
 - Changes we made to accommodate the bottleneck (e.g., change the goal, change the method, change the data, etc.):
  
 If in the end you solve the bottleneck, please also add the following:
